@@ -1,0 +1,39 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 5
+  metrics: count: method: 9
+
+  entity: book: {
+    path: "/books": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/books/{id}": {
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+  }
+
+  entity: currency: {
+    path: "/currencies": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: person: {
+    path: "/peoples": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: pokemon: {
+    path: "/pokemons": {
+      op: list: method: *GET
+    }
+  }
+
+}

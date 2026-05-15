@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "book": {
+      "BOOK00": {
+        "author": "s32",
+        "id": "BOOK00",
+        "isbn": "s34",
+        "publication_year": "s35",
+        "title": "s36"
+      },
+      "BOOK01": {
+        "author": "s64",
+        "id": "BOOK01",
+        "isbn": "s66",
+        "publication_year": "s67",
+        "title": "s68"
+      },
+      "BOOK02": {
+        "author": "s96",
+        "id": "BOOK02",
+        "isbn": "s98",
+        "publication_year": "s99",
+        "title": "s9a"
+      }
+    }
+  },
+  "new": {
+    "book": {
+      "book_ref01": {
+        "author": "sc8",
+        "isbn": "sca",
+        "publication_year": "scb",
+        "title": "scc"
+      }
+    }
+  }
+}

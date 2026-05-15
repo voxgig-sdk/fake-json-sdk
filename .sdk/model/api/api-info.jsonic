@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://softwium.com/fake-api/"
+      }
+      description: "This free public API allows developers to easily obtain fake JSON data for testing and development. There is no need for registration, tokens, or authentication, simplifying the process of retrieving dummy data quickly."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://softwium.com/api"
+        }
+      ]
+      title: "Fake JSON API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

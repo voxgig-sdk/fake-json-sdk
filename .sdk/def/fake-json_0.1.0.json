@@ -1,0 +1,526 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Fake JSON API",
+    "description": "This free public API allows developers to easily obtain fake JSON data for testing and development. There is no need for registration, tokens, or authentication, simplifying the process of retrieving dummy data quickly.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://softwium.com/fake-api/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://softwium.com/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "Get all books",
+        "description": "Returns all books or a limited number of books based on the limit query parameter",
+        "operationId": "getBooks",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of books to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new book",
+        "description": "Create a new book (no actual data will be persisted)",
+        "operationId": "createBook",
+        "tags": [
+          "Books"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Book created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "summary": "Get a book by ID",
+        "description": "Returns the book with the specified ID",
+        "operationId": "getBookById",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the book to retrieve",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 23
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a book",
+        "description": "Update the book with the specified ID (no actual data will be persisted)",
+        "operationId": "updateBook",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the book to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 23
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Partially update a book",
+        "description": "Partially update the book with the specified ID (no actual data will be persisted)",
+        "operationId": "patchBook",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the book to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 23
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a book",
+        "description": "Delete the book with the specified ID (no actual data will be deleted)",
+        "operationId": "deleteBook",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the book to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 23
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      }
+    },
+    "/currencies": {
+      "get": {
+        "summary": "Get all currencies",
+        "description": "Returns all currencies or a limited number of currencies based on the limit query parameter",
+        "operationId": "getCurrencies",
+        "tags": [
+          "Currencies"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of currencies to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Currency"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/peoples": {
+      "get": {
+        "summary": "Get all peoples",
+        "description": "Returns all peoples or a limited number of peoples based on the limit query parameter",
+        "operationId": "getPeoples",
+        "tags": [
+          "Peoples"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of peoples to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/People"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pokemons": {
+      "get": {
+        "summary": "Get all pokemons",
+        "description": "Returns all pokemons or a limited number of pokemons based on the limit query parameter",
+        "operationId": "getPokemons",
+        "tags": [
+          "Pokemons"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of pokemons to return",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pokemon"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the book",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the book",
+            "example": "The Great Gatsby"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the book",
+            "example": "F. Scott Fitzgerald"
+          },
+          "isbn": {
+            "type": "string",
+            "description": "ISBN of the book",
+            "example": "978-0-7432-7356-5"
+          },
+          "publicationYear": {
+            "type": "integer",
+            "description": "Year of publication",
+            "example": 1925
+          }
+        }
+      },
+      "BookInput": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the book",
+            "example": "The Great Gatsby"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the book",
+            "example": "F. Scott Fitzgerald"
+          },
+          "isbn": {
+            "type": "string",
+            "description": "ISBN of the book",
+            "example": "978-0-7432-7356-5"
+          },
+          "publicationYear": {
+            "type": "integer",
+            "description": "Year of publication",
+            "example": 1925
+          }
+        }
+      },
+      "Currency": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the currency",
+            "example": 1
+          },
+          "code": {
+            "type": "string",
+            "description": "Currency code (ISO 4217)",
+            "example": "USD"
+          },
+          "name": {
+            "type": "string",
+            "description": "Currency name",
+            "example": "United States Dollar"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "Currency symbol",
+            "example": "$"
+          }
+        }
+      },
+      "People": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the person",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Full name of the person",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address",
+            "example": "john.doe@example.com"
+          },
+          "age": {
+            "type": "integer",
+            "description": "Age of the person",
+            "example": 30
+          },
+          "address": {
+            "type": "string",
+            "description": "Address of the person",
+            "example": "123 Main St, Anytown, USA"
+          }
+        }
+      },
+      "Pokemon": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the pokemon",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the pokemon",
+            "example": "Bulbasaur"
+          },
+          "type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Types of the pokemon",
+            "example": [
+              "Grass",
+              "Poison"
+            ]
+          },
+          "stats": {
+            "type": "object",
+            "description": "Stats of the pokemon",
+            "properties": {
+              "hp": {
+                "type": "integer",
+                "example": 45
+              },
+              "attack": {
+                "type": "integer",
+                "example": 49
+              },
+              "defense": {
+                "type": "integer",
+                "example": 49
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Books",
+      "description": "Operations related to books (80 books available)"
+    },
+    {
+      "name": "Currencies",
+      "description": "Operations related to currencies (170 currencies available)"
+    },
+    {
+      "name": "Peoples",
+      "description": "Operations related to peoples (1000 peoples available)"
+    },
+    {
+      "name": "Pokemons",
+      "description": "Operations related to pokemons (394 pokemons available)"
+    }
+  ]
+}

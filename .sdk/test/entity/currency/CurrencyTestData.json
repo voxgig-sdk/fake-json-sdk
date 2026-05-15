@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "currency": {
+      "CURRENCY00": {
+        "code": "s28",
+        "id": "CURRENCY00",
+        "name": "s2a",
+        "symbol": "s2b"
+      },
+      "CURRENCY01": {
+        "code": "s50",
+        "id": "CURRENCY01",
+        "name": "s52",
+        "symbol": "s53"
+      },
+      "CURRENCY02": {
+        "code": "s78",
+        "id": "CURRENCY02",
+        "name": "s7a",
+        "symbol": "s7b"
+      }
+    }
+  },
+  "new": {
+    "currency": {
+      "currency_ref01": {
+        "code": "sa0",
+        "name": "sa2",
+        "symbol": "sa3"
+      }
+    }
+  }
+}

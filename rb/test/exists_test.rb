@@ -1,0 +1,11 @@
+# FakeJson SDK exists test
+
+require "minitest/autorun"
+require_relative "../FakeJson_sdk"
+
+class ExistsTest < Minitest::Test
+  def test_create_test_sdk
+    testsdk = FakeJsonSDK.test(nil, nil)
+    assert !testsdk.nil?
+  end
+end

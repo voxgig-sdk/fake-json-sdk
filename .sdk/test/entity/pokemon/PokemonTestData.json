@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "pokemon": {
+      "POKEMON00": {
+        "id": "POKEMON00",
+        "name": "s29",
+        "stat": {},
+        "type": []
+      },
+      "POKEMON01": {
+        "id": "POKEMON01",
+        "name": "s51",
+        "stat": {},
+        "type": []
+      },
+      "POKEMON02": {
+        "id": "POKEMON02",
+        "name": "s79",
+        "stat": {},
+        "type": []
+      }
+    }
+  },
+  "new": {
+    "pokemon": {
+      "pokemon_ref01": {
+        "name": "sa1",
+        "stat": {},
+        "type": []
+      }
+    }
+  }
+}

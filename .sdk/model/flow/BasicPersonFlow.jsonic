@@ -1,0 +1,22 @@
+# BasicPersonFlow
+
+main: kit: flow: BasicPersonFlow:
+{
+  entity: "person",
+  kind: "basic",
+  name: "BasicPersonFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "person_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPersonFlow"
+}

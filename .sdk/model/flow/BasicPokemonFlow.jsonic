@@ -1,0 +1,22 @@
+# BasicPokemonFlow
+
+main: kit: flow: BasicPokemonFlow:
+{
+  entity: "pokemon",
+  kind: "basic",
+  name: "BasicPokemonFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "pokemon_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPokemonFlow"
+}
