@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/fake-json-sdk"
-	"github.com/voxgig-sdk/fake-json-sdk/core"
+	sdk "github.com/voxgig-sdk/fake-json-sdk/go"
+	"github.com/voxgig-sdk/fake-json-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/fake-json-sdk/go/utility/struct"
 )
 
 func TestPokemonEntity(t *testing.T) {

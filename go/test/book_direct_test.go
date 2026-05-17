@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/fake-json-sdk"
-	"github.com/voxgig-sdk/fake-json-sdk/core"
+	sdk "github.com/voxgig-sdk/fake-json-sdk/go"
+	"github.com/voxgig-sdk/fake-json-sdk/go/core"
 )
 
 func TestBookDirect(t *testing.T) {

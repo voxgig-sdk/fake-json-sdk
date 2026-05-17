@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/fake-json-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/fake-json-sdk/core"
+	"github.com/voxgig-sdk/fake-json-sdk/go/core"
 )
 
 func paramUtil(ctx *core.Context, paramdef any) any {

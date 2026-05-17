@@ -1,10 +1,10 @@
 package voxgigfakejsonsdk
 
 import (
-	"github.com/voxgig-sdk/fake-json-sdk/core"
-	"github.com/voxgig-sdk/fake-json-sdk/entity"
-	"github.com/voxgig-sdk/fake-json-sdk/feature"
-	_ "github.com/voxgig-sdk/fake-json-sdk/utility"
+	"github.com/voxgig-sdk/fake-json-sdk/go/core"
+	"github.com/voxgig-sdk/fake-json-sdk/go/entity"
+	"github.com/voxgig-sdk/fake-json-sdk/go/feature"
+	_ "github.com/voxgig-sdk/fake-json-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
