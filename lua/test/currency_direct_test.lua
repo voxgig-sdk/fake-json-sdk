@@ -63,14 +63,12 @@ function currency_direct_setup(mockres)
   local env = runner.env_override({
     ["FAKEJSON_TEST_CURRENCY_ENTID"] = {},
     ["FAKEJSON_TEST_LIVE"] = "FALSE",
-    ["FAKEJSON_APIKEY"] = "NONE",
   })
 
   local live = env["FAKEJSON_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["FAKEJSON_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

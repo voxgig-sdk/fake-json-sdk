@@ -20,9 +20,6 @@ class FakeJsonConfig
             ],
             "options" => [
                 "base" => "https://softwium.com/api",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

@@ -79,14 +79,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'FAKEJSON_TEST_POKEMON_ENTID': {},
     'FAKEJSON_TEST_LIVE': 'FALSE',
-    'FAKEJSON_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.FAKEJSON_TEST_LIVE
 
   if (live) {
     const client = new FakeJsonSDK({
-      apikey: env.FAKEJSON_APIKEY,
     })
 
     let idmap: any = env['FAKEJSON_TEST_POKEMON_ENTID']
