@@ -10,7 +10,7 @@ The Python SDK for the FakeJson API — an entity-oriented client following Pyth
 
 ## Install
 ```bash
-pip install fake-json-sdk
+pip install voxgig-sdk-fake-json
 ```
 
 Or install from source:

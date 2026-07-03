@@ -10,7 +10,7 @@ The PHP SDK for the FakeJson API — an entity-oriented client using PHP convent
 
 ## Install
 ```bash
-composer require voxgig/fake-json-sdk
+composer require voxgig-sdk/fake-json
 ```
 
 

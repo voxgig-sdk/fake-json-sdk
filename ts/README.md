@@ -10,7 +10,7 @@ The TypeScript SDK for the FakeJson API — a type-safe, entity-oriented client 
 
 ## Install
 ```bash
-npm install fake-json
+npm install @voxgig-sdk/fake-json
 ```
 ## Tutorial: your first API call
 

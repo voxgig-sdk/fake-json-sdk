@@ -10,13 +10,13 @@ The Ruby SDK for the FakeJson API — an entity-oriented client using idiomatic 
 
 ## Install
 ```bash
-gem install fake-json-sdk
+gem install voxgig-sdk-fake-json
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "fake-json-sdk"
+gem "voxgig-sdk-fake-json"
 ```
 
 Then run:
