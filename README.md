@@ -1,22 +1,8 @@
 # FakeJson SDK
 
-Free public API for fake JSON data — books, currencies, people, and pokemon — for testing and development
+Fake JSON API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Fake JSON API
-
-The Fake JSON API is a free public service from [Softwium](https://softwium.com/fake-api/) that serves ready-made JSON datasets so developers can prototype clients, demos, and tests without standing up a backend. It is hosted at `https://softwium.com/api` and requires no registration or API key.
-
-What you get from the API:
-
-- `GET /books` — 80 book records, with `?limit=` pagination and `/{id}` single-record lookup.
-- `GET /currencies` — 170 currency records.
-- `GET /peoples` — 1000 people records.
-- `GET /pokemons` — 394 pokemon records.
-- `POST`, `PUT`, `PATCH`, and `DELETE` are accepted on `/books` (and return realistic status codes such as 201 on create and 404 on unknown IDs) but changes are not persisted.
-
-Operational notes: CORS is enabled, so the endpoints work directly from browser apps. Invalid IDs return HTTP 404 and unsupported method/route combinations return HTTP 405. The service is intended for prototyping and endpoint validation, not for production traffic.
 
 ## Try it
 
@@ -50,29 +36,31 @@ gem install fake-json-sdk
 luarocks install fake-json-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { FakeJsonSDK } from 'fake-json'
 
-const client = new FakeJsonSDK({})
+const client = new FakeJsonSDK({
+  apikey: process.env.FAKE-JSON_APIKEY,
+})
 
 // List all books
 const books = await client.Book().list()
+console.log(books.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -102,10 +90,10 @@ The API exposes 4 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Book** | Book records suitable for catalogue or library demos, served from `GET /books` (with `?limit=` and `GET /books/{id}`); mock writes are accepted on the same path. | `/books` |
-| **Currency** | Currency reference records (around 170 entries) for populating selectors and FX demos, served from `GET /currencies`. | `/currencies` |
-| **Person** | People records (around 1000 entries) for user, contact, or directory mock-ups, served from `GET /peoples`. | `/peoples` |
-| **Pokemon** | Pokemon records (around 394 entries) sourced from the Pokemon JSON Pokedex dataset, served from `GET /pokemons`. | `/pokemons` |
+| **Book** |  | `/books` |
+| **Currency** |  | `/currencies` |
+| **Person** |  | `/peoples` |
+| **Pokemon** |  | `/pokemons` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -115,17 +103,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from fakejson_sdk import FakeJsonSDK
 
-client = FakeJsonSDK({})
+client = FakeJsonSDK({
+    "apikey": os.environ.get("FAKE-JSON_APIKEY"),
+})
 
 # List all books
-books, err = client.Book(None).list(None, None)
+books, err = client.Book().list()
+print(books)
 
 # Load a specific book
-book, err = client.Book(None).load(
-    {"id": "example_id"}, None
-)
+book, err = client.Book().load({"id": "example_id"})
+print(book)
 ```
 
 ### PHP
@@ -134,15 +125,17 @@ book, err = client.Book(None).load(
 <?php
 require_once 'fakejson_sdk.php';
 
-$client = new FakeJsonSDK([]);
+$client = new FakeJsonSDK([
+    "apikey" => getenv("FAKE-JSON_APIKEY"),
+]);
 
 // List all books
-[$books, $err] = $client->Book(null)->list(null, null);
+[$books, $err] = $client->Book()->list();
+print_r($books);
 
 // Load a specific book
-[$book, $err] = $client->Book(null)->load(
-    ["id" => "example_id"], null
-);
+[$book, $err] = $client->Book()->load(["id" => "example_id"]);
+print_r($book);
 ```
 
 ### Golang
@@ -150,10 +143,13 @@ $client = new FakeJsonSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/fake-json-sdk/go"
 
-client := sdk.NewFakeJsonSDK(map[string]any{})
+client := sdk.NewFakeJsonSDK(map[string]any{
+    "apikey": os.Getenv("FAKE-JSON_APIKEY"),
+})
 
 // List all books
 books, err := client.Book(nil).List(nil, nil)
+fmt.Println(books)
 ```
 
 ### Ruby
@@ -161,15 +157,17 @@ books, err := client.Book(nil).List(nil, nil)
 ```ruby
 require_relative "FakeJson_sdk"
 
-client = FakeJsonSDK.new({})
+client = FakeJsonSDK.new({
+  "apikey" => ENV["FAKE-JSON_APIKEY"],
+})
 
 # List all books
-books, err = client.Book(nil).list(nil, nil)
+books, err = client.Book().list
+puts books
 
 # Load a specific book
-book, err = client.Book(nil).load(
-  { "id" => "example_id" }, nil
-)
+book, err = client.Book().load({ "id" => "example_id" })
+puts book
 ```
 
 ### Lua
@@ -177,15 +175,17 @@ book, err = client.Book(nil).load(
 ```lua
 local sdk = require("fake-json_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("FAKE-JSON_APIKEY"),
+})
 
 -- List all books
-local books, err = client:Book(nil):list(nil, nil)
+local books, err = client:Book():list()
+print(books)
 
 -- Load a specific book
-local book, err = client:Book(nil):load(
-  { id = "example_id" }, nil
-)
+local book, err = client:Book():load({ id = "example_id" })
+print(book)
 ```
 
 ## Unit testing in offline mode
@@ -204,25 +204,21 @@ const result = await client.Book().load({ id: 'test01' })
 ### Python
 
 ```python
-client = FakeJsonSDK.test(None, None)
-result, err = client.Book(None).load(
-    {"id": "test01"}, None
-)
+client = FakeJsonSDK.test()
+result, err = client.Book().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = FakeJsonSDK::test(null, null);
-[$result, $err] = $client->Book(null)->load(
-    ["id" => "test01"], null
-);
+$client = FakeJsonSDK::test();
+[$result, $err] = $client->Book()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Book(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -231,19 +227,15 @@ result, err := client.Book(nil).Load(
 ### Ruby
 
 ```ruby
-client = FakeJsonSDK.test(nil, nil)
-result, err = client.Book(nil).load(
-  { "id" => "test01" }, nil
-)
+client = FakeJsonSDK.test
+result, err = client.Book().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Book(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Book():load({ id = "test01" })
 ```
 
 ## How it works
@@ -347,15 +339,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Fake JSON API
-
-- Upstream: [https://softwium.com/fake-api/](https://softwium.com/fake-api/)
-
-- Free to use for testing and development; no registration, tokens, or authentication required.
-- Underlying sample data is sourced from public GitHub repositories (e.g. json-datasets, Pokemon JSON Pokedex, MongoDB JSON files, random-name datasets) under their original licences (Apache, MIT, and others).
-- Write operations (POST/PUT/PATCH/DELETE) are accepted but do not persist — useful for prototyping clients only.
-- Check the upstream dataset licences before redistributing the data.
 
 ---
 

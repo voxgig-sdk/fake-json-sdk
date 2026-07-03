@@ -15,6 +15,9 @@ module FakeJsonConfig
       },
       "options" => {
         "base" => "https://softwium.com/api",
+        "auth" => {
+          "prefix" => "Bearer",
+        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -29,79 +32,81 @@ module FakeJsonConfig
         "book" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "author",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "id",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "isbn",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "publication_year",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "title",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 4,
             },
           ],
           "name" => "book",
           "op" => {
             "create" => {
+              "input" => "data",
               "name" => "create",
               "points" => [
                 {
+                  "active" => true,
+                  "args" => {},
                   "method" => "POST",
                   "orig" => "/books",
                   "parts" => [
                     "books",
                   ],
+                  "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
-                  "args" => {},
-                  "select" => {},
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "create",
             },
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "example" => 20,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -119,27 +124,27 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => 23,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -158,27 +163,27 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
             "patch" => {
+              "input" => "data",
               "name" => "patch",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => 23,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -197,27 +202,27 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "patch",
             },
             "remove" => {
+              "input" => "data",
               "name" => "remove",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => 23,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -236,27 +241,27 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "remove",
             },
             "update" => {
+              "input" => "data",
               "name" => "update",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => 23,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -275,11 +280,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "update",
             },
           },
@@ -290,49 +293,51 @@ module FakeJsonConfig
         "currency" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "code",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "id",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "name",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "symbol",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 3,
             },
           ],
           "name" => "currency",
           "op" => {
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -350,11 +355,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
           },
@@ -365,56 +368,58 @@ module FakeJsonConfig
         "person" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "address",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "age",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "email",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "id",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "name",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 4,
             },
           ],
           "name" => "person",
           "op" => {
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -432,11 +437,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
           },
@@ -447,49 +450,51 @@ module FakeJsonConfig
         "pokemon" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "id",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "name",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "stat",
               "req" => false,
               "type" => "`$OBJECT`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "type",
               "req" => false,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 3,
             },
           ],
           "name" => "pokemon",
           "op" => {
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -507,11 +512,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
           },

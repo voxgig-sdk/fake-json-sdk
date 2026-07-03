@@ -1,6 +1,11 @@
 # FakeJson Lua SDK
 
-The Lua SDK for the FakeJson API. Provides an entity-oriented interface using Lua conventions.
+
+
+The Lua SDK for the FakeJson API — an entity-oriented client using Lua conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -26,13 +31,15 @@ loading a specific record.
 ```lua
 local sdk = require("fake-json_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("FAKE-JSON_APIKEY"),
+})
 ```
 
 ### 2. List books
 
 ```lua
-local result, err = client:Book(nil):list(nil, nil)
+local result, err = client:Book():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -46,7 +53,7 @@ end
 ### 3. Load a book
 
 ```lua
-local result, err = client:Book(nil):load({ id = "example_id" }, nil)
+local result, err = client:Book():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -55,13 +62,13 @@ print(result)
 
 ```lua
 -- Create
-local created, _ = client:Book(nil):create({ name = "Example" }, nil)
+local created, _ = client:Book():create({ name = "Example" })
 
 -- Update
-client:Book(nil):update({ id = created["id"], name = "Example-Renamed" }, nil)
+client:Book():update({ id = created["id"], name = "Example-Renamed" })
 
 -- Remove
-client:Book(nil):remove({ id = created["id"] }, nil)
+client:Book():remove({ id = created["id"] })
 ```
 
 
@@ -105,11 +112,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 
-local result, err = client:FakeJson(nil):load(
-  { id = "test01" }, nil
-)
+local result, err = client:FakeJson():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -143,6 +148,7 @@ Create a `.env.local` file at the project root:
 
 ```
 FAKE-JSON_TEST_LIVE=TRUE
+FAKE-JSON_APIKEY=<your-key>
 ```
 
 Then run:
@@ -165,6 +171,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

@@ -119,6 +119,7 @@ func personBasicSetup(extra map[string]any) *entityTestSetup {
 		"FAKEJSON_TEST_PERSON_ENTID": idmap,
 		"FAKEJSON_TEST_LIVE":      "FALSE",
 		"FAKEJSON_TEST_EXPLAIN":   "FALSE",
+		"FAKEJSON_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["FAKEJSON_TEST_PERSON_ENTID"])
@@ -129,6 +130,7 @@ func personBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["FAKEJSON_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["FAKEJSON_APIKEY"],
 			},
 			extra,
 		})

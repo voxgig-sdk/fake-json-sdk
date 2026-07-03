@@ -16,32 +16,7 @@ main: {
       ]
       title: "Fake JSON API"
       version: "1.0.0"
-      tagline: "Free public API for fake JSON data — books, currencies, people, and pokemon — for testing and development"
-      homepage: "https://softwium.com/fake-api/"
-      docs_url: "https://softwium.com/fake-api/"
-      license_short: "Free public API; underlying datasets sourced from third-party GitHub repositories under various licences (Apache, MIT, etc.)"
-      license_md: `- Free to use for testing and development; no registration, tokens, or authentication required.
-- Underlying sample data is sourced from public GitHub repositories (e.g. json-datasets, Pokemon JSON Pokedex, MongoDB JSON files, random-name datasets) under their original licences (Apache, MIT, and others).
-- Write operations (POST/PUT/PATCH/DELETE) are accepted but do not persist — useful for prototyping clients only.
-- Check the upstream dataset licences before redistributing the data.`
-      about_md: `The Fake JSON API is a free public service from [Softwium](https://softwium.com/fake-api/) that serves ready-made JSON datasets so developers can prototype clients, demos, and tests without standing up a backend. It is hosted at \`https://softwium.com/api\` and requires no registration or API key.
-
-What you get from the API:
-
-- \`GET /books\` — 80 book records, with \`?limit=\` pagination and \`/{id}\` single-record lookup.
-- \`GET /currencies\` — 170 currency records.
-- \`GET /peoples\` — 1000 people records.
-- \`GET /pokemons\` — 394 pokemon records.
-- \`POST\`, \`PUT\`, \`PATCH\`, and \`DELETE\` are accepted on \`/books\` (and return realistic status codes such as 201 on create and 404 on unknown IDs) but changes are not persisted.
-
-Operational notes: CORS is enabled, so the endpoints work directly from browser apps. Invalid IDs return HTTP 404 and unsupported method/route combinations return HTTP 405. The service is intended for prototyping and endpoint validation, not for production traffic.`
-      entity_desc: {
-        book: "Book records suitable for catalogue or library demos, served from `GET /books` (with `?limit=` and `GET /books/{id}`); mock writes are accepted on the same path."
-        currency: "Currency reference records (around 170 entries) for populating selectors and FX demos, served from `GET /currencies`."
-        person: "People records (around 1000 entries) for user, contact, or directory mock-ups, served from `GET /peoples`."
-        pokemon: "Pokemon records (around 394 entries) sourced from the Pokemon JSON Pokedex dataset, served from `GET /pokemons`."
-      }
-      auth: false
     }
   }
 }
+

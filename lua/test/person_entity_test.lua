@@ -92,6 +92,7 @@ function person_basic_setup(extra)
     ["FAKEJSON_TEST_PERSON_ENTID"] = idmap,
     ["FAKEJSON_TEST_LIVE"] = "FALSE",
     ["FAKEJSON_TEST_EXPLAIN"] = "FALSE",
+    ["FAKEJSON_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,6 +104,7 @@ function person_basic_setup(extra)
   if env["FAKEJSON_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["FAKEJSON_APIKEY"],
       },
       extra or {},
     })

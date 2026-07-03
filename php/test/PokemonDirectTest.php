@@ -68,12 +68,14 @@ function pokemon_direct_setup($mockres)
     $env = Runner::env_override([
         "FAKEJSON_TEST_POKEMON_ENTID" => [],
         "FAKEJSON_TEST_LIVE" => "FALSE",
+        "FAKEJSON_APIKEY" => "NONE",
     ]);
 
     $live = $env["FAKEJSON_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["FAKEJSON_APIKEY"],
         ];
         $client = new FakeJsonSDK($merged_opts);
         return [

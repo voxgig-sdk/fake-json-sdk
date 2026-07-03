@@ -145,6 +145,7 @@ def _book_basic_setup(extra):
         "FAKEJSON_TEST_BOOK_ENTID": idmap,
         "FAKEJSON_TEST_LIVE": "FALSE",
         "FAKEJSON_TEST_EXPLAIN": "FALSE",
+        "FAKEJSON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -155,6 +156,7 @@ def _book_basic_setup(extra):
     if env.get("FAKEJSON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("FAKEJSON_APIKEY"),
             },
             extra or {},
         ])

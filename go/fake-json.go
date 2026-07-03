@@ -55,5 +55,12 @@ var NewResult = core.NewResult
 var NewResponse = core.NewResponse
 var NewOperation = core.NewOperation
 var MakeConfig = core.MakeConfig
+
+// No-arg convenience constructors. Go has no default-argument syntax,
+// so these aliases let callers write `sdk.New()` / `sdk.Test()`
+// instead of `sdk.NewFakeJsonSDK(nil)` / `sdk.TestSDK(nil, nil)`
+// for the common no-options case.
+func New() *FakeJsonSDK  { return NewFakeJsonSDK(nil) }
+func Test() *FakeJsonSDK { return TestSDK(nil, nil) }
 var NewBaseFeature = feature.NewBaseFeature
 var NewTestFeature = feature.NewTestFeature

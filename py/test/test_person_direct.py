@@ -61,12 +61,14 @@ def _person_direct_setup(mockres):
     env = runner.env_override({
         "FAKEJSON_TEST_PERSON_ENTID": {},
         "FAKEJSON_TEST_LIVE": "FALSE",
+        "FAKEJSON_APIKEY": "NONE",
     })
 
     live = env.get("FAKEJSON_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("FAKEJSON_APIKEY"),
         }
         client = FakeJsonSDK(merged_opts)
         return {

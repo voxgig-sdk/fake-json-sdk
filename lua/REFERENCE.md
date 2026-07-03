@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -116,8 +116,8 @@ local book = client:Book(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Book(nil):create({
-}, nil)
+local result, err = client:Book():create({
+})
 ```
 
 #### `list(reqmatch, ctrl) -> any, err`
@@ -125,7 +125,7 @@ local result, err = client:Book(nil):create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Book(nil):list(nil, nil)
+local results, err = client:Book():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -133,7 +133,7 @@ local results, err = client:Book(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Book(nil):load({ id = "book_id" }, nil)
+local result, err = client:Book():load({ id = "book_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -141,7 +141,7 @@ local result, err = client:Book(nil):load({ id = "book_id" }, nil)
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Book(nil):remove({ id = "book_id" }, nil)
+local result, err = client:Book():remove({ id = "book_id" })
 ```
 
 #### `update(reqdata, ctrl) -> any, err`
@@ -149,10 +149,10 @@ local result, err = client:Book(nil):remove({ id = "book_id" }, nil)
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:Book(nil):update({
+local result, err = client:Book():update({
   id = "book_id",
   -- Fields to update
-}, nil)
+})
 ```
 
 ### Common Methods
@@ -207,7 +207,7 @@ local currency = client:Currency(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Currency(nil):list(nil, nil)
+local results, err = client:Currency():list()
 ```
 
 ### Common Methods
@@ -263,7 +263,7 @@ local person = client:Person(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Person(nil):list(nil, nil)
+local results, err = client:Person():list()
 ```
 
 ### Common Methods
@@ -318,7 +318,7 @@ local pokemon = client:Pokemon(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Pokemon(nil):list(nil, nil)
+local results, err = client:Pokemon():list()
 ```
 
 ### Common Methods
