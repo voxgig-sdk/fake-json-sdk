@@ -97,7 +97,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## BookEntity
 
 ```php
-$book = $client->book();
+$book = $client->Book();
 ```
 
 ### Fields
@@ -117,7 +117,7 @@ $book = $client->book();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->book()->create([
+$result = $client->Book()->create([
 ]);
 ```
 
@@ -126,7 +126,7 @@ $result = $client->book()->create([
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->book()->list([]);
+$results = $client->Book()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -134,7 +134,7 @@ $results = $client->book()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->book()->load(["id" => "book_id"]);
+$result = $client->Book()->load(["id" => "book_id"]);
 ```
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
@@ -142,7 +142,7 @@ $result = $client->book()->load(["id" => "book_id"]);
 Remove the entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->book()->remove(["id" => "book_id"]);
+$result = $client->Book()->remove(["id" => "book_id"]);
 ```
 
 #### `update(array $reqdata, ?array $ctrl = null): mixed`
@@ -150,7 +150,7 @@ $result = $client->book()->remove(["id" => "book_id"]);
 Update an existing entity. The data must include the entity `id`. Throws on error.
 
 ```php
-$result = $client->book()->update([
+$result = $client->Book()->update([
   "id" => "book_id",
   // Fields to update
 ]);
@@ -189,7 +189,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```php
-$currency = $client->currency();
+$currency = $client->Currency();
 ```
 
 ### Fields
@@ -208,7 +208,7 @@ $currency = $client->currency();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->currency()->list([]);
+$results = $client->Currency()->list([]);
 ```
 
 ### Common Methods
@@ -244,7 +244,7 @@ Return the entity name.
 ## PersonEntity
 
 ```php
-$person = $client->person();
+$person = $client->Person();
 ```
 
 ### Fields
@@ -264,7 +264,7 @@ $person = $client->person();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->person()->list([]);
+$results = $client->Person()->list([]);
 ```
 
 ### Common Methods
@@ -300,7 +300,7 @@ Return the entity name.
 ## PokemonEntity
 
 ```php
-$pokemon = $client->pokemon();
+$pokemon = $client->Pokemon();
 ```
 
 ### Fields
@@ -319,7 +319,7 @@ $pokemon = $client->pokemon();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->pokemon()->list([]);
+$results = $client->Pokemon()->list([]);
 ```
 
 ### Common Methods

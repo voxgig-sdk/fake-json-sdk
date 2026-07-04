@@ -28,16 +28,14 @@ require_relative "FakeJson_sdk"
 client = FakeJsonSDK.new
 ```
 
-### 2. List books
+### 2. List book records
 
 ```ruby
 begin
-  result = client.book.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Book records — iterate directly.
+  books = client.Book.list
+  books.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,8 +46,9 @@ end
 
 ```ruby
 begin
-  result = client.book.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Book record (raises on error).
+  book = client.Book.load({ "id" => "example_id" })
+  puts book
 rescue => err
   warn "load failed: #{err}"
 end
@@ -58,14 +57,14 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# Create
-created = client.book.create({ "name" => "Example" })
+# create returns the bare created Book record.
+created = client.Book.create({ "name" => "Example" })
 
-# Update
-client.book.update({ "id" => created["id"], "name" => "Example-Renamed" })
+# Update — index the bare record directly (created["id"]).
+client.Book.update({ "id" => created["id"], "name" => "Example-Renamed" })
 
 # Remove
-client.book.remove({ "id" => created["id"] })
+client.Book.remove({ "id" => created["id"] })
 ```
 
 
@@ -109,13 +108,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = FakeJsonSDK.test
+client = FakeJsonSDK.test({
+  "entity" => { "book" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.book.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+book = client.Book.load({ "id" => "test01" })
+puts book
 ```
 
 ### Use a custom fetch function
@@ -294,7 +297,7 @@ API path: `/pokemons`
 
 ### Book
 
-Create an instance: `const book = client.book`
+Create an instance: `book = client.Book`
 
 #### Operations
 
@@ -318,27 +321,29 @@ Create an instance: `const book = client.book`
 
 #### Example: Load
 
-```ts
-const book = await client.book.load({ id: 'book_id' })
+```ruby
+# load returns the bare Book record (raises on error).
+book = client.Book.load({ "id" => "book_id" })
 ```
 
 #### Example: List
 
-```ts
-const books = await client.book.list()
+```ruby
+# list returns an Array of Book records (raises on error).
+books = client.Book.list
 ```
 
 #### Example: Create
 
-```ts
-const book = await client.book.create({
+```ruby
+book = client.Book.create({
 })
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.currency`
+Create an instance: `currency = client.Currency`
 
 #### Operations
 
@@ -357,14 +362,15 @@ Create an instance: `const currency = client.currency`
 
 #### Example: List
 
-```ts
-const currencys = await client.currency.list()
+```ruby
+# list returns an Array of Currency records (raises on error).
+currencys = client.Currency.list
 ```
 
 
 ### Person
 
-Create an instance: `const person = client.person`
+Create an instance: `person = client.Person`
 
 #### Operations
 
@@ -384,14 +390,15 @@ Create an instance: `const person = client.person`
 
 #### Example: List
 
-```ts
-const persons = await client.person.list()
+```ruby
+# list returns an Array of Person records (raises on error).
+persons = client.Person.list
 ```
 
 
 ### Pokemon
 
-Create an instance: `const pokemon = client.pokemon`
+Create an instance: `pokemon = client.Pokemon`
 
 #### Operations
 
@@ -410,8 +417,9 @@ Create an instance: `const pokemon = client.pokemon`
 
 #### Example: List
 
-```ts
-const pokemons = await client.pokemon.list()
+```ruby
+# list returns an Array of Pokemon records (raises on error).
+pokemons = client.Pokemon.list
 ```
 
 
@@ -486,7 +494,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-book = client.book
+book = client.Book
 book.load({ "id" => "example_id" })
 
 # book.data_get now returns the loaded book data

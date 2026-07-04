@@ -220,73 +220,33 @@ class FakeJsonSDK:
         }
 
 
-    @property
-    def book(self):
-        """Idiomatic facade: client.book.list() / client.book.load({"id": ...})."""
-        from entity.book_entity import BookEntity
-        cached = getattr(self, "_book", None)
-        if cached is None:
-            cached = BookEntity(self, None)
-            self._book = cached
-        return cached
-
-    def Book(self, data=None):
-        # Deprecated: use client.book instead.
+    def Book(self, data=None) -> "BookEntity":
+        """Entity factory: client.Book().list({}) / client.Book().load({"id": ...})."""
         from entity.book_entity import BookEntity
         return BookEntity(self, data)
 
 
-    @property
-    def currency(self):
-        """Idiomatic facade: client.currency.list() / client.currency.load({"id": ...})."""
-        from entity.currency_entity import CurrencyEntity
-        cached = getattr(self, "_currency", None)
-        if cached is None:
-            cached = CurrencyEntity(self, None)
-            self._currency = cached
-        return cached
-
-    def Currency(self, data=None):
-        # Deprecated: use client.currency instead.
+    def Currency(self, data=None) -> "CurrencyEntity":
+        """Entity factory: client.Currency().list({}) / client.Currency().load({"id": ...})."""
         from entity.currency_entity import CurrencyEntity
         return CurrencyEntity(self, data)
 
 
-    @property
-    def person(self):
-        """Idiomatic facade: client.person.list() / client.person.load({"id": ...})."""
-        from entity.person_entity import PersonEntity
-        cached = getattr(self, "_person", None)
-        if cached is None:
-            cached = PersonEntity(self, None)
-            self._person = cached
-        return cached
-
-    def Person(self, data=None):
-        # Deprecated: use client.person instead.
+    def Person(self, data=None) -> "PersonEntity":
+        """Entity factory: client.Person().list({}) / client.Person().load({"id": ...})."""
         from entity.person_entity import PersonEntity
         return PersonEntity(self, data)
 
 
-    @property
-    def pokemon(self):
-        """Idiomatic facade: client.pokemon.list() / client.pokemon.load({"id": ...})."""
-        from entity.pokemon_entity import PokemonEntity
-        cached = getattr(self, "_pokemon", None)
-        if cached is None:
-            cached = PokemonEntity(self, None)
-            self._pokemon = cached
-        return cached
-
-    def Pokemon(self, data=None):
-        # Deprecated: use client.pokemon instead.
+    def Pokemon(self, data=None) -> "PokemonEntity":
+        """Entity factory: client.Pokemon().list({}) / client.Pokemon().load({"id": ...})."""
         from entity.pokemon_entity import PokemonEntity
         return PokemonEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "FakeJsonSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -306,3 +266,12 @@ class FakeJsonSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.book_entity import BookEntity
+    from entity.currency_entity import CurrencyEntity
+    from entity.person_entity import PersonEntity
+    from entity.pokemon_entity import PokemonEntity

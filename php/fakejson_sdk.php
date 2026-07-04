@@ -233,10 +233,10 @@ class FakeJsonSDK
 
     private $_book = null;
 
-    // Idiomatic facade: $client->book()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Book() (PHP method
-    // names are case-insensitive).
-    public function book($data = null)
+    // Canonical facade: $client->Book()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->book()
+    // resolves here too.
+    public function Book($data = null)
     {
         require_once __DIR__ . '/entity/book_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class FakeJsonSDK
 
     private $_currency = null;
 
-    // Idiomatic facade: $client->currency()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Currency() (PHP method
-    // names are case-insensitive).
-    public function currency($data = null)
+    // Canonical facade: $client->Currency()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->currency()
+    // resolves here too.
+    public function Currency($data = null)
     {
         require_once __DIR__ . '/entity/currency_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class FakeJsonSDK
 
     private $_person = null;
 
-    // Idiomatic facade: $client->person()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Person() (PHP method
-    // names are case-insensitive).
-    public function person($data = null)
+    // Canonical facade: $client->Person()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->person()
+    // resolves here too.
+    public function Person($data = null)
     {
         require_once __DIR__ . '/entity/person_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class FakeJsonSDK
 
     private $_pokemon = null;
 
-    // Idiomatic facade: $client->pokemon()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Pokemon() (PHP method
-    // names are case-insensitive).
-    public function pokemon($data = null)
+    // Canonical facade: $client->Pokemon()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->pokemon()
+    // resolves here too.
+    public function Pokemon($data = null)
     {
         require_once __DIR__ . '/entity/pokemon_entity.php';
         if ($data === null) {

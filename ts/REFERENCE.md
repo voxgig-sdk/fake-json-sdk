@@ -145,7 +145,7 @@ Alias for `FakeJsonSDK.test()`.
 ## BookEntity
 
 ```ts
-const book = client.book
+const book = client.Book()
 ```
 
 ### Fields
@@ -165,7 +165,7 @@ const book = client.book
 Create a new entity with the given data.
 
 ```ts
-const result = await client.book.create({
+const result = await client.Book().create({
 })
 ```
 
@@ -174,7 +174,7 @@ const result = await client.book.create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.book.list()
+const results = await client.Book().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -182,7 +182,7 @@ const results = await client.book.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.book.load({ id: 'book_id' })
+const result = await client.Book().load({ id: 'book_id' })
 ```
 
 #### `remove(match: object, ctrl?: object)`
@@ -190,7 +190,7 @@ const result = await client.book.load({ id: 'book_id' })
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.book.remove({ id: 'book_id' })
+const result = await client.Book().remove({ id: 'book_id' })
 ```
 
 #### `update(data: object, ctrl?: object)`
@@ -198,7 +198,7 @@ const result = await client.book.remove({ id: 'book_id' })
 Update an existing entity. The data must include the entity `id`.
 
 ```ts
-const result = await client.book.update({
+const result = await client.Book().update({
   id: 'book_id',
   // Fields to update
 })
@@ -235,7 +235,7 @@ Return a copy of the entity options.
 ## CurrencyEntity
 
 ```ts
-const currency = client.currency
+const currency = client.Currency()
 ```
 
 ### Fields
@@ -254,7 +254,7 @@ const currency = client.currency
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.currency.list()
+const results = await client.Currency().list()
 ```
 
 ### Common Methods
@@ -288,7 +288,7 @@ Return a copy of the entity options.
 ## PersonEntity
 
 ```ts
-const person = client.person
+const person = client.Person()
 ```
 
 ### Fields
@@ -308,7 +308,7 @@ const person = client.person
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.person.list()
+const results = await client.Person().list()
 ```
 
 ### Common Methods
@@ -342,7 +342,7 @@ Return a copy of the entity options.
 ## PokemonEntity
 
 ```ts
-const pokemon = client.pokemon
+const pokemon = client.Pokemon()
 ```
 
 ### Fields
@@ -361,7 +361,7 @@ const pokemon = client.pokemon
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.pokemon.list()
+const results = await client.Pokemon().list()
 ```
 
 ### Common Methods

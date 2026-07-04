@@ -4,101 +4,93 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Book:
-    author: Optional[str] = None
-    id: Optional[int] = None
-    isbn: Optional[str] = None
-    publication_year: Optional[int] = None
-    title: Optional[str] = None
+class Book(TypedDict, total=False):
+    author: str
+    id: int
+    isbn: str
+    publication_year: int
+    title: str
 
 
-@dataclass
-class BookLoadMatch:
+class BookLoadMatch(TypedDict):
     id: int
 
 
-@dataclass
-class BookListMatch:
-    author: Optional[str] = None
-    id: Optional[int] = None
-    isbn: Optional[str] = None
-    publication_year: Optional[int] = None
-    title: Optional[str] = None
+class BookListMatch(TypedDict, total=False):
+    author: str
+    id: int
+    isbn: str
+    publication_year: int
+    title: str
 
 
-@dataclass
-class BookCreateData:
-    author: Optional[str] = None
-    id: Optional[int] = None
-    isbn: Optional[str] = None
-    publication_year: Optional[int] = None
-    title: Optional[str] = None
+class BookCreateData(TypedDict, total=False):
+    author: str
+    id: int
+    isbn: str
+    publication_year: int
+    title: str
 
 
-@dataclass
-class BookUpdateData:
+class BookUpdateData(TypedDict):
     id: int
 
 
-@dataclass
-class BookRemoveMatch:
+class BookRemoveMatch(TypedDict):
     id: int
 
 
-@dataclass
-class Currency:
-    code: Optional[str] = None
-    id: Optional[int] = None
-    name: Optional[str] = None
-    symbol: Optional[str] = None
+class Currency(TypedDict, total=False):
+    code: str
+    id: int
+    name: str
+    symbol: str
 
 
-@dataclass
-class CurrencyListMatch:
-    code: Optional[str] = None
-    id: Optional[int] = None
-    name: Optional[str] = None
-    symbol: Optional[str] = None
+class CurrencyListMatch(TypedDict, total=False):
+    code: str
+    id: int
+    name: str
+    symbol: str
 
 
-@dataclass
-class Person:
-    address: Optional[str] = None
-    age: Optional[int] = None
-    email: Optional[str] = None
-    id: Optional[int] = None
-    name: Optional[str] = None
+class Person(TypedDict, total=False):
+    address: str
+    age: int
+    email: str
+    id: int
+    name: str
 
 
-@dataclass
-class PersonListMatch:
-    address: Optional[str] = None
-    age: Optional[int] = None
-    email: Optional[str] = None
-    id: Optional[int] = None
-    name: Optional[str] = None
+class PersonListMatch(TypedDict, total=False):
+    address: str
+    age: int
+    email: str
+    id: int
+    name: str
 
 
-@dataclass
-class Pokemon:
-    id: Optional[int] = None
-    name: Optional[str] = None
-    stat: Optional[dict] = None
-    type: Optional[list] = None
+class Pokemon(TypedDict, total=False):
+    id: int
+    name: str
+    stat: dict
+    type: list
 
 
-@dataclass
-class PokemonListMatch:
-    id: Optional[int] = None
-    name: Optional[str] = None
-    stat: Optional[dict] = None
-    type: Optional[list] = None
-
+class PokemonListMatch(TypedDict, total=False):
+    id: int
+    name: str
+    stat: dict
+    type: list

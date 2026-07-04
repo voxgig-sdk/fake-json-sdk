@@ -208,52 +208,28 @@ class FakeJsonSDK
   end
 
 
-  # Idiomatic facade: client.book.list / client.book.load({ "id" => ... })
-  def book
-    require_relative 'entity/book_entity'
-    @book ||= BookEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.book instead.
+  # Canonical facade: client.Book.list / client.Book.load({ "id" => ... })
   def Book(data = nil)
     require_relative 'entity/book_entity'
     BookEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.currency.list / client.currency.load({ "id" => ... })
-  def currency
-    require_relative 'entity/currency_entity'
-    @currency ||= CurrencyEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.currency instead.
+  # Canonical facade: client.Currency.list / client.Currency.load({ "id" => ... })
   def Currency(data = nil)
     require_relative 'entity/currency_entity'
     CurrencyEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.person.list / client.person.load({ "id" => ... })
-  def person
-    require_relative 'entity/person_entity'
-    @person ||= PersonEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.person instead.
+  # Canonical facade: client.Person.list / client.Person.load({ "id" => ... })
   def Person(data = nil)
     require_relative 'entity/person_entity'
     PersonEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.pokemon.list / client.pokemon.load({ "id" => ... })
-  def pokemon
-    require_relative 'entity/pokemon_entity'
-    @pokemon ||= PokemonEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.pokemon instead.
+  # Canonical facade: client.Pokemon.list / client.Pokemon.load({ "id" => ... })
   def Pokemon(data = nil)
     require_relative 'entity/pokemon_entity'
     PokemonEntity.new(self, data)

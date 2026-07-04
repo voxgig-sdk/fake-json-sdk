@@ -207,56 +207,28 @@ class FakeJsonSDK {
 
 
 
-  _book?: BookEntity
-
-  // Idiomatic facade: `client.book.list()` / `client.book.load({ id })`.
-  get book(): BookEntity {
-    return (this._book ??= new BookEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.book` instead. */
+  // Entity access: `client.Book().list()` / `client.Book().load({ id })`.
   Book(data?: any) {
     const self = this
     return new BookEntity(self,data)
   }
 
 
-  _currency?: CurrencyEntity
-
-  // Idiomatic facade: `client.currency.list()` / `client.currency.load({ id })`.
-  get currency(): CurrencyEntity {
-    return (this._currency ??= new CurrencyEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.currency` instead. */
+  // Entity access: `client.Currency().list()` / `client.Currency().load({ id })`.
   Currency(data?: any) {
     const self = this
     return new CurrencyEntity(self,data)
   }
 
 
-  _person?: PersonEntity
-
-  // Idiomatic facade: `client.person.list()` / `client.person.load({ id })`.
-  get person(): PersonEntity {
-    return (this._person ??= new PersonEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.person` instead. */
+  // Entity access: `client.Person().list()` / `client.Person().load({ id })`.
   Person(data?: any) {
     const self = this
     return new PersonEntity(self,data)
   }
 
 
-  _pokemon?: PokemonEntity
-
-  // Idiomatic facade: `client.pokemon.list()` / `client.pokemon.load({ id })`.
-  get pokemon(): PokemonEntity {
-    return (this._pokemon ??= new PokemonEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.pokemon` instead. */
+  // Entity access: `client.Pokemon().list()` / `client.Pokemon().load({ id })`.
   Pokemon(data?: any) {
     const self = this
     return new PokemonEntity(self,data)

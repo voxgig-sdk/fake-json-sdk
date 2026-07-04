@@ -29,18 +29,16 @@ require_once 'fakejson_sdk.php';
 $client = new FakeJsonSDK();
 ```
 
-### 2. List books
+### 2. List book records
 
 ```php
 try {
-    $result = $client->book()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Book records — iterate directly.
+    $books = $client->Book()->list();
+    foreach ($books as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->book()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Book record (throws on error).
+    $book = $client->Book()->load(["id" => "example_id"]);
+    print_r($book);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -59,14 +58,14 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->book()->create(["name" => "Example"]);
+// create() returns the bare created Book record.
+$created = $client->Book()->create(["name" => "Example"]);
 
-// Update
-$client->book()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
+// Update — index the bare record directly ($created["id"]).
+$client->Book()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
 
 // Remove
-$client->book()->remove(["id" => $created["id"]]);
+$client->Book()->remove(["id" => $created["id"]]);
 ```
 
 
@@ -110,13 +109,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = FakeJsonSDK::test();
+$client = FakeJsonSDK::test([
+    "entity" => ["book" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->book()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$book = $client->Book()->load(["id" => "test01"]);
+print_r($book);
 ```
 
 ### Use a custom fetch function
@@ -299,7 +302,7 @@ API path: `/pokemons`
 
 ### Book
 
-Create an instance: `const book = client.book`
+Create an instance: `$book = $client->Book();`
 
 #### Operations
 
@@ -323,27 +326,29 @@ Create an instance: `const book = client.book`
 
 #### Example: Load
 
-```ts
-const book = await client.book.load({ id: 'book_id' })
+```php
+// load() returns the bare Book record (throws on error).
+$book = $client->Book()->load(["id" => "book_id"]);
 ```
 
 #### Example: List
 
-```ts
-const books = await client.book.list()
+```php
+// list() returns an array of Book records (throws on error).
+$books = $client->Book()->list();
 ```
 
 #### Example: Create
 
-```ts
-const book = await client.book.create({
-})
+```php
+$book = $client->Book()->create([
+]);
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.currency`
+Create an instance: `$currency = $client->Currency();`
 
 #### Operations
 
@@ -362,14 +367,15 @@ Create an instance: `const currency = client.currency`
 
 #### Example: List
 
-```ts
-const currencys = await client.currency.list()
+```php
+// list() returns an array of Currency records (throws on error).
+$currencys = $client->Currency()->list();
 ```
 
 
 ### Person
 
-Create an instance: `const person = client.person`
+Create an instance: `$person = $client->Person();`
 
 #### Operations
 
@@ -389,14 +395,15 @@ Create an instance: `const person = client.person`
 
 #### Example: List
 
-```ts
-const persons = await client.person.list()
+```php
+// list() returns an array of Person records (throws on error).
+$persons = $client->Person()->list();
 ```
 
 
 ### Pokemon
 
-Create an instance: `const pokemon = client.pokemon`
+Create an instance: `$pokemon = $client->Pokemon();`
 
 #### Operations
 
@@ -415,8 +422,9 @@ Create an instance: `const pokemon = client.pokemon`
 
 #### Example: List
 
-```ts
-const pokemons = await client.pokemon.list()
+```php
+// list() returns an array of Pokemon records (throws on error).
+$pokemons = $client->Pokemon()->list();
 ```
 
 
@@ -491,7 +499,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$book = $client->book();
+$book = $client->Book();
 $book->load(["id" => "example_id"]);
 
 // $book->dataGet() now returns the loaded book data

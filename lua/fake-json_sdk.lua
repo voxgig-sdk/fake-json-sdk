@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:book():list() / client:book():load({ id = ... })
-function FakeJsonSDK:book(data)
+-- Idiomatic facade: client:Book():list() / client:Book():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FakeJsonSDK:Book(data)
   local EntityMod = require("entity.book_entity")
   if data == nil then
     if self._book == nil then
@@ -256,15 +257,10 @@ function FakeJsonSDK:book(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:book() instead.
-function FakeJsonSDK:Book(data)
-  local EntityMod = require("entity.book_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:currency():list() / client:currency():load({ id = ... })
-function FakeJsonSDK:currency(data)
+-- Idiomatic facade: client:Currency():list() / client:Currency():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FakeJsonSDK:Currency(data)
   local EntityMod = require("entity.currency_entity")
   if data == nil then
     if self._currency == nil then
@@ -275,15 +271,10 @@ function FakeJsonSDK:currency(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:currency() instead.
-function FakeJsonSDK:Currency(data)
-  local EntityMod = require("entity.currency_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:person():list() / client:person():load({ id = ... })
-function FakeJsonSDK:person(data)
+-- Idiomatic facade: client:Person():list() / client:Person():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FakeJsonSDK:Person(data)
   local EntityMod = require("entity.person_entity")
   if data == nil then
     if self._person == nil then
@@ -294,15 +285,10 @@ function FakeJsonSDK:person(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:person() instead.
-function FakeJsonSDK:Person(data)
-  local EntityMod = require("entity.person_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:pokemon():list() / client:pokemon():load({ id = ... })
-function FakeJsonSDK:pokemon(data)
+-- Idiomatic facade: client:Pokemon():list() / client:Pokemon():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FakeJsonSDK:Pokemon(data)
   local EntityMod = require("entity.pokemon_entity")
   if data == nil then
     if self._pokemon == nil then
@@ -310,12 +296,6 @@ function FakeJsonSDK:pokemon(data)
     end
     return self._pokemon
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:pokemon() instead.
-function FakeJsonSDK:Pokemon(data)
-  local EntityMod = require("entity.pokemon_entity")
   return EntityMod.new(self, data)
 end
 

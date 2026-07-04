@@ -31,24 +31,28 @@ from fakejson_sdk import FakeJsonSDK
 client = FakeJsonSDK()
 ```
 
-### 2. List books
+### 2. List book records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.book.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    books = client.Book().list({})
+    for book in books:
+        print(book)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a book
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.book.load({"id": "example_id"})
-    print(result)
+    book = client.Book().load({"id": "example_id"})
+    print(book)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -56,14 +60,14 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.book.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Book().create({"name": "Example"})
 
-# Update
-client.book.update({"id": created["id"], "name": "Example-Renamed"})
+# Update — the created record's id is a plain dict key
+client.Book().update({"id": created["id"], "name": "Example-Renamed"})
 
 # Remove
-client.book.remove({"id": created["id"]})
+client.Book().remove({"id": created["id"]})
 ```
 
 
@@ -109,8 +113,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FakeJsonSDK.test()
 
-result = client.book.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+book = client.Book().load({"id": "test01"})
+# book contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -290,7 +295,7 @@ API path: `/pokemons`
 
 ### Book
 
-Create an instance: `const book = client.book`
+Create an instance: `book = client.Book()`
 
 #### Operations
 
@@ -314,27 +319,27 @@ Create an instance: `const book = client.book`
 
 #### Example: Load
 
-```ts
-const book = await client.book.load({ id: 'book_id' })
+```python
+book = client.Book().load({"id": "book_id"})
 ```
 
 #### Example: List
 
-```ts
-const books = await client.book.list()
+```python
+books = client.Book().list({})
 ```
 
 #### Example: Create
 
-```ts
-const book = await client.book.create({
+```python
+book = client.Book().create({
 })
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.currency`
+Create an instance: `currency = client.Currency()`
 
 #### Operations
 
@@ -353,14 +358,14 @@ Create an instance: `const currency = client.currency`
 
 #### Example: List
 
-```ts
-const currencys = await client.currency.list()
+```python
+currencys = client.Currency().list({})
 ```
 
 
 ### Person
 
-Create an instance: `const person = client.person`
+Create an instance: `person = client.Person()`
 
 #### Operations
 
@@ -380,14 +385,14 @@ Create an instance: `const person = client.person`
 
 #### Example: List
 
-```ts
-const persons = await client.person.list()
+```python
+persons = client.Person().list({})
 ```
 
 
 ### Pokemon
 
-Create an instance: `const pokemon = client.pokemon`
+Create an instance: `pokemon = client.Pokemon()`
 
 #### Operations
 
@@ -406,8 +411,8 @@ Create an instance: `const pokemon = client.pokemon`
 
 #### Example: List
 
-```ts
-const pokemons = await client.pokemon.list()
+```python
+pokemons = client.Pokemon().list({})
 ```
 
 
@@ -481,7 +486,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-book = client.book
+book = client.Book()
 book.load({"id": "example_id"})
 
 # book.data_get() now returns the loaded book data

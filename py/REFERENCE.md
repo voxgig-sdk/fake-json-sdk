@@ -92,7 +92,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## BookEntity
 
 ```python
-book = client.book
+book = client.Book()
 ```
 
 ### Fields
@@ -112,7 +112,7 @@ book = client.book
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.book.create({
+result = client.Book().create({
 })
 ```
 
@@ -121,7 +121,9 @@ result = client.book.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.book.list({})
+results = client.Book().list({})
+for book in results:
+    print(book)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -129,7 +131,7 @@ results = client.book.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.book.load({"id": "book_id"})
+result = client.Book().load({"id": "book_id"})
 ```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -137,7 +139,7 @@ result = client.book.load({"id": "book_id"})
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.book.remove({"id": "book_id"})
+result = client.Book().remove({"id": "book_id"})
 ```
 
 #### `update(reqdata, ctrl=None) -> dict`
@@ -145,7 +147,7 @@ result = client.book.remove({"id": "book_id"})
 Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result = client.book.update({
+result = client.Book().update({
     "id": "book_id",
     # Fields to update
 })
@@ -183,7 +185,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```python
-currency = client.currency
+currency = client.Currency()
 ```
 
 ### Fields
@@ -202,7 +204,9 @@ currency = client.currency
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.currency.list({})
+results = client.Currency().list({})
+for currency in results:
+    print(currency)
 ```
 
 ### Common Methods
@@ -237,7 +241,7 @@ Return the entity name.
 ## PersonEntity
 
 ```python
-person = client.person
+person = client.Person()
 ```
 
 ### Fields
@@ -257,7 +261,9 @@ person = client.person
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.person.list({})
+results = client.Person().list({})
+for person in results:
+    print(person)
 ```
 
 ### Common Methods
@@ -292,7 +298,7 @@ Return the entity name.
 ## PokemonEntity
 
 ```python
-pokemon = client.pokemon
+pokemon = client.Pokemon()
 ```
 
 ### Fields
@@ -311,7 +317,9 @@ pokemon = client.pokemon
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.pokemon.list({})
+results = client.Pokemon().list({})
+for pokemon in results:
+    print(pokemon)
 ```
 
 ### Common Methods

@@ -98,7 +98,7 @@ same parameters as `direct()`. Raises on error.
 ## BookEntity
 
 ```ruby
-book = client.book
+book = client.Book
 ```
 
 ### Fields
@@ -118,7 +118,7 @@ book = client.book
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.book.create({
+result = client.Book.create({
 })
 ```
 
@@ -127,7 +127,7 @@ result = client.book.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.book.list(nil)
+results = client.Book.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -135,7 +135,7 @@ results = client.book.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.book.load({ "id" => "book_id" })
+result = client.Book.load({ "id" => "book_id" })
 ```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -143,7 +143,7 @@ result = client.book.load({ "id" => "book_id" })
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.book.remove({ "id" => "book_id" })
+result = client.Book.remove({ "id" => "book_id" })
 ```
 
 #### `update(reqdata, ctrl = nil) -> result`
@@ -151,7 +151,7 @@ result = client.book.remove({ "id" => "book_id" })
 Update an existing entity. The data must include the entity `id`. Raises on error.
 
 ```ruby
-result = client.book.update({
+result = client.Book.update({
   "id" => "book_id",
   # Fields to update
 })
@@ -190,7 +190,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```ruby
-currency = client.currency
+currency = client.Currency
 ```
 
 ### Fields
@@ -209,7 +209,7 @@ currency = client.currency
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.currency.list(nil)
+results = client.Currency.list(nil)
 ```
 
 ### Common Methods
@@ -245,7 +245,7 @@ Return the entity name.
 ## PersonEntity
 
 ```ruby
-person = client.person
+person = client.Person
 ```
 
 ### Fields
@@ -265,7 +265,7 @@ person = client.person
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.person.list(nil)
+results = client.Person.list(nil)
 ```
 
 ### Common Methods
@@ -301,7 +301,7 @@ Return the entity name.
 ## PokemonEntity
 
 ```ruby
-pokemon = client.pokemon
+pokemon = client.Pokemon
 ```
 
 ### Fields
@@ -320,7 +320,7 @@ pokemon = client.pokemon
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.pokemon.list(nil)
+results = client.Pokemon.list(nil)
 ```
 
 ### Common Methods
