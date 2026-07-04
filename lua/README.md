@@ -9,12 +9,9 @@ The Lua SDK for the FakeJson API — an entity-oriented client using Lua convent
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-fake-json
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fake-json-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("fake-json_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("FAKE-JSON_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List books
 
 ```lua
-local result, err = client:Book():list()
+local result, err = client:book():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -53,7 +48,7 @@ end
 ### 3. Load a book
 
 ```lua
-local result, err = client:Book():load({ id = "example_id" })
+local result, err = client:book():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -62,13 +57,13 @@ print(result)
 
 ```lua
 -- Create
-local created, _ = client:Book():create({ name = "Example" })
+local created, _ = client:book():create({ name = "Example" })
 
 -- Update
-client:Book():update({ id = created["id"], name = "Example-Renamed" })
+client:book():update({ id = created["id"], name = "Example-Renamed" })
 
 -- Remove
-client:Book():remove({ id = created["id"] })
+client:book():remove({ id = created["id"] })
 ```
 
 
@@ -114,7 +109,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:FakeJson():load({ id = "test01" })
+local result, err = client:book():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -147,8 +142,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-FAKE-JSON_TEST_LIVE=TRUE
-FAKE-JSON_APIKEY=<your-key>
+FAKE_JSON_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -171,7 +165,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -295,7 +288,7 @@ API path: `/pokemons`
 
 ### Book
 
-Create an instance: `const book = client.Book()`
+Create an instance: `const book = client.book`
 
 #### Operations
 
@@ -320,26 +313,26 @@ Create an instance: `const book = client.Book()`
 #### Example: Load
 
 ```ts
-const book = await client.Book().load({ id: 'book_id' })
+const book = await client.book.load({ id: 'book_id' })
 ```
 
 #### Example: List
 
 ```ts
-const books = await client.Book().list()
+const books = await client.book.list()
 ```
 
 #### Example: Create
 
 ```ts
-const book = await client.Book().create({
+const book = await client.book.create({
 })
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.Currency()`
+Create an instance: `const currency = client.currency`
 
 #### Operations
 
@@ -359,13 +352,13 @@ Create an instance: `const currency = client.Currency()`
 #### Example: List
 
 ```ts
-const currencys = await client.Currency().list()
+const currencys = await client.currency.list()
 ```
 
 
 ### Person
 
-Create an instance: `const person = client.Person()`
+Create an instance: `const person = client.person`
 
 #### Operations
 
@@ -386,13 +379,13 @@ Create an instance: `const person = client.Person()`
 #### Example: List
 
 ```ts
-const persons = await client.Person().list()
+const persons = await client.person.list()
 ```
 
 
 ### Pokemon
 
-Create an instance: `const pokemon = client.Pokemon()`
+Create an instance: `const pokemon = client.pokemon`
 
 #### Operations
 
@@ -412,7 +405,7 @@ Create an instance: `const pokemon = client.Pokemon()`
 #### Example: List
 
 ```ts
-const pokemons = await client.Pokemon().list()
+const pokemons = await client.pokemon.list()
 ```
 
 
@@ -487,11 +480,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local book = client:book()
+book:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- book:data_get() now returns the loaded book data
+-- book:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

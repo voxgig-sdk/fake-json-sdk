@@ -43,8 +43,7 @@ class BookEntityTest extends TestCase
         $book_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.book"), "book_ref01"));
 
-        [$book_ref01_data_result, $err] = $book_ref01_ent->create($book_ref01_data, null);
-        $this->assertNull($err);
+        $book_ref01_data_result = $book_ref01_ent->create($book_ref01_data, null);
         $book_ref01_data = Helpers::to_map($book_ref01_data_result);
         $this->assertNotNull($book_ref01_data);
         $this->assertNotNull($book_ref01_data["id"]);
@@ -52,8 +51,7 @@ class BookEntityTest extends TestCase
         // LIST
         $book_ref01_match = [];
 
-        [$book_ref01_list_result, $err] = $book_ref01_ent->list($book_ref01_match, null);
-        $this->assertNull($err);
+        $book_ref01_list_result = $book_ref01_ent->list($book_ref01_match, null);
         $this->assertIsArray($book_ref01_list_result);
 
         $found_item = sdk_select(
@@ -70,8 +68,7 @@ class BookEntityTest extends TestCase
         $book_ref01_markdef_up0_value = "Mark01-book_ref01_" . $setup["now"];
         $book_ref01_data_up0_up[$book_ref01_markdef_up0_name] = $book_ref01_markdef_up0_value;
 
-        [$book_ref01_resdata_up0_result, $err] = $book_ref01_ent->update($book_ref01_data_up0_up, null);
-        $this->assertNull($err);
+        $book_ref01_resdata_up0_result = $book_ref01_ent->update($book_ref01_data_up0_up, null);
         $book_ref01_resdata_up0 = Helpers::to_map($book_ref01_resdata_up0_result);
         $this->assertNotNull($book_ref01_resdata_up0);
         $this->assertEquals($book_ref01_resdata_up0["id"], $book_ref01_data_up0_up["id"]);
@@ -81,8 +78,7 @@ class BookEntityTest extends TestCase
         $book_ref01_match_dt0 = [
             "id" => $book_ref01_data["id"],
         ];
-        [$book_ref01_data_dt0_loaded, $err] = $book_ref01_ent->load($book_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $book_ref01_data_dt0_loaded = $book_ref01_ent->load($book_ref01_match_dt0, null);
         $book_ref01_data_dt0_load_result = Helpers::to_map($book_ref01_data_dt0_loaded);
         $this->assertNotNull($book_ref01_data_dt0_load_result);
         $this->assertEquals($book_ref01_data_dt0_load_result["id"], $book_ref01_data["id"]);
@@ -91,14 +87,12 @@ class BookEntityTest extends TestCase
         $book_ref01_match_rm0 = [
             "id" => $book_ref01_data["id"],
         ];
-        [$_, $err] = $book_ref01_ent->remove($book_ref01_match_rm0, null);
-        $this->assertNull($err);
+        $book_ref01_ent->remove($book_ref01_match_rm0, null);
 
         // LIST
         $book_ref01_match_rt0 = [];
 
-        [$book_ref01_list_rt0_result, $err] = $book_ref01_ent->list($book_ref01_match_rt0, null);
-        $this->assertNull($err);
+        $book_ref01_list_rt0_result = $book_ref01_ent->list($book_ref01_match_rt0, null);
         $this->assertIsArray($book_ref01_list_rt0_result);
 
         $not_found_item = sdk_select(
@@ -138,7 +132,6 @@ function book_basic_setup($extra)
         "FAKEJSON_TEST_BOOK_ENTID" => $idmap,
         "FAKEJSON_TEST_LIVE" => "FALSE",
         "FAKEJSON_TEST_EXPLAIN" => "FALSE",
-        "FAKEJSON_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -150,7 +143,6 @@ function book_basic_setup($extra)
     if ($env["FAKEJSON_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["FAKEJSON_APIKEY"],
             ],
             $extra ?? [],
         ]);

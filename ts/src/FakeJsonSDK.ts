@@ -5,6 +5,8 @@ import { CurrencyEntity } from './entity/CurrencyEntity'
 import { PersonEntity } from './entity/PersonEntity'
 import { PokemonEntity } from './entity/PokemonEntity'
 
+export type * from './FakeJsonTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -205,24 +207,56 @@ class FakeJsonSDK {
 
 
 
+  _book?: BookEntity
+
+  // Idiomatic facade: `client.book.list()` / `client.book.load({ id })`.
+  get book(): BookEntity {
+    return (this._book ??= new BookEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.book` instead. */
   Book(data?: any) {
     const self = this
     return new BookEntity(self,data)
   }
 
 
+  _currency?: CurrencyEntity
+
+  // Idiomatic facade: `client.currency.list()` / `client.currency.load({ id })`.
+  get currency(): CurrencyEntity {
+    return (this._currency ??= new CurrencyEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.currency` instead. */
   Currency(data?: any) {
     const self = this
     return new CurrencyEntity(self,data)
   }
 
 
+  _person?: PersonEntity
+
+  // Idiomatic facade: `client.person.list()` / `client.person.load({ id })`.
+  get person(): PersonEntity {
+    return (this._person ??= new PersonEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.person` instead. */
   Person(data?: any) {
     const self = this
     return new PersonEntity(self,data)
   }
 
 
+  _pokemon?: PokemonEntity
+
+  // Idiomatic facade: `client.pokemon.list()` / `client.pokemon.load({ id })`.
+  get pokemon(): PokemonEntity {
+    return (this._pokemon ??= new PokemonEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.pokemon` instead. */
   Pokemon(data?: any) {
     const self = this
     return new PokemonEntity(self,data)

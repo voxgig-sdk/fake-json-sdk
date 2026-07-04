@@ -14,9 +14,17 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Book,
+  BookLoadMatch,
+  BookListMatch,
+  BookCreateData,
+  BookUpdateData,
+  BookRemoveMatch,
+} from '../FakeJsonTypes'
 
 // TODO: needs Entity superclass
-class BookEntity extends FakeJsonEntityBase {
+class BookEntity extends FakeJsonEntityBase<Book> {
 
   constructor(client: FakeJsonSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +40,7 @@ class BookEntity extends FakeJsonEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: BookLoadMatch, ctrl?: Control): Promise<Book> {
 
     const utility = this._utility
 
@@ -136,14 +144,16 @@ class BookEntity extends FakeJsonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Book> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: BookListMatch, ctrl?: Control): Promise<Book[]> {
 
     const utility = this._utility
 
@@ -243,14 +253,16 @@ class BookEntity extends FakeJsonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Book[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: BookCreateData, ctrl?: Control): Promise<Book> {
 
     const utility = this._utility
     const {
@@ -349,14 +361,16 @@ class BookEntity extends FakeJsonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Book> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async update(this: any, reqdata?: any, ctrl?: Control) {
+  async update(this: any, reqdata?: BookUpdateData, ctrl?: Control): Promise<Book> {
 
     const utility = this._utility
 
@@ -461,14 +475,16 @@ class BookEntity extends FakeJsonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Book> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async remove(this: any, reqmatch?: any, ctrl?: Control) {
+  async remove(this: any, reqmatch?: BookRemoveMatch, ctrl?: Control): Promise<Book> {
 
     const utility = this._utility
 
@@ -573,7 +589,9 @@ class BookEntity extends FakeJsonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Book> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -55,6 +55,9 @@ class BookEntity
         return new BookEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Book|array $args Book data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class BookEntity
         }
     }
 
+    /**
+     * @return Book|array The current Book data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Book fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class BookEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Book fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class BookEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Book.
+     *
+     * @param BookLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed BookLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Book|array The loaded Book as an assoc-array at the
+     *   SDK boundary; throws FakeJsonError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class BookEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Book items matching the given filter.
+     *
+     * @param BookListMatch|array|null $reqmatch Match filter (any subset
+     *   of Book fields) as an assoc-array; BookListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Book[]|array A list of Book items as assoc-arrays at
+     *   the SDK boundary; throws FakeJsonError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -133,7 +163,16 @@ class BookEntity
 
 
     
-    public function create($reqdata, $ctrl = null): array
+    /**
+     * Create a new Book.
+     *
+     * @param BookCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed BookCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Book|array The created Book as an assoc-array at the
+     *   SDK boundary; throws FakeJsonError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -156,7 +195,16 @@ class BookEntity
 
 
     
-    public function update($reqdata, $ctrl = null): array
+    /**
+     * Update an existing Book.
+     *
+     * @param BookUpdateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed BookUpdateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Book|array The updated Book as an assoc-array at the
+     *   SDK boundary; throws FakeJsonError on failure (item-5 convention).
+     */
+    public function update(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -182,7 +230,16 @@ class BookEntity
 
 
     
-    public function remove($reqmatch, $ctrl = null): array
+    /**
+     * Remove an Book matching the given criteria.
+     *
+     * @param BookRemoveMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; BookRemoveMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Book|array The removed Book as an assoc-array at the
+     *   SDK boundary; throws FakeJsonError on failure (item-5 convention).
+     */
+    public function remove(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -207,7 +264,7 @@ class BookEntity
 
 
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

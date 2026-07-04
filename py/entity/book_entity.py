@@ -1,7 +1,17 @@
 # FakeJson SDK Book entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from fakejson_types import (
+    Book,
+    BookLoadMatch,
+    BookListMatch,
+    BookCreateData,
+    BookUpdateData,
+    BookRemoveMatch,
+)
 
 
 class BookEntity:
@@ -44,7 +54,7 @@ class BookEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Book:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +63,12 @@ class BookEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Book:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: BookLoadMatch, ctrl=None) -> Book:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -80,7 +90,7 @@ class BookEntity:
 
 
     
-    def list(self, reqmatch, ctrl=None):
+    def list(self, reqmatch: BookListMatch, ctrl=None) -> list[Book]:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "list",
@@ -100,7 +110,7 @@ class BookEntity:
 
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: BookCreateData, ctrl=None) -> Book:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",
@@ -120,7 +130,7 @@ class BookEntity:
 
 
     
-    def update(self, reqdata, ctrl=None):
+    def update(self, reqdata: BookUpdateData, ctrl=None) -> Book:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "update",
@@ -142,7 +152,7 @@ class BookEntity:
 
 
     
-    def remove(self, reqmatch, ctrl=None):
+    def remove(self, reqmatch: BookRemoveMatch, ctrl=None) -> Book:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "remove",

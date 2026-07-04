@@ -50,8 +50,7 @@ class PokemonEntityTest extends TestCase
         $pokemon_ref01_ent = $client->Pokemon(null);
         $pokemon_ref01_match = [];
 
-        [$pokemon_ref01_list_result, $err] = $pokemon_ref01_ent->list($pokemon_ref01_match, null);
-        $this->assertNull($err);
+        $pokemon_ref01_list_result = $pokemon_ref01_ent->list($pokemon_ref01_match, null);
         $this->assertIsArray($pokemon_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function pokemon_basic_setup($extra)
         "FAKEJSON_TEST_POKEMON_ENTID" => $idmap,
         "FAKEJSON_TEST_LIVE" => "FALSE",
         "FAKEJSON_TEST_EXPLAIN" => "FALSE",
-        "FAKEJSON_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function pokemon_basic_setup($extra)
     if ($env["FAKEJSON_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["FAKEJSON_APIKEY"],
             ],
             $extra ?? [],
         ]);

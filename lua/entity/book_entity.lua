@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch BookLoadMatch
+---@param ctrl? table
+---@return Book
+---@return string? err
 function BookEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch BookListMatch
+---@param ctrl? table
+---@return Book[]
+---@return string? err
 function BookEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -126,6 +134,10 @@ end
 
 
 
+---@param reqdata BookCreateData
+---@param ctrl? table
+---@return Book
+---@return string? err
 function BookEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -148,6 +160,10 @@ end
 
 
 
+---@param reqdata BookUpdateData
+---@param ctrl? table
+---@return Book
+---@return string? err
 function BookEntity:update(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -173,6 +189,10 @@ end
 
 
 
+---@param reqmatch BookRemoveMatch
+---@param ctrl? table
+---@return Book
+---@return string? err
 function BookEntity:remove(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

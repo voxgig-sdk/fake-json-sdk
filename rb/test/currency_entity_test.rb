@@ -43,8 +43,7 @@ class CurrencyEntityTest < Minitest::Test
     currency_ref01_ent = client.Currency(nil)
     currency_ref01_match = {}
 
-    currency_ref01_list_result, err = currency_ref01_ent.list(currency_ref01_match, nil)
-    assert_nil err
+    currency_ref01_list_result = currency_ref01_ent.list(currency_ref01_match, nil)
     assert currency_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def currency_basic_setup(extra)
     "FAKEJSON_TEST_CURRENCY_ENTID" => idmap,
     "FAKEJSON_TEST_LIVE" => "FALSE",
     "FAKEJSON_TEST_EXPLAIN" => "FALSE",
-    "FAKEJSON_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def currency_basic_setup(extra)
   if env["FAKEJSON_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["FAKEJSON_APIKEY"],
       },
       extra || {},
     ])

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Pokemon,
+  PokemonListMatch,
+} from '../FakeJsonTypes'
 
 // TODO: needs Entity superclass
-class PokemonEntity extends FakeJsonEntityBase {
+class PokemonEntity extends FakeJsonEntityBase<Pokemon> {
 
   constructor(client: FakeJsonSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class PokemonEntity extends FakeJsonEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: PokemonListMatch, ctrl?: Control): Promise<Pokemon[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class PokemonEntity extends FakeJsonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Pokemon[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

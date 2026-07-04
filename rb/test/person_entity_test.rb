@@ -43,8 +43,7 @@ class PersonEntityTest < Minitest::Test
     person_ref01_ent = client.Person(nil)
     person_ref01_match = {}
 
-    person_ref01_list_result, err = person_ref01_ent.list(person_ref01_match, nil)
-    assert_nil err
+    person_ref01_list_result = person_ref01_ent.list(person_ref01_match, nil)
     assert person_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def person_basic_setup(extra)
     "FAKEJSON_TEST_PERSON_ENTID" => idmap,
     "FAKEJSON_TEST_LIVE" => "FALSE",
     "FAKEJSON_TEST_EXPLAIN" => "FALSE",
-    "FAKEJSON_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def person_basic_setup(extra)
   if env["FAKEJSON_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["FAKEJSON_APIKEY"],
       },
       extra || {},
     ])

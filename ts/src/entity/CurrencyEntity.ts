@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Currency,
+  CurrencyListMatch,
+} from '../FakeJsonTypes'
 
 // TODO: needs Entity superclass
-class CurrencyEntity extends FakeJsonEntityBase {
+class CurrencyEntity extends FakeJsonEntityBase<Currency> {
 
   constructor(client: FakeJsonSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class CurrencyEntity extends FakeJsonEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: CurrencyListMatch, ctrl?: Control): Promise<Currency[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class CurrencyEntity extends FakeJsonEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Currency[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

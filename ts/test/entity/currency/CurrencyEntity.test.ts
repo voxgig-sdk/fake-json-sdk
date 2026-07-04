@@ -113,7 +113,6 @@ function basicSetup(extra?: any) {
     'FAKE_JSON_TEST_CURRENCY_ENTID': idmap,
     'FAKE_JSON_TEST_LIVE': 'FALSE',
     'FAKE_JSON_TEST_EXPLAIN': 'FALSE',
-    'FAKE_JSON_APIKEY': 'NONE',
   })
 
   idmap = env['FAKE_JSON_TEST_CURRENCY_ENTID']
@@ -123,7 +122,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new FakeJsonSDK(merge([
       {
-        apikey: env.FAKE_JSON_APIKEY,
       },
       extra
     ]))

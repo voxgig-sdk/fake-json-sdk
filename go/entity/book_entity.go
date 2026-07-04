@@ -85,6 +85,27 @@ func (e *BookEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Book; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *BookEntity) DataTyped(data ...Book) Book {
+	if len(data) > 0 {
+		return typedFrom[Book](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Book](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Book (all fields
+// optional at the wire level).
+func (e *BookEntity) MatchTyped(match ...Book) Book {
+	if len(match) > 0 {
+		return typedFrom[Book](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Book](e.Match())
+}
+
 
 func (e *BookEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *BookEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, er
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// BookLoadMatch and returns an Book. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *BookEntity) LoadTyped(reqmatch BookLoadMatch, ctrl map[string]any) (Book, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Book{}, err
+	}
+	return typedFrom[Book](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *BookEntity) List(reqmatch map[string]any, ctrl map[string]any) (any, er
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// BookListMatch and returns []Book. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *BookEntity) ListTyped(reqmatch BookListMatch, ctrl map[string]any) ([]Book, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Book](res), nil
 }
 
 
@@ -156,6 +199,17 @@ func (e *BookEntity) Create(reqdata map[string]any, ctrl map[string]any) (any, e
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// BookCreateData and returns an Book. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *BookEntity) CreateTyped(reqdata BookCreateData, ctrl map[string]any) (Book, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Book{}, err
+	}
+	return typedFrom[Book](res), nil
 }
 
 
@@ -186,6 +240,17 @@ func (e *BookEntity) Update(reqdata map[string]any, ctrl map[string]any) (any, e
 	})
 }
 
+// UpdateTyped is the statically-typed variant of Update: it takes an
+// BookUpdateData and returns an Book. It delegates to the untyped
+// Update (identical runtime) and converts at the typed boundary.
+func (e *BookEntity) UpdateTyped(reqdata BookUpdateData, ctrl map[string]any) (Book, error) {
+	res, err := e.Update(asMap(reqdata), ctrl)
+	if err != nil {
+		return Book{}, err
+	}
+	return typedFrom[Book](res), nil
+}
+
 
 
 
@@ -212,6 +277,17 @@ func (e *BookEntity) Remove(reqmatch map[string]any, ctrl map[string]any) (any, 
 			}
 		}
 	})
+}
+
+// RemoveTyped is the statically-typed variant of Remove: it takes an
+// BookRemoveMatch and returns an Book. It delegates to the untyped
+// Remove (identical runtime) and converts at the typed boundary.
+func (e *BookEntity) RemoveTyped(reqmatch BookRemoveMatch, ctrl map[string]any) (Book, error) {
+	res, err := e.Remove(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Book{}, err
+	}
+	return typedFrom[Book](res), nil
 }
 
 

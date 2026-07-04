@@ -50,8 +50,7 @@ class PersonEntityTest extends TestCase
         $person_ref01_ent = $client->Person(null);
         $person_ref01_match = [];
 
-        [$person_ref01_list_result, $err] = $person_ref01_ent->list($person_ref01_match, null);
-        $this->assertNull($err);
+        $person_ref01_list_result = $person_ref01_ent->list($person_ref01_match, null);
         $this->assertIsArray($person_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function person_basic_setup($extra)
         "FAKEJSON_TEST_PERSON_ENTID" => $idmap,
         "FAKEJSON_TEST_LIVE" => "FALSE",
         "FAKEJSON_TEST_EXPLAIN" => "FALSE",
-        "FAKEJSON_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function person_basic_setup($extra)
     if ($env["FAKEJSON_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["FAKEJSON_APIKEY"],
             ],
             $extra ?? [],
         ]);

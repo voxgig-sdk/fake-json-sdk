@@ -45,6 +45,7 @@ class PokemonEntity
     end
   end
 
+  # @return [Pokemon, Hash] the current Pokemon data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class PokemonEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Pokemon fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class PokemonEntity
   
 
   
+  # List Pokemon items matching the given filter.
+  #
+  # @param reqmatch [PokemonListMatch, Hash, nil] match filter (any subset of Pokemon fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Pokemon>, Array] the matching Pokemon items; raises FakeJsonError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

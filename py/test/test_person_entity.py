@@ -50,8 +50,7 @@ class TestPersonEntity:
         person_ref01_ent = client.Person(None)
         person_ref01_match = {}
 
-        person_ref01_list_result, err = person_ref01_ent.list(person_ref01_match, None)
-        assert err is None
+        person_ref01_list_result = person_ref01_ent.list(person_ref01_match, None)
         assert isinstance(person_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _person_basic_setup(extra):
         "FAKEJSON_TEST_PERSON_ENTID": idmap,
         "FAKEJSON_TEST_LIVE": "FALSE",
         "FAKEJSON_TEST_EXPLAIN": "FALSE",
-        "FAKEJSON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _person_basic_setup(extra):
     if env.get("FAKEJSON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("FAKEJSON_APIKEY"),
             },
             extra or {},
         ])

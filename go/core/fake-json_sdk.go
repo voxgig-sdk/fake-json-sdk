@@ -245,21 +245,33 @@ func (sdk *FakeJsonSDK) Direct(fetchargs map[string]any) (map[string]any, error)
 }
 
 
+// Book returns a Book entity bound to this client.
+// Idiomatic usage: client.Book(nil).List(nil, nil) or
+// client.Book(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FakeJsonSDK) Book(data map[string]any) FakeJsonEntity {
 	return NewBookEntityFunc(sdk, data)
 }
 
 
+// Currency returns a Currency entity bound to this client.
+// Idiomatic usage: client.Currency(nil).List(nil, nil) or
+// client.Currency(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FakeJsonSDK) Currency(data map[string]any) FakeJsonEntity {
 	return NewCurrencyEntityFunc(sdk, data)
 }
 
 
+// Person returns a Person entity bound to this client.
+// Idiomatic usage: client.Person(nil).List(nil, nil) or
+// client.Person(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FakeJsonSDK) Person(data map[string]any) FakeJsonEntity {
 	return NewPersonEntityFunc(sdk, data)
 }
 
 
+// Pokemon returns a Pokemon entity bound to this client.
+// Idiomatic usage: client.Pokemon(nil).List(nil, nil) or
+// client.Pokemon(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FakeJsonSDK) Pokemon(data map[string]any) FakeJsonEntity {
 	return NewPokemonEntityFunc(sdk, data)
 }

@@ -244,24 +244,76 @@ end
 
 
 
+-- Idiomatic facade: client:book():list() / client:book():load({ id = ... })
+function FakeJsonSDK:book(data)
+  local EntityMod = require("entity.book_entity")
+  if data == nil then
+    if self._book == nil then
+      self._book = EntityMod.new(self, nil)
+    end
+    return self._book
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:book() instead.
 function FakeJsonSDK:Book(data)
   local EntityMod = require("entity.book_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:currency():list() / client:currency():load({ id = ... })
+function FakeJsonSDK:currency(data)
+  local EntityMod = require("entity.currency_entity")
+  if data == nil then
+    if self._currency == nil then
+      self._currency = EntityMod.new(self, nil)
+    end
+    return self._currency
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:currency() instead.
 function FakeJsonSDK:Currency(data)
   local EntityMod = require("entity.currency_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:person():list() / client:person():load({ id = ... })
+function FakeJsonSDK:person(data)
+  local EntityMod = require("entity.person_entity")
+  if data == nil then
+    if self._person == nil then
+      self._person = EntityMod.new(self, nil)
+    end
+    return self._person
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:person() instead.
 function FakeJsonSDK:Person(data)
   local EntityMod = require("entity.person_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:pokemon():list() / client:pokemon():load({ id = ... })
+function FakeJsonSDK:pokemon(data)
+  local EntityMod = require("entity.pokemon_entity")
+  if data == nil then
+    if self._pokemon == nil then
+      self._pokemon = EntityMod.new(self, nil)
+    end
+    return self._pokemon
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:pokemon() instead.
 function FakeJsonSDK:Pokemon(data)
   local EntityMod = require("entity.pokemon_entity")
   return EntityMod.new(self, data)

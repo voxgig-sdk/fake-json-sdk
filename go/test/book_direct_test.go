@@ -175,14 +175,12 @@ func bookDirectSetup(mockres any) *bookDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FAKEJSON_TEST_BOOK_ENTID": map[string]any{},
 		"FAKEJSON_TEST_LIVE":    "FALSE",
-		"FAKEJSON_APIKEY":       "NONE",
 	})
 
 	live := env["FAKEJSON_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["FAKEJSON_APIKEY"],
 		}
 		client := sdk.NewFakeJsonSDK(mergedOpts)
 

@@ -44,17 +44,14 @@ class TestBookEntity:
         book_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.book"), "book_ref01"))
 
-        book_ref01_data_result, err = book_ref01_ent.create(book_ref01_data, None)
-        assert err is None
-        book_ref01_data = helpers.to_map(book_ref01_data_result)
+        book_ref01_data = helpers.to_map(book_ref01_ent.create(book_ref01_data, None))
         assert book_ref01_data is not None
         assert book_ref01_data["id"] is not None
 
         # LIST
         book_ref01_match = {}
 
-        book_ref01_list_result, err = book_ref01_ent.list(book_ref01_match, None)
-        assert err is None
+        book_ref01_list_result = book_ref01_ent.list(book_ref01_match, None)
         assert isinstance(book_ref01_list_result, list)
 
         found_item = vs.select(
@@ -71,9 +68,7 @@ class TestBookEntity:
         book_ref01_markdef_up0_value = "Mark01-book_ref01_" + str(setup["now"])
         book_ref01_data_up0_up[book_ref01_markdef_up0_name] = book_ref01_markdef_up0_value
 
-        book_ref01_resdata_up0_result, err = book_ref01_ent.update(book_ref01_data_up0_up, None)
-        assert err is None
-        book_ref01_resdata_up0 = helpers.to_map(book_ref01_resdata_up0_result)
+        book_ref01_resdata_up0 = helpers.to_map(book_ref01_ent.update(book_ref01_data_up0_up, None))
         assert book_ref01_resdata_up0 is not None
         assert book_ref01_resdata_up0["id"] == book_ref01_data_up0_up["id"]
         assert book_ref01_resdata_up0[book_ref01_markdef_up0_name] == book_ref01_markdef_up0_value
@@ -82,8 +77,7 @@ class TestBookEntity:
         book_ref01_match_dt0 = {
             "id": book_ref01_data["id"],
         }
-        book_ref01_data_dt0_loaded, err = book_ref01_ent.load(book_ref01_match_dt0, None)
-        assert err is None
+        book_ref01_data_dt0_loaded = book_ref01_ent.load(book_ref01_match_dt0, None)
         book_ref01_data_dt0_load_result = helpers.to_map(book_ref01_data_dt0_loaded)
         assert book_ref01_data_dt0_load_result is not None
         assert book_ref01_data_dt0_load_result["id"] == book_ref01_data["id"]
@@ -92,14 +86,12 @@ class TestBookEntity:
         book_ref01_match_rm0 = {
             "id": book_ref01_data["id"],
         }
-        _, err = book_ref01_ent.remove(book_ref01_match_rm0, None)
-        assert err is None
+        book_ref01_ent.remove(book_ref01_match_rm0, None)
 
         # LIST
         book_ref01_match_rt0 = {}
 
-        book_ref01_list_rt0_result, err = book_ref01_ent.list(book_ref01_match_rt0, None)
-        assert err is None
+        book_ref01_list_rt0_result = book_ref01_ent.list(book_ref01_match_rt0, None)
         assert isinstance(book_ref01_list_rt0_result, list)
 
         not_found_item = vs.select(
@@ -145,7 +137,6 @@ def _book_basic_setup(extra):
         "FAKEJSON_TEST_BOOK_ENTID": idmap,
         "FAKEJSON_TEST_LIVE": "FALSE",
         "FAKEJSON_TEST_EXPLAIN": "FALSE",
-        "FAKEJSON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -156,7 +147,6 @@ def _book_basic_setup(extra):
     if env.get("FAKEJSON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("FAKEJSON_APIKEY"),
             },
             extra or {},
         ])

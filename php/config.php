@@ -20,9 +20,6 @@ class FakeJsonConfig
             ],
             "options" => [
                 "base" => "https://softwium.com/api",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -150,6 +147,7 @@ class FakeJsonConfig
                         'orig' => 'id',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -228,6 +226,7 @@ class FakeJsonConfig
                         'orig' => 'id',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -267,6 +266,7 @@ class FakeJsonConfig
                         'orig' => 'id',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

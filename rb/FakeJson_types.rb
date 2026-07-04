@@ -1,0 +1,246 @@
+# frozen_string_literal: true
+
+# Typed models for the FakeJson SDK.
+#
+# GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
+# params (op.<name>.points[].args.params[]). Member types come from the
+# canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
+# @voxgig/apidef VALID_CANON). Ruby types are unenforced; these YARD
+# annotations document the shapes. Do not edit by hand.
+
+# Book entity data model.
+#
+# @!attribute [rw] author
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] isbn
+#   @return [String, nil]
+#
+# @!attribute [rw] publication_year
+#   @return [Integer, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+Book = Struct.new(
+  :author,
+  :id,
+  :isbn,
+  :publication_year,
+  :title,
+  keyword_init: true
+)
+
+# Request payload for Book#load.
+#
+# @!attribute [rw] id
+#   @return [Integer]
+BookLoadMatch = Struct.new(
+  :id,
+  keyword_init: true
+)
+
+# Match filter for Book#list (any subset of Book fields).
+#
+# @!attribute [rw] author
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] isbn
+#   @return [String, nil]
+#
+# @!attribute [rw] publication_year
+#   @return [Integer, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+BookListMatch = Struct.new(
+  :author,
+  :id,
+  :isbn,
+  :publication_year,
+  :title,
+  keyword_init: true
+)
+
+# Match filter for Book#create (any subset of Book fields).
+#
+# @!attribute [rw] author
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] isbn
+#   @return [String, nil]
+#
+# @!attribute [rw] publication_year
+#   @return [Integer, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+BookCreateData = Struct.new(
+  :author,
+  :id,
+  :isbn,
+  :publication_year,
+  :title,
+  keyword_init: true
+)
+
+# Request payload for Book#update.
+#
+# @!attribute [rw] id
+#   @return [Integer]
+BookUpdateData = Struct.new(
+  :id,
+  keyword_init: true
+)
+
+# Request payload for Book#remove.
+#
+# @!attribute [rw] id
+#   @return [Integer]
+BookRemoveMatch = Struct.new(
+  :id,
+  keyword_init: true
+)
+
+# Currency entity data model.
+#
+# @!attribute [rw] code
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] symbol
+#   @return [String, nil]
+Currency = Struct.new(
+  :code,
+  :id,
+  :name,
+  :symbol,
+  keyword_init: true
+)
+
+# Match filter for Currency#list (any subset of Currency fields).
+#
+# @!attribute [rw] code
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] symbol
+#   @return [String, nil]
+CurrencyListMatch = Struct.new(
+  :code,
+  :id,
+  :name,
+  :symbol,
+  keyword_init: true
+)
+
+# Person entity data model.
+#
+# @!attribute [rw] address
+#   @return [String, nil]
+#
+# @!attribute [rw] age
+#   @return [Integer, nil]
+#
+# @!attribute [rw] email
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+Person = Struct.new(
+  :address,
+  :age,
+  :email,
+  :id,
+  :name,
+  keyword_init: true
+)
+
+# Match filter for Person#list (any subset of Person fields).
+#
+# @!attribute [rw] address
+#   @return [String, nil]
+#
+# @!attribute [rw] age
+#   @return [Integer, nil]
+#
+# @!attribute [rw] email
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+PersonListMatch = Struct.new(
+  :address,
+  :age,
+  :email,
+  :id,
+  :name,
+  keyword_init: true
+)
+
+# Pokemon entity data model.
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] stat
+#   @return [Hash, nil]
+#
+# @!attribute [rw] type
+#   @return [Array, nil]
+Pokemon = Struct.new(
+  :id,
+  :name,
+  :stat,
+  :type,
+  keyword_init: true
+)
+
+# Match filter for Pokemon#list (any subset of Pokemon fields).
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] stat
+#   @return [Hash, nil]
+#
+# @!attribute [rw] type
+#   @return [Array, nil]
+PokemonListMatch = Struct.new(
+  :id,
+  :name,
+  :stat,
+  :type,
+  keyword_init: true
+)
+

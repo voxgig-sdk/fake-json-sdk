@@ -50,8 +50,7 @@ class TestCurrencyEntity:
         currency_ref01_ent = client.Currency(None)
         currency_ref01_match = {}
 
-        currency_ref01_list_result, err = currency_ref01_ent.list(currency_ref01_match, None)
-        assert err is None
+        currency_ref01_list_result = currency_ref01_ent.list(currency_ref01_match, None)
         assert isinstance(currency_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _currency_basic_setup(extra):
         "FAKEJSON_TEST_CURRENCY_ENTID": idmap,
         "FAKEJSON_TEST_LIVE": "FALSE",
         "FAKEJSON_TEST_EXPLAIN": "FALSE",
-        "FAKEJSON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _currency_basic_setup(extra):
     if env.get("FAKEJSON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("FAKEJSON_APIKEY"),
             },
             extra or {},
         ])

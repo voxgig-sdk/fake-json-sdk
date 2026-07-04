@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -96,7 +95,7 @@ same parameters as `direct()`.
 ## BookEntity
 
 ```lua
-local book = client:Book(nil)
+local book = client:book(nil)
 ```
 
 ### Fields
@@ -116,7 +115,7 @@ local book = client:Book(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Book():create({
+local result, err = client:book():create({
 })
 ```
 
@@ -125,7 +124,7 @@ local result, err = client:Book():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Book():list()
+local results, err = client:book():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -133,7 +132,7 @@ local results, err = client:Book():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Book():load({ id = "book_id" })
+local result, err = client:book():load({ id = "book_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -141,7 +140,7 @@ local result, err = client:Book():load({ id = "book_id" })
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Book():remove({ id = "book_id" })
+local result, err = client:book():remove({ id = "book_id" })
 ```
 
 #### `update(reqdata, ctrl) -> any, err`
@@ -149,7 +148,7 @@ local result, err = client:Book():remove({ id = "book_id" })
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:Book():update({
+local result, err = client:book():update({
   id = "book_id",
   -- Fields to update
 })
@@ -188,7 +187,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```lua
-local currency = client:Currency(nil)
+local currency = client:currency(nil)
 ```
 
 ### Fields
@@ -207,7 +206,7 @@ local currency = client:Currency(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Currency():list()
+local results, err = client:currency():list()
 ```
 
 ### Common Methods
@@ -243,7 +242,7 @@ Return the entity name.
 ## PersonEntity
 
 ```lua
-local person = client:Person(nil)
+local person = client:person(nil)
 ```
 
 ### Fields
@@ -263,7 +262,7 @@ local person = client:Person(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Person():list()
+local results, err = client:person():list()
 ```
 
 ### Common Methods
@@ -299,7 +298,7 @@ Return the entity name.
 ## PokemonEntity
 
 ```lua
-local pokemon = client:Pokemon(nil)
+local pokemon = client:pokemon(nil)
 ```
 
 ### Fields
@@ -318,7 +317,7 @@ local pokemon = client:Pokemon(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Pokemon():list()
+local results, err = client:pokemon():list()
 ```
 
 ### Common Methods

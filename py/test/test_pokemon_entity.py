@@ -50,8 +50,7 @@ class TestPokemonEntity:
         pokemon_ref01_ent = client.Pokemon(None)
         pokemon_ref01_match = {}
 
-        pokemon_ref01_list_result, err = pokemon_ref01_ent.list(pokemon_ref01_match, None)
-        assert err is None
+        pokemon_ref01_list_result = pokemon_ref01_ent.list(pokemon_ref01_match, None)
         assert isinstance(pokemon_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _pokemon_basic_setup(extra):
         "FAKEJSON_TEST_POKEMON_ENTID": idmap,
         "FAKEJSON_TEST_LIVE": "FALSE",
         "FAKEJSON_TEST_EXPLAIN": "FALSE",
-        "FAKEJSON_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _pokemon_basic_setup(extra):
     if env.get("FAKEJSON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("FAKEJSON_APIKEY"),
             },
             extra or {},
         ])

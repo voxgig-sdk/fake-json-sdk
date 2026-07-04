@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch PokemonListMatch
+---@param ctrl? table
+---@return Pokemon[]
+---@return string? err
 function PokemonEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

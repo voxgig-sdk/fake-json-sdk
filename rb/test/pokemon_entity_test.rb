@@ -43,8 +43,7 @@ class PokemonEntityTest < Minitest::Test
     pokemon_ref01_ent = client.Pokemon(nil)
     pokemon_ref01_match = {}
 
-    pokemon_ref01_list_result, err = pokemon_ref01_ent.list(pokemon_ref01_match, nil)
-    assert_nil err
+    pokemon_ref01_list_result = pokemon_ref01_ent.list(pokemon_ref01_match, nil)
     assert pokemon_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def pokemon_basic_setup(extra)
     "FAKEJSON_TEST_POKEMON_ENTID" => idmap,
     "FAKEJSON_TEST_LIVE" => "FALSE",
     "FAKEJSON_TEST_EXPLAIN" => "FALSE",
-    "FAKEJSON_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def pokemon_basic_setup(extra)
   if env["FAKEJSON_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["FAKEJSON_APIKEY"],
       },
       extra || {},
     ])

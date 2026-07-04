@@ -144,16 +144,23 @@ class FakeJsonSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class FakeJsonSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,30 +212,74 @@ class FakeJsonSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def book(self):
+        """Idiomatic facade: client.book.list() / client.book.load({"id": ...})."""
+        from entity.book_entity import BookEntity
+        cached = getattr(self, "_book", None)
+        if cached is None:
+            cached = BookEntity(self, None)
+            self._book = cached
+        return cached
 
     def Book(self, data=None):
+        # Deprecated: use client.book instead.
         from entity.book_entity import BookEntity
         return BookEntity(self, data)
 
 
+    @property
+    def currency(self):
+        """Idiomatic facade: client.currency.list() / client.currency.load({"id": ...})."""
+        from entity.currency_entity import CurrencyEntity
+        cached = getattr(self, "_currency", None)
+        if cached is None:
+            cached = CurrencyEntity(self, None)
+            self._currency = cached
+        return cached
+
     def Currency(self, data=None):
+        # Deprecated: use client.currency instead.
         from entity.currency_entity import CurrencyEntity
         return CurrencyEntity(self, data)
 
 
+    @property
+    def person(self):
+        """Idiomatic facade: client.person.list() / client.person.load({"id": ...})."""
+        from entity.person_entity import PersonEntity
+        cached = getattr(self, "_person", None)
+        if cached is None:
+            cached = PersonEntity(self, None)
+            self._person = cached
+        return cached
+
     def Person(self, data=None):
+        # Deprecated: use client.person instead.
         from entity.person_entity import PersonEntity
         return PersonEntity(self, data)
 
 
+    @property
+    def pokemon(self):
+        """Idiomatic facade: client.pokemon.list() / client.pokemon.load({"id": ...})."""
+        from entity.pokemon_entity import PokemonEntity
+        cached = getattr(self, "_pokemon", None)
+        if cached is None:
+            cached = PokemonEntity(self, None)
+            self._pokemon = cached
+        return cached
+
     def Pokemon(self, data=None):
+        # Deprecated: use client.pokemon instead.
         from entity.pokemon_entity import PokemonEntity
         return PokemonEntity(self, data)
 
