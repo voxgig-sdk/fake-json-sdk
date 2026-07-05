@@ -28,7 +28,7 @@ class BookLoadMatch
     public int $id;
 }
 
-/** Match filter for Book#list (any subset of Book fields). */
+/** Request payload for Book#list. */
 class BookListMatch
 {
     public ?string $author = null;
@@ -38,7 +38,7 @@ class BookListMatch
     public ?string $title = null;
 }
 
-/** Match filter for Book#create (any subset of Book fields). */
+/** Request payload for Book#create. */
 class BookCreateData
 {
     public ?string $author = null;
@@ -69,7 +69,7 @@ class Currency
     public ?string $symbol = null;
 }
 
-/** Match filter for Currency#list (any subset of Currency fields). */
+/** Request payload for Currency#list. */
 class CurrencyListMatch
 {
     public ?string $code = null;
@@ -88,7 +88,7 @@ class Person
     public ?string $name = null;
 }
 
-/** Match filter for Person#list (any subset of Person fields). */
+/** Request payload for Person#list. */
 class PersonListMatch
 {
     public ?string $address = null;
@@ -107,7 +107,7 @@ class Pokemon
     public ?array $type = null;
 }
 
-/** Match filter for Pokemon#list (any subset of Pokemon fields). */
+/** Request payload for Pokemon#list. */
 class PokemonListMatch
 {
     public ?int $id = null;

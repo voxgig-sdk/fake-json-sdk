@@ -17,9 +17,21 @@ export interface BookLoadMatch {
   id: number
 }
 
-export type BookListMatch = Partial<Book>
+export interface BookListMatch {
+  author?: string
+  id?: number
+  isbn?: string
+  publication_year?: number
+  title?: string
+}
 
-export type BookCreateData = Partial<Book>
+export interface BookCreateData {
+  author?: string
+  id?: number
+  isbn?: string
+  publication_year?: number
+  title?: string
+}
 
 export interface BookUpdateData {
   id: number
@@ -36,7 +48,12 @@ export interface Currency {
   symbol?: string
 }
 
-export type CurrencyListMatch = Partial<Currency>
+export interface CurrencyListMatch {
+  code?: string
+  id?: number
+  name?: string
+  symbol?: string
+}
 
 export interface Person {
   address?: string
@@ -46,7 +63,13 @@ export interface Person {
   name?: string
 }
 
-export type PersonListMatch = Partial<Person>
+export interface PersonListMatch {
+  address?: string
+  age?: number
+  email?: string
+  id?: number
+  name?: string
+}
 
 export interface Pokemon {
   id?: number
@@ -55,5 +78,10 @@ export interface Pokemon {
   type?: any[]
 }
 
-export type PokemonListMatch = Partial<Pokemon>
+export interface PokemonListMatch {
+  id?: number
+  name?: string
+  stat?: Record<string, any>
+  type?: any[]
+}
 

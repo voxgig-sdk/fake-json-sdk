@@ -102,11 +102,11 @@ local book = client:Book(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `isbn` | ``$STRING`` | No |  |
-| `publication_year` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author` | `string` | No |  |
+| `id` | `number` | No |  |
+| `isbn` | `string` | No |  |
+| `publication_year` | `number` | No |  |
+| `title` | `string` | No |  |
 
 ### Operations
 
@@ -194,10 +194,10 @@ local currency = client:Currency(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `symbol` | ``$STRING`` | No |  |
+| `code` | `string` | No |  |
+| `id` | `number` | No |  |
+| `name` | `string` | No |  |
+| `symbol` | `string` | No |  |
 
 ### Operations
 
@@ -249,11 +249,11 @@ local person = client:Person(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `age` | ``$INTEGER`` | No |  |
-| `email` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `address` | `string` | No |  |
+| `age` | `number` | No |  |
+| `email` | `string` | No |  |
+| `id` | `number` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -305,10 +305,10 @@ local pokemon = client:Pokemon(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `stat` | ``$OBJECT`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `id` | `number` | No |  |
+| `name` | `string` | No |  |
+| `stat` | `table` | No |  |
+| `type` | `table` | No |  |
 
 ### Operations
 

@@ -79,12 +79,12 @@ describe('BookEntity', async () => {
     book_ref01_data_up0.id = book_ref01_data.id
 
     const book_ref01_markdef_up0 = { name: 'author', value: 'Mark01-book_ref01_' + setup.now }
-    book_ref01_data_up0 [book_ref01_markdef_up0.name] = book_ref01_markdef_up0.value
+    ;(book_ref01_data_up0 as any)[book_ref01_markdef_up0.name] = book_ref01_markdef_up0.value
 
     const book_ref01_resdata_up0 = await book_ref01_ent.update(book_ref01_data_up0)
     assert(book_ref01_resdata_up0.id === book_ref01_data_up0.id)
 
-    assert(book_ref01_resdata_up0[book_ref01_markdef_up0.name] === book_ref01_markdef_up0.value)
+    assert((book_ref01_resdata_up0 as any)[book_ref01_markdef_up0.name] === book_ref01_markdef_up0.value)
 
 
     // LOAD

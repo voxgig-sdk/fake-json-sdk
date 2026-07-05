@@ -4,6 +4,11 @@
 
 The Python SDK for the FakeJson API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Book()` — each
+carrying a small, uniform set of operations (`list`, `load`, `create`, `update`, `remove`, `patch`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    books = client.Book().list({})
+    books = client.Book().list()
     for book in books:
         print(book)
 except Exception as err:
@@ -61,13 +66,41 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Book().create({"name": "Example"})
+created = client.Book().create({"author": "example", "isbn": "example"})
 
 # Update — the created record's id is a plain dict key
-client.Book().update({"id": created["id"], "name": "Example-Renamed"})
+client.Book().update({"id": created["id"]})
 
 # Remove
 client.Book().remove({"id": created["id"]})
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    books = client.Book().list()
+    print(books)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -88,7 +121,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -114,7 +150,7 @@ Create a mock client for unit testing — no server required:
 client = FakeJsonSDK.test()
 
 # Entity ops return the bare record and raise on error.
-book = client.Book().load({"id": "test01"})
+book = client.Book().list()
 # book contains the mock response record
 ```
 
@@ -302,7 +338,7 @@ Create an instance: `book = client.Book()`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -311,11 +347,11 @@ Create an instance: `book = client.Book()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `isbn` | ``$STRING`` |  |
-| `publication_year` | ``$INTEGER`` |  |
-| `title` | ``$STRING`` |  |
+| `author` | `str` |  |
+| `id` | `int` |  |
+| `isbn` | `str` |  |
+| `publication_year` | `int` |  |
+| `title` | `str` |  |
 
 #### Example: Load
 
@@ -326,7 +362,7 @@ book = client.Book().load({"id": "book_id"})
 #### Example: List
 
 ```python
-books = client.Book().list({})
+books = client.Book().list()
 ```
 
 #### Example: Create
@@ -345,21 +381,21 @@ Create an instance: `currency = client.Currency()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `code` | `str` |  |
+| `id` | `int` |  |
+| `name` | `str` |  |
+| `symbol` | `str` |  |
 
 #### Example: List
 
 ```python
-currencys = client.Currency().list({})
+currencys = client.Currency().list()
 ```
 
 
@@ -371,22 +407,22 @@ Create an instance: `person = client.Person()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `age` | ``$INTEGER`` |  |
-| `email` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
+| `address` | `str` |  |
+| `age` | `int` |  |
+| `email` | `str` |  |
+| `id` | `int` |  |
+| `name` | `str` |  |
 
 #### Example: List
 
 ```python
-persons = client.Person().list({})
+persons = client.Person().list()
 ```
 
 
@@ -398,30 +434,34 @@ Create an instance: `pokemon = client.Pokemon()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `stat` | ``$OBJECT`` |  |
-| `type` | ``$ARRAY`` |  |
+| `id` | `int` |  |
+| `name` | `str` |  |
+| `stat` | `dict` |  |
+| `type` | `list` |  |
 
 #### Example: List
 
 ```python
-pokemons = client.Pokemon().list({})
+pokemons = client.Pokemon().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -438,8 +478,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -482,14 +523,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 book = client.Book()
-book.load({"id": "example_id"})
+book.list()
 
-# book.data_get() now returns the loaded book data
+# book.data_get() now returns the book data from the last list
 # book.match_get() returns the last match criteria
 ```
 

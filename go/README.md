@@ -4,6 +4,8 @@
 
 The Golang SDK for the FakeJson API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Book(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Update`, `Remove`, `Patch`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -58,33 +60,62 @@ func main() {
     }
 
     // Load a single book — the value is the loaded record.
-    book, err := client.Book(nil).Load(map[string]any{"id": "example_id"}, nil)
+    book, err := client.Book(nil).Load(map[string]any{"id": 1}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(book)
 
     // Create a book.
-    created, err := client.Book(nil).Create(map[string]any{"name": "Example"}, nil)
+    created, err := client.Book(nil).Create(map[string]any{"author": "example", "isbn": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 
     // Update a book.
-    updated, err := client.Book(nil).Update(map[string]any{"id": "example_id", "name": "Renamed"}, nil)
+    updated, err := client.Book(nil).Update(map[string]any{"id": 1}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(updated)
 
     // Remove a book.
-    removed, err := client.Book(nil).Remove(map[string]any{"id": "example_id"}, nil)
+    removed, err := client.Book(nil).Remove(map[string]any{"id": 1}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(removed)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+books, err := client.Book(nil).List(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = books
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -134,13 +165,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-book, err := client.Book(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+book, err := client.Book(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(book) // the loaded mock data
+fmt.Println(book) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -252,9 +283,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    book, err := client.Book(nil).Load(map[string]any{"id": "example_id"}, nil)
+    book, err := client.Book(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // book is the loaded record
+    // book is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -338,11 +369,11 @@ Create an instance: `book := client.Book(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `isbn` | ``$STRING`` |  |
-| `publication_year` | ``$INTEGER`` |  |
-| `title` | ``$STRING`` |  |
+| `author` | `string` |  |
+| `id` | `int` |  |
+| `isbn` | `string` |  |
+| `publication_year` | `int` |  |
+| `title` | `string` |  |
 
 #### Example: Load
 
@@ -386,10 +417,10 @@ Create an instance: `currency := client.Currency(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `code` | `string` |  |
+| `id` | `int` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: List
 
@@ -416,11 +447,11 @@ Create an instance: `person := client.Person(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `age` | ``$INTEGER`` |  |
-| `email` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
+| `address` | `string` |  |
+| `age` | `int` |  |
+| `email` | `string` |  |
+| `id` | `int` |  |
+| `name` | `string` |  |
 
 #### Example: List
 
@@ -447,10 +478,10 @@ Create an instance: `pokemon := client.Pokemon(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `stat` | ``$OBJECT`` |  |
-| `type` | ``$ARRAY`` |  |
+| `id` | `int` |  |
+| `name` | `string` |  |
+| `stat` | `map[string]any` |  |
+| `type` | `[]any` |  |
 
 #### Example: List
 
@@ -463,12 +494,16 @@ fmt.Println(pokemons) // the array of records
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -485,9 +520,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -528,14 +563,14 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
 book := client.Book(nil)
-book.Load(map[string]any{"id": "example_id"}, nil)
+book.List(nil, nil)
 
-// book.Data() now returns the loaded book data
+// book.Data() now returns the book data from the last list
 // book.Match() returns the last match criteria
 ```
 

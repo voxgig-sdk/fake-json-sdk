@@ -42,7 +42,7 @@ BookLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Book#list (any subset of Book fields).
+# Request payload for Book#list.
 #
 # @!attribute [rw] author
 #   @return [String, nil]
@@ -67,7 +67,7 @@ BookListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Book#create (any subset of Book fields).
+# Request payload for Book#create.
 #
 # @!attribute [rw] author
 #   @return [String, nil]
@@ -131,7 +131,7 @@ Currency = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Currency#list (any subset of Currency fields).
+# Request payload for Currency#list.
 #
 # @!attribute [rw] code
 #   @return [String, nil]
@@ -177,7 +177,7 @@ Person = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Person#list (any subset of Person fields).
+# Request payload for Person#list.
 #
 # @!attribute [rw] address
 #   @return [String, nil]
@@ -223,7 +223,7 @@ Pokemon = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Pokemon#list (any subset of Pokemon fields).
+# Request payload for Pokemon#list.
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]

@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the FakeJson API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.Book()` — each with a small set of operations (`list`, `load`, `create`, `update`, `remove`, `patch`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -46,7 +51,7 @@ for (const book of books) {
 
 ```ts
 try {
-  const book = await client.Book().load({ id: 'example_id' })
+  const book = await client.Book().load({ id: 1 })
   console.log(book)
 } catch (err) {
   console.error('load failed:', err)
@@ -58,19 +63,48 @@ try {
 ```ts
 // Create — returns the created Book
 const created = await client.Book().create({
-  name: 'Example',
+  author: 'example_author',
+  isbn: 'example_isbn',
 })
 
 // Update — the id comes straight off the returned entity
 const updated = await client.Book().update({
-  id: created.id,
-  name: 'Example-Renamed',
+  id: created.id!,
 })
 
 // Remove
 await client.Book().remove({
-  id: created.id,
+  id: created.id!,
 })
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const books = await client.Book().list()
+  console.log(books)
+} catch (err) {
+  console.error('list failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
+}
 ```
 
 
@@ -118,7 +152,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FakeJsonSDK.test()
 
-const book = await client.Book().load({ id: 'test01' })
+const book = await client.Book().list()
 // book is a bare entity populated with mock response data
 console.log(book)
 ```
@@ -137,12 +171,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.Book()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.list()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -238,8 +272,8 @@ All entities share the same interface.
 | `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
 | `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
 | `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): FakeJsonSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -365,16 +399,16 @@ Create an instance: `const book = client.Book()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `isbn` | ``$STRING`` |  |
-| `publication_year` | ``$INTEGER`` |  |
-| `title` | ``$STRING`` |  |
+| `author` | `string` |  |
+| `id` | `number` |  |
+| `isbn` | `string` |  |
+| `publication_year` | `number` |  |
+| `title` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const book = await client.Book().load({ id: 'book_id' })
+const book = await client.Book().load({ id: 1 })
 ```
 
 #### Example: List
@@ -405,10 +439,10 @@ Create an instance: `const currency = client.Currency()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `code` | `string` |  |
+| `id` | `number` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: List
 
@@ -431,11 +465,11 @@ Create an instance: `const person = client.Person()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `age` | ``$INTEGER`` |  |
-| `email` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
+| `address` | `string` |  |
+| `age` | `number` |  |
+| `email` | `string` |  |
+| `id` | `number` |  |
+| `name` | `string` |  |
 
 #### Example: List
 
@@ -458,10 +492,10 @@ Create an instance: `const pokemon = client.Pokemon()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `stat` | ``$OBJECT`` |  |
-| `type` | ``$ARRAY`` |  |
+| `id` | `number` |  |
+| `name` | `string` |  |
+| `stat` | `Record<string, any>` |  |
+| `type` | `any[]` |  |
 
 #### Example: List
 
@@ -470,12 +504,16 @@ const pokemons = await client.Pokemon().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -492,11 +530,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -532,16 +568,16 @@ import { FakeJsonSDK } from '@voxgig-sdk/fake-json'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const book = client.Book()
-await book.load({ id: "example_id" })
+await book.list()
 
-// book.data() now returns the loaded book data
-// book.match() returns { id: "example_id" }
+// book.data() now returns the book data from the last `list`
+// book.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

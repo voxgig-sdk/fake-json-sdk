@@ -109,11 +109,11 @@ book := client.Book(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `isbn` | ``$STRING`` | No |  |
-| `publication_year` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author` | `string` | No |  |
+| `id` | `int` | No |  |
+| `isbn` | `string` | No |  |
+| `publication_year` | `int` | No |  |
+| `title` | `string` | No |  |
 
 ### Operations
 
@@ -195,10 +195,10 @@ currency := client.Currency(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `symbol` | ``$STRING`` | No |  |
+| `code` | `string` | No |  |
+| `id` | `int` | No |  |
+| `name` | `string` | No |  |
+| `symbol` | `string` | No |  |
 
 ### Operations
 
@@ -244,11 +244,11 @@ person := client.Person(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `age` | ``$INTEGER`` | No |  |
-| `email` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `address` | `string` | No |  |
+| `age` | `int` | No |  |
+| `email` | `string` | No |  |
+| `id` | `int` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -294,10 +294,10 @@ pokemon := client.Pokemon(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `stat` | ``$OBJECT`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `id` | `int` | No |  |
+| `name` | `string` | No |  |
+| `stat` | `map[string]any` | No |  |
+| `type` | `[]any` | No |  |
 
 ### Operations
 

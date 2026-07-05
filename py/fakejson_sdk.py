@@ -221,25 +221,25 @@ class FakeJsonSDK:
 
 
     def Book(self, data=None) -> "BookEntity":
-        """Entity factory: client.Book().list({}) / client.Book().load({"id": ...})."""
+        """Entity factory: client.Book().list() / client.Book().load({"id": ...})."""
         from entity.book_entity import BookEntity
         return BookEntity(self, data)
 
 
     def Currency(self, data=None) -> "CurrencyEntity":
-        """Entity factory: client.Currency().list({}) / client.Currency().load({"id": ...})."""
+        """Entity factory: client.Currency().list() / client.Currency().load({"id": ...})."""
         from entity.currency_entity import CurrencyEntity
         return CurrencyEntity(self, data)
 
 
     def Person(self, data=None) -> "PersonEntity":
-        """Entity factory: client.Person().list({}) / client.Person().load({"id": ...})."""
+        """Entity factory: client.Person().list() / client.Person().load({"id": ...})."""
         from entity.person_entity import PersonEntity
         return PersonEntity(self, data)
 
 
     def Pokemon(self, data=None) -> "PokemonEntity":
-        """Entity factory: client.Pokemon().list({}) / client.Pokemon().load({"id": ...})."""
+        """Entity factory: client.Pokemon().list() / client.Pokemon().load({"id": ...})."""
         from entity.pokemon_entity import PokemonEntity
         return PokemonEntity(self, data)
 

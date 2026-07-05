@@ -152,11 +152,11 @@ const book = client.Book()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `isbn` | ``$STRING`` | No |  |
-| `publication_year` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author` | `string` | No |  |
+| `id` | `number` | No |  |
+| `isbn` | `string` | No |  |
+| `publication_year` | `number` | No |  |
+| `title` | `string` | No |  |
 
 ### Operations
 
@@ -182,7 +182,7 @@ const results = await client.Book().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Book().load({ id: 'book_id' })
+const result = await client.Book().load({ id: 1 })
 ```
 
 #### `remove(match: object, ctrl?: object)`
@@ -190,7 +190,7 @@ const result = await client.Book().load({ id: 'book_id' })
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.Book().remove({ id: 'book_id' })
+const result = await client.Book().remove({ id: 1 })
 ```
 
 #### `update(data: object, ctrl?: object)`
@@ -199,7 +199,7 @@ Update an existing entity. The data must include the entity `id`.
 
 ```ts
 const result = await client.Book().update({
-  id: 'book_id',
+  id: 1,
   // Fields to update
 })
 ```
@@ -242,10 +242,10 @@ const currency = client.Currency()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `symbol` | ``$STRING`` | No |  |
+| `code` | `string` | No |  |
+| `id` | `number` | No |  |
+| `name` | `string` | No |  |
+| `symbol` | `string` | No |  |
 
 ### Operations
 
@@ -295,11 +295,11 @@ const person = client.Person()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `age` | ``$INTEGER`` | No |  |
-| `email` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `address` | `string` | No |  |
+| `age` | `number` | No |  |
+| `email` | `string` | No |  |
+| `id` | `number` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -349,10 +349,10 @@ const pokemon = client.Pokemon()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `stat` | ``$OBJECT`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `id` | `number` | No |  |
+| `name` | `string` | No |  |
+| `stat` | `Record<string, any>` | No |  |
+| `type` | `any[]` | No |  |
 
 ### Operations
 

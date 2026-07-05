@@ -68,8 +68,13 @@ class BookEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: BookLoadMatch, ctrl=None) -> Book:
+    def load(self, reqmatch=None, ctrl=None) -> Book:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.Book().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,
@@ -90,8 +95,12 @@ class BookEntity:
 
 
     
-    def list(self, reqmatch: BookListMatch, ctrl=None) -> list[Book]:
+    def list(self, reqmatch=None, ctrl=None) -> list[Book]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Book().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,
@@ -152,8 +161,13 @@ class BookEntity:
 
 
     
-    def remove(self, reqmatch: BookRemoveMatch, ctrl=None) -> Book:
+    def remove(self, reqmatch=None, ctrl=None) -> Book:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key removes with no
+        # match. Treat None as an empty match so client.Book().remove()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "remove",
             "ctrl": ctrl,

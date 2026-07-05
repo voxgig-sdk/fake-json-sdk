@@ -19,6 +19,7 @@ go build -o fake-json-cli ./...
 ./fake-json-cli list book
 ./fake-json-cli load 1 book
 ./fake-json-cli load '{id:1}' book
+./fake-json-cli update '{id:1}' book
 
 # REPL
 ./fake-json-cli

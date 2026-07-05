@@ -8,7 +8,7 @@ Complete API reference for the FakeJson Python SDK.
 ### Constructor
 
 ```python
-from fake-json_sdk import FakeJsonSDK
+from fakejson_sdk import FakeJsonSDK
 
 client = FakeJsonSDK(options)
 ```
@@ -99,11 +99,11 @@ book = client.Book()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `isbn` | ``$STRING`` | No |  |
-| `publication_year` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author` | `str` | No |  |
+| `id` | `int` | No |  |
+| `isbn` | `str` | No |  |
+| `publication_year` | `int` | No |  |
+| `title` | `str` | No |  |
 
 ### Operations
 
@@ -116,12 +116,12 @@ result = client.Book().create({
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Book().list({})
+results = client.Book().list()
 for book in results:
     print(book)
 ```
@@ -192,19 +192,19 @@ currency = client.Currency()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `symbol` | ``$STRING`` | No |  |
+| `code` | `str` | No |  |
+| `id` | `int` | No |  |
+| `name` | `str` | No |  |
+| `symbol` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Currency().list({})
+results = client.Currency().list()
 for currency in results:
     print(currency)
 ```
@@ -248,20 +248,20 @@ person = client.Person()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `age` | ``$INTEGER`` | No |  |
-| `email` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `address` | `str` | No |  |
+| `age` | `int` | No |  |
+| `email` | `str` | No |  |
+| `id` | `int` | No |  |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Person().list({})
+results = client.Person().list()
 for person in results:
     print(person)
 ```
@@ -305,19 +305,19 @@ pokemon = client.Pokemon()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `stat` | ``$OBJECT`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `id` | `int` | No |  |
+| `name` | `str` | No |  |
+| `stat` | `dict` | No |  |
+| `type` | `list` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Pokemon().list({})
+results = client.Pokemon().list()
 for pokemon in results:
     print(pokemon)
 ```

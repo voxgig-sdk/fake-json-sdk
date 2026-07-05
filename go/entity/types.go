@@ -22,8 +22,7 @@ type BookLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// BookListMatch mirrors the book fields as an all-optional match
-// filter (Go analog of Partial<Book>).
+// BookListMatch is the typed request payload for Book.ListTyped.
 type BookListMatch struct {
 	Author *string `json:"author,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -32,8 +31,7 @@ type BookListMatch struct {
 	Title *string `json:"title,omitempty"`
 }
 
-// BookCreateData mirrors the book fields as an all-optional match
-// filter (Go analog of Partial<Book>).
+// BookCreateData is the typed request payload for Book.CreateTyped.
 type BookCreateData struct {
 	Author *string `json:"author,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -60,8 +58,7 @@ type Currency struct {
 	Symbol *string `json:"symbol,omitempty"`
 }
 
-// CurrencyListMatch mirrors the currency fields as an all-optional match
-// filter (Go analog of Partial<Currency>).
+// CurrencyListMatch is the typed request payload for Currency.ListTyped.
 type CurrencyListMatch struct {
 	Code *string `json:"code,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -78,8 +75,7 @@ type Person struct {
 	Name *string `json:"name,omitempty"`
 }
 
-// PersonListMatch mirrors the person fields as an all-optional match
-// filter (Go analog of Partial<Person>).
+// PersonListMatch is the typed request payload for Person.ListTyped.
 type PersonListMatch struct {
 	Address *string `json:"address,omitempty"`
 	Age *int `json:"age,omitempty"`
@@ -96,8 +92,7 @@ type Pokemon struct {
 	Type *[]any `json:"type,omitempty"`
 }
 
-// PokemonListMatch mirrors the pokemon fields as an all-optional match
-// filter (Go analog of Partial<Pokemon>).
+// PokemonListMatch is the typed request payload for Pokemon.ListTyped.
 type PokemonListMatch struct {
 	Id *int `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`

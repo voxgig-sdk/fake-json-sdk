@@ -8,7 +8,7 @@ Complete API reference for the FakeJson Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'fake-json_sdk'
+require_relative 'FakeJson_sdk'
 
 client = FakeJsonSDK.new(options)
 ```
@@ -105,11 +105,11 @@ book = client.Book
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `isbn` | ``$STRING`` | No |  |
-| `publication_year` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `author` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `isbn` | `String` | No |  |
+| `publication_year` | `Integer` | No |  |
+| `title` | `String` | No |  |
 
 ### Operations
 
@@ -122,12 +122,12 @@ result = client.Book.create({
 })
 ```
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Book.list(nil)
+results = client.Book.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -197,19 +197,19 @@ currency = client.Currency
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `symbol` | ``$STRING`` | No |  |
+| `code` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `symbol` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Currency.list(nil)
+results = client.Currency.list
 ```
 
 ### Common Methods
@@ -252,20 +252,20 @@ person = client.Person
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `age` | ``$INTEGER`` | No |  |
-| `email` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `address` | `String` | No |  |
+| `age` | `Integer` | No |  |
+| `email` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Person.list(nil)
+results = client.Person.list
 ```
 
 ### Common Methods
@@ -308,19 +308,19 @@ pokemon = client.Pokemon
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `stat` | ``$OBJECT`` | No |  |
-| `type` | ``$ARRAY`` | No |  |
+| `id` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `stat` | `Hash` | No |  |
+| `type` | `Array` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Pokemon.list(nil)
+results = client.Pokemon.list
 ```
 
 ### Common Methods
