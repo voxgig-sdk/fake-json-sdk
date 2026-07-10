@@ -135,7 +135,7 @@ results = client.Book.list
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Book.load({ "id" => "book_id" })
+result = client.Book.load({ "id" => 1 })
 ```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -143,7 +143,7 @@ result = client.Book.load({ "id" => "book_id" })
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Book.remove({ "id" => "book_id" })
+result = client.Book.remove({ "id" => 1 })
 ```
 
 #### `update(reqdata, ctrl = nil) -> result`
@@ -152,7 +152,7 @@ Update an existing entity. The data must include the entity `id`. Raises on erro
 
 ```ruby
 result = client.Book.update({
-  "id" => "book_id",
+  "id" => 1,
   # Fields to update
 })
 ```

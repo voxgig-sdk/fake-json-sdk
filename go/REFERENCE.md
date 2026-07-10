@@ -103,6 +103,7 @@ same parameters as `Direct()`.
 
 ```go
 book := client.Book(nil)
+fmt.Println(book.GetName()) // "book"
 ```
 
 ### Fields
@@ -117,21 +118,16 @@ book := client.Book(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Book(nil).Create(map[string]any{
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Book(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -139,15 +135,24 @@ results, err := client.Book(nil).List(nil, nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Book(nil).Load(map[string]any{"id": "book_id"}, nil)
+result, err := client.Book(nil).Load(map[string]any{"id": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
-#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Remove the entity matching the given criteria.
+Create a new entity with the given data.
 
 ```go
-result, err := client.Book(nil).Remove(map[string]any{"id": "book_id"}, nil)
+result, err := client.Book(nil).Create(map[string]any{
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 #### `Update(reqdata, ctrl map[string]any) (any, error)`
@@ -156,9 +161,25 @@ Update an existing entity. The data must include the entity `id`.
 
 ```go
 result, err := client.Book(nil).Update(map[string]any{
-    "id": "book_id",
+    "id": 1,
     // Fields to update
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+
+Remove the entity matching the given criteria.
+
+```go
+result, err := client.Book(nil).Remove(map[string]any{"id": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -189,6 +210,7 @@ Return the entity name.
 
 ```go
 currency := client.Currency(nil)
+fmt.Println(currency.GetName()) // "currency"
 ```
 
 ### Fields
@@ -208,6 +230,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Currency(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -238,6 +264,7 @@ Return the entity name.
 
 ```go
 person := client.Person(nil)
+fmt.Println(person.GetName()) // "person"
 ```
 
 ### Fields
@@ -258,6 +285,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Person(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -288,6 +319,7 @@ Return the entity name.
 
 ```go
 pokemon := client.Pokemon(nil)
+fmt.Println(pokemon.GetName()) // "pokemon"
 ```
 
 ### Fields
@@ -307,6 +339,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Pokemon(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods

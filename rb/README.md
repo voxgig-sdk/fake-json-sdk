@@ -49,7 +49,7 @@ end
 ```ruby
 begin
   # load returns the bare Book record (raises on error).
-  book = client.Book.load({ "id" => "example_id" })
+  book = client.Book.load({ "id" => 1 })
   puts book
 rescue => err
   warn "load failed: #{err}"
@@ -60,7 +60,7 @@ end
 
 ```ruby
 # create returns the bare created Book record.
-created = client.Book.create({ "author" => "example", "isbn" => "example" })
+created = client.Book.create({ "author" => "example_author", "isbn" => "example_isbn" })
 
 # Update — index the bare record directly (created["id"]).
 client.Book.update({ "id" => created["id"] })
@@ -354,7 +354,7 @@ Create an instance: `book = client.Book`
 
 ```ruby
 # load returns the bare Book record (raises on error).
-book = client.Book.load({ "id" => "book_id" })
+book = client.Book.load({ "id" => 1 })
 ```
 
 #### Example: List

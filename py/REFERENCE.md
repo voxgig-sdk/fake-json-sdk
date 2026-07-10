@@ -131,7 +131,7 @@ for book in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Book().load({"id": "book_id"})
+result = client.Book().load({"id": 1})
 ```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -139,7 +139,7 @@ result = client.Book().load({"id": "book_id"})
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.Book().remove({"id": "book_id"})
+result = client.Book().remove({"id": 1})
 ```
 
 #### `update(reqdata, ctrl=None) -> dict`
@@ -148,7 +148,7 @@ Update an existing entity. The data must include the entity `id`. Returns the up
 
 ```python
 result = client.Book().update({
-    "id": "book_id",
+    "id": 1,
     # Fields to update
 })
 ```

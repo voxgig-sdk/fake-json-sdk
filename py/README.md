@@ -56,7 +56,7 @@ except Exception as err:
 
 ```python
 try:
-    book = client.Book().load({"id": "example_id"})
+    book = client.Book().load({"id": 1})
     print(book)
 except Exception as err:
     print(f"load failed: {err}")
@@ -66,7 +66,7 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Book().create({"author": "example", "isbn": "example"})
+created = client.Book().create({"author": "example_author", "isbn": "example_isbn"})
 
 # Update — the created record's id is a plain dict key
 client.Book().update({"id": created["id"]})
@@ -356,7 +356,7 @@ Create an instance: `book = client.Book()`
 #### Example: Load
 
 ```python
-book = client.Book().load({"id": "book_id"})
+book = client.Book().load({"id": 1})
 ```
 
 #### Example: List

@@ -67,7 +67,7 @@ func main() {
     fmt.Println(book)
 
     // Create a book.
-    created, err := client.Book(nil).Create(map[string]any{"author": "example", "isbn": "example"}, nil)
+    created, err := client.Book(nil).Create(map[string]any{"author": "example_author", "isbn": "example_isbn"}, nil)
     if err != nil {
         panic(err)
     }
@@ -359,11 +359,11 @@ Create an instance: `book := client.Book(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
-| `Remove(match, ctrl)` | Remove the matching entity. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Update(data, ctrl)` | Update an existing entity. |
+| `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
 
@@ -378,7 +378,7 @@ Create an instance: `book := client.Book(nil)`
 #### Example: Load
 
 ```go
-book, err := client.Book(nil).Load(map[string]any{"id": "book_id"}, nil)
+book, err := client.Book(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -400,6 +400,10 @@ fmt.Println(books) // the array of records
 ```go
 result, err := client.Book(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

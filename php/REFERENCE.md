@@ -134,7 +134,7 @@ $results = $client->Book()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Book()->load(["id" => "book_id"]);
+$result = $client->Book()->load(["id" => 1]);
 ```
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
@@ -142,7 +142,7 @@ $result = $client->Book()->load(["id" => "book_id"]);
 Remove the entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Book()->remove(["id" => "book_id"]);
+$result = $client->Book()->remove(["id" => 1]);
 ```
 
 #### `update(array $reqdata, ?array $ctrl = null): mixed`
@@ -151,7 +151,7 @@ Update an existing entity. The data must include the entity `id`. Throws on erro
 
 ```php
 $result = $client->Book()->update([
-  "id" => "book_id",
+  "id" => 1,
   // Fields to update
 ]);
 ```

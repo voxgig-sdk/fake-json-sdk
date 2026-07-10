@@ -50,7 +50,7 @@ end
 ### 3. Load a book
 
 ```lua
-local book, err = client:Book():load({ id = "example_id" })
+local book, err = client:Book():load({ id = 1 })
 if err then error(err) end
 print(book)
 ```
@@ -59,7 +59,7 @@ print(book)
 
 ```lua
 -- Create
-local created, err = client:Book():create({ author = "example", isbn = "example" })
+local created, err = client:Book():create({ author = "example_author", isbn = "example_isbn" })
 if err then error(err) end
 
 -- Update
@@ -343,7 +343,7 @@ Create an instance: `local book = client:Book(nil)`
 #### Example: Load
 
 ```lua
-local book, err = client:Book():load({ id = "book_id" })
+local book, err = client:Book():load({ id = 1 })
 ```
 
 #### Example: List

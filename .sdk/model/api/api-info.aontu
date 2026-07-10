@@ -15,9 +15,9 @@ main: {
           url: "https://softwium.com/api"
         }
       ]
+      summary: "This free public API allows developers to easily obtain fake JSON data for testing and development."
       title: "Fake JSON API"
       version: "1.0.0"
+      website: "https://softwium.com"
     }
   }
-}
-

@@ -50,7 +50,7 @@ try {
 ```php
 try {
     // load() returns the bare Book record (throws on error).
-    $book = $client->Book()->load(["id" => "example_id"]);
+    $book = $client->Book()->load(["id" => 1]);
     print_r($book);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -61,7 +61,7 @@ try {
 
 ```php
 // create() returns the bare created Book record.
-$created = $client->Book()->create(["author" => "example", "isbn" => "example"]);
+$created = $client->Book()->create(["author" => "example_author", "isbn" => "example_isbn"]);
 
 // Update — index the bare record directly ($created["id"]).
 $client->Book()->update(["id" => $created["id"]]);
@@ -364,7 +364,7 @@ Create an instance: `$book = $client->Book();`
 
 ```php
 // load() returns the bare Book record (throws on error).
-$book = $client->Book()->load(["id" => "book_id"]);
+$book = $client->Book()->load(["id" => 1]);
 ```
 
 #### Example: List
