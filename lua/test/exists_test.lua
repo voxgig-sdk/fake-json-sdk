@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- FakeJson SDK exists test
 
 local sdk = require("fake-json_sdk")
 
