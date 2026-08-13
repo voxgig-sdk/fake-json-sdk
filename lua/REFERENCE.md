@@ -105,7 +105,7 @@ local book = client:Book(nil)
 | `author` | `string` | No |  |
 | `id` | `number` | No |  |
 | `isbn` | `string` | No |  |
-| `publication_year` | `number` | No |  |
+| `publicationYear` | `number` | No |  |
 | `title` | `string` | No |  |
 
 ### Operations
@@ -307,7 +307,7 @@ local pokemon = client:Pokemon(nil)
 | --- | --- | --- | --- |
 | `id` | `number` | No |  |
 | `name` | `string` | No |  |
-| `stat` | `table` | No |  |
+| `stats` | `table` | No |  |
 | `type` | `table` | No |  |
 
 ### Operations

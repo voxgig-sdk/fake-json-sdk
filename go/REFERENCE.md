@@ -113,7 +113,7 @@ fmt.Println(book.GetName()) // "book"
 | `author` | `string` | No |  |
 | `id` | `int` | No |  |
 | `isbn` | `string` | No |  |
-| `publication_year` | `int` | No |  |
+| `publicationYear` | `int` | No |  |
 | `title` | `string` | No |  |
 
 ### Operations
@@ -328,7 +328,7 @@ fmt.Println(pokemon.GetName()) // "pokemon"
 | --- | --- | --- | --- |
 | `id` | `int` | No |  |
 | `name` | `string` | No |  |
-| `stat` | `map[string]any` | No |  |
+| `stats` | `map[string]any` | No |  |
 | `type` | `[]any` | No |  |
 
 ### Operations

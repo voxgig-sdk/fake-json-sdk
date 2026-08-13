@@ -43,8 +43,8 @@ class FakeJsonTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('FAKEJSON_TEST_LIVE');
-        $override = self::getenv('FAKEJSON_TEST_OVERRIDE');
+        $live = self::getenv('FAKE_JSON_TEST_LIVE');
+        $override = self::getenv('FAKE_JSON_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class FakeJsonTestRunner
             }
         }
 
-        $explain = self::getenv('FAKEJSON_TEST_EXPLAIN');
+        $explain = self::getenv('FAKE_JSON_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['FAKEJSON_TEST_EXPLAIN'] = $explain;
+            $m['FAKE_JSON_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import FakeJsonControl
-from core.error import FakeJsonError
-from core.result import FakeJsonResult
-from core.spec import FakeJsonSpec
+from fakejson_sdk.config import make_config
+from fakejson_sdk.features import _make_feature
+from fakejson_sdk.core.control import FakeJsonControl
+from fakejson_sdk.core.error import FakeJsonError
+from fakejson_sdk.core.result import FakeJsonResult
+from fakejson_sdk.core.spec import FakeJsonSpec
 
 
 # True when this SDK was generated with the named feature.

@@ -102,7 +102,7 @@ book = client.Book()
 | `author` | `str` | No |  |
 | `id` | `int` | No |  |
 | `isbn` | `str` | No |  |
-| `publication_year` | `int` | No |  |
+| `publicationYear` | `int` | No |  |
 | `title` | `str` | No |  |
 
 ### Operations
@@ -307,7 +307,7 @@ pokemon = client.Pokemon()
 | --- | --- | --- | --- |
 | `id` | `int` | No |  |
 | `name` | `str` | No |  |
-| `stat` | `dict` | No |  |
+| `stats` | `dict` | No |  |
 | `type` | `list` | No |  |
 
 ### Operations

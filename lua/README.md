@@ -63,10 +63,10 @@ local created, err = client:Book():create({ author = "example_author", isbn = "e
 if err then error(err) end
 
 -- Update
-client:Book():update({ id = created["id"] })
+client:Book():update({ id = created:data_get()["id"], author = "example_author", isbn = "example_isbn" })
 
 -- Remove
-client:Book():remove({ id = created["id"] })
+client:Book():remove({ id = created:data_get()["id"] })
 ```
 
 
@@ -76,7 +76,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local books, err = client:Book():list()
+local persons, err = client:Person():list()
 if err then error(err) end
 ```
 
@@ -134,7 +134,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Book():list()
+local result, err = client:Person():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -264,7 +264,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `author` |  |
 | `id` |  |
 | `isbn` |  |
-| `publication_year` |  |
+| `publicationYear` |  |
 | `title` |  |
 
 Operations: Create, List, Load, Patch, Remove, Update.
@@ -304,7 +304,7 @@ API path: `/peoples`
 | --- | --- |
 | `id` |  |
 | `name` |  |
-| `stat` |  |
+| `stats` |  |
 | `type` |  |
 
 Operations: List.
@@ -337,7 +337,7 @@ Create an instance: `local book = client:Book(nil)`
 | `author` | `string` |  |
 | `id` | `number` |  |
 | `isbn` | `string` |  |
-| `publication_year` | `number` |  |
+| `publicationYear` | `number` |  |
 | `title` | `string` |  |
 
 #### Example: Load
@@ -429,7 +429,7 @@ Create an instance: `local pokemon = client:Pokemon(nil)`
 | --- | --- | --- |
 | `id` | `number` |  |
 | `name` | `string` |  |
-| `stat` | `table` |  |
+| `stats` | `table` |  |
 | `type` | `table` |  |
 
 #### Example: List
@@ -515,11 +515,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local book = client:Book()
-book:list()
+local person = client:Person()
+person:list()
 
--- book:data_get() now returns the book data from the last list
--- book:match_get() returns the last match criteria
+-- person:data_get() now returns the person data from the last list
+-- person:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

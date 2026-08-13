@@ -35,7 +35,9 @@ const client = new FakeJsonSDK()
 
 ### 2. List book records
 
-`list()` resolves to an array of Book objects — iterate it directly:
+`list()` resolves to an array of Book ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const books = await client.Book().list()
@@ -61,20 +63,22 @@ try {
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Book
+// Create — returns the created Book ENTITY (.data() for the record)
 const created = await client.Book().create({
   author: 'example_author',
   isbn: 'example_isbn',
 })
 
-// Update — the id comes straight off the returned entity
+// Update — the id comes off the returned entity's data()
 const updated = await client.Book().update({
-  id: created.id!,
+  id: created.data().id!,
+  author: 'example_author',
+  isbn: 'example_isbn',
 })
 
 // Remove
 await client.Book().remove({
-  id: created.id!,
+  id: created.data().id!,
 })
 ```
 
@@ -85,8 +89,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const books = await client.Book().list()
-  console.log(books)
+  const persons = await client.Person().list()
+  console.log(persons)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -152,9 +156,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FakeJsonSDK.test()
 
-const book = await client.Book().list()
-// book is a bare entity populated with mock response data
-console.log(book)
+const person = await client.Person().list()
+// person is the entity, populated with mock response data
+// — call person.data() for the record itself
+console.log(person)
 ```
 
 You can also use the instance method:
@@ -169,7 +174,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Book()
+const entity = client.Person()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -329,7 +334,7 @@ The `prepare()` method returns:
 | `author` |  |
 | `id` |  |
 | `isbn` |  |
-| `publication_year` |  |
+| `publicationYear` |  |
 | `title` |  |
 
 Operations: create, list, load, patch, remove, update.
@@ -369,7 +374,7 @@ API path: `/peoples`
 | --- | --- |
 | `id` |  |
 | `name` |  |
-| `stat` |  |
+| `stats` |  |
 | `type` |  |
 
 Operations: list.
@@ -402,7 +407,7 @@ Create an instance: `const book = client.Book()`
 | `author` | `string` |  |
 | `id` | `number` |  |
 | `isbn` | `string` |  |
-| `publication_year` | `number` |  |
+| `publicationYear` | `number` |  |
 | `title` | `string` |  |
 
 #### Example: Load
@@ -494,7 +499,7 @@ Create an instance: `const pokemon = client.Pokemon()`
 | --- | --- | --- |
 | `id` | `number` |  |
 | `name` | `string` |  |
-| `stat` | `Record<string, any>` |  |
+| `stats` | `Record<string, any>` |  |
 | `type` | `any[]` |  |
 
 #### Example: List
@@ -573,11 +578,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const book = client.Book()
-await book.list()
+const person = client.Person()
+await person.list()
 
-// book.data() now returns the book data from the last `list`
-// book.match() returns the last match criteria
+// person.data() now returns the person data from the last `list`
+// person.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -37,7 +37,7 @@ class PersonEntity extends FakeJsonEntityBase<Person> {
 
 
 
-  async list(this: any, reqmatch?: PersonListMatch, ctrl?: Control): Promise<Person[]> {
+  async list(this: any, reqmatch?: PersonListMatch, ctrl?: Control): Promise<PersonEntity[]> {
 
     const utility = this._utility
 

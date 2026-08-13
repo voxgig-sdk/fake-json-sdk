@@ -26,8 +26,8 @@ import {
 describe('PokemonEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when FAKEJSON_TEST_LIVE=TRUE.
-  afterEach(liveDelay('FAKEJSON_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when FAKE_JSON_TEST_LIVE=TRUE.
+  afterEach(liveDelay('FAKE_JSON_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = FakeJsonSDK.test()
@@ -63,7 +63,7 @@ describe('PokemonEntity', async () => {
     const pokemon_ref01_ent = client.Pokemon()
     const pokemon_ref01_match: any = {}
 
-    const pokemon_ref01_list = await pokemon_ref01_ent.list(pokemon_ref01_match)
+    const pokemon_ref01_list = (await pokemon_ref01_ent.list(pokemon_ref01_match)).map((e: any) => e.data())
 
 
   })

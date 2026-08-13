@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = FakeJsonSDK.test()
-const books = await client.Book().list()
-// books is an array of bare Book records populated with mock data
-console.log(books)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = FakeJsonSDK.test({
+  entity: {
+    person: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const persons = await client.Person().list()
+// persons is an array of Person entities, populated with mock data
+// — call persons[0].data() for the record itself
+console.log(persons)
 ```
 
 ### Python
 
 ```python
 client = FakeJsonSDK.test()
-books = client.Book().list()
-print(books)
+persons = client.Person().list()
+print(persons)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(books)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = FakeJsonSDK::test([
-    "entity" => ["book" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["person" => ["test01" => []]],
 ]);
-$books = $client->Book()->list();
+$persons = $client->Person()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Book(nil).List(
+result, err := client.Person(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Book(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = FakeJsonSDK.test({
-  "entity" => { "book" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "person" => { "test01" => {} } },
 })
-books = client.Book.list()
+persons = client.Person.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Book():list()
+local results, err = client:Person():list()
 ```
 
 ## Packages
@@ -110,7 +119,7 @@ import { FakeJsonSDK } from '@voxgig-sdk/fake-json'
 
 const client = new FakeJsonSDK()
 
-// List all books (returns Book[])
+// List all books (returns BookEntity[] — .data() for the record)
 const books = await client.Book().list()
 for (const book of books) {
   console.log(book)
@@ -194,7 +203,7 @@ $client = new FakeJsonSDK();
 $books = $client->Book()->list();
 print_r($books);
 
-// Load a specific book (returns the bare record; throws on error)
+// Load a specific book (returns the ENTITY; call data_get() for the record; throws on error)
 $book = $client->Book()->load(["id" => 1]);
 print_r($book);
 ```
@@ -225,7 +234,7 @@ client = FakeJsonSDK.new
 books = client.Book.list
 puts books
 
-# Load a specific book (returns the bare record; raises on error)
+# Load a specific book (returns the ENTITY; call data_get for the record)
 book = client.Book.load({ "id" => 1 })
 puts book
 ```
@@ -362,6 +371,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://softwium.com/fake-api/](https://softwium.com/fake-api/)
 

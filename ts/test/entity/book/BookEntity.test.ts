@@ -26,8 +26,8 @@ import {
 describe('BookEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when FAKEJSON_TEST_LIVE=TRUE.
-  afterEach(liveDelay('FAKEJSON_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when FAKE_JSON_TEST_LIVE=TRUE.
+  afterEach(liveDelay('FAKE_JSON_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = FakeJsonSDK.test()
@@ -62,14 +62,14 @@ describe('BookEntity', async () => {
     const book_ref01_ent = client.Book()
     let book_ref01_data = setup.data.new.book['book_ref01']
 
-    book_ref01_data = await book_ref01_ent.create(book_ref01_data)
+    book_ref01_data = (await book_ref01_ent.create(book_ref01_data)).data()
     assert(null != book_ref01_data.id)
 
 
     // LIST
     const book_ref01_match: any = {}
 
-    const book_ref01_list = await book_ref01_ent.list(book_ref01_match)
+    const book_ref01_list = (await book_ref01_ent.list(book_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(book_ref01_list, { id: book_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('BookEntity', async () => {
     const book_ref01_markdef_up0 = { name: 'author', value: 'Mark01-book_ref01_' + setup.now }
     ;(book_ref01_data_up0 as any)[book_ref01_markdef_up0.name] = book_ref01_markdef_up0.value
 
-    const book_ref01_resdata_up0 = await book_ref01_ent.update(book_ref01_data_up0)
+    const book_ref01_resdata_up0 = (await book_ref01_ent.update(book_ref01_data_up0)).data()
     assert(book_ref01_resdata_up0.id === book_ref01_data_up0.id)
 
     assert((book_ref01_resdata_up0 as any)[book_ref01_markdef_up0.name] === book_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('BookEntity', async () => {
     // LOAD
     const book_ref01_match_dt0: any = {}
     book_ref01_match_dt0.id = book_ref01_data.id
-    const book_ref01_data_dt0 = await book_ref01_ent.load(book_ref01_match_dt0)
+    const book_ref01_data_dt0 = (await book_ref01_ent.load(book_ref01_match_dt0)).data()
     assert(book_ref01_data_dt0.id === book_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('BookEntity', async () => {
     // LIST
     const book_ref01_match_rt0: any = {}
 
-    const book_ref01_list_rt0 = await book_ref01_ent.list(book_ref01_match_rt0)
+    const book_ref01_list_rt0 = (await book_ref01_ent.list(book_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(book_ref01_list_rt0, { id: book_ref01_data.id })))
 

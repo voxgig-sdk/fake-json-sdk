@@ -9,7 +9,7 @@ export interface Book {
   author?: string
   id?: number
   isbn?: string
-  publication_year?: number
+  publicationYear?: number
   title?: string
 }
 
@@ -21,7 +21,7 @@ export interface BookListMatch {
   author?: string
   id?: number
   isbn?: string
-  publication_year?: number
+  publicationYear?: number
   title?: string
 }
 
@@ -29,12 +29,16 @@ export interface BookCreateData {
   author?: string
   id?: number
   isbn?: string
-  publication_year?: number
+  publicationYear?: number
   title?: string
 }
 
 export interface BookUpdateData {
   id: number
+  author?: string
+  isbn?: string
+  publicationYear?: number
+  title?: string
 }
 
 export interface BookRemoveMatch {
@@ -74,14 +78,14 @@ export interface PersonListMatch {
 export interface Pokemon {
   id?: number
   name?: string
-  stat?: Record<string, any>
+  stats?: Record<string, any>
   type?: any[]
 }
 
 export interface PokemonListMatch {
   id?: number
   name?: string
-  stat?: Record<string, any>
+  stats?: Record<string, any>
   type?: any[]
 }
 

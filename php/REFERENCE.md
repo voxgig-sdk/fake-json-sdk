@@ -107,7 +107,7 @@ $book = $client->Book();
 | `author` | `string` | No |  |
 | `id` | `int` | No |  |
 | `isbn` | `string` | No |  |
-| `publication_year` | `int` | No |  |
+| `publicationYear` | `int` | No |  |
 | `title` | `string` | No |  |
 
 ### Operations
@@ -309,7 +309,7 @@ $pokemon = $client->Pokemon();
 | --- | --- | --- | --- |
 | `id` | `int` | No |  |
 | `name` | `string` | No |  |
-| `stat` | `array` | No |  |
+| `stats` | `array` | No |  |
 | `type` | `array` | No |  |
 
 ### Operations

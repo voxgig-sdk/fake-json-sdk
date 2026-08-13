@@ -50,7 +50,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "publication_year",
+            ["name"] = "publicationYear",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 3,
@@ -72,6 +72,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/books",
                 ["parts"] = {
@@ -106,6 +107,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/books",
                 ["parts"] = {
@@ -145,6 +147,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/books/{id}",
                 ["parts"] = {
@@ -184,6 +187,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/books/{id}",
                 ["parts"] = {
@@ -224,6 +228,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/books/{id}",
                 ["parts"] = {
@@ -264,6 +269,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/books/{id}",
                 ["parts"] = {
@@ -340,6 +346,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/currencies",
                 ["parts"] = {
@@ -422,6 +429,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/peoples",
                 ["parts"] = {
@@ -464,7 +472,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "stat",
+            ["name"] = "stats",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 2,
@@ -497,6 +505,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/pokemons",
                 ["parts"] = {

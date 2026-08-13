@@ -23,8 +23,8 @@ module FakeJsonTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("FAKEJSON_TEST_LIVE")
-    override = getenv("FAKEJSON_TEST_OVERRIDE")
+    live = getenv("FAKE_JSON_TEST_LIVE")
+    override = getenv("FAKE_JSON_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module FakeJsonTestRunner
       end
     end
 
-    explain = getenv("FAKEJSON_TEST_EXPLAIN")
-    m["FAKEJSON_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("FAKE_JSON_TEST_EXPLAIN")
+    m["FAKE_JSON_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

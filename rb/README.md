@@ -48,7 +48,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Book record (raises on error).
+  # load returns the ENTITY — call data_get for the Book record (raises on error).
   book = client.Book.load({ "id" => 1 })
   puts book
 rescue => err
@@ -59,14 +59,14 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Book record.
+# create returns the ENTITY — call data_get for the created Book record.
 created = client.Book.create({ "author" => "example_author", "isbn" => "example_isbn" })
 
-# Update — index the bare record directly (created["id"]).
-client.Book.update({ "id" => created["id"] })
+# Update — index the record via data_get (created.data_get["id"]).
+client.Book.update({ "id" => created.data_get["id"], "author" => "example_author", "isbn" => "example_isbn" })
 
 # Remove
-client.Book.remove({ "id" => created["id"] })
+client.Book.remove({ "id" => created.data_get["id"] })
 ```
 
 
@@ -76,7 +76,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  books = client.Book.list()
+  persons = client.Person.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -139,17 +139,15 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = FakeJsonSDK.test({
-  "entity" => { "book" => { "test01" => { "id" => "test01" } } },
-})
+client = FakeJsonSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-book = client.Book.list()
-puts book
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+person = client.Person.list()
+puts person
 ```
 
 ### Use a custom fetch function
@@ -274,7 +272,7 @@ returns a result `Hash` with these keys:
 | `author` |  |
 | `id` |  |
 | `isbn` |  |
-| `publication_year` |  |
+| `publicationYear` |  |
 | `title` |  |
 
 Operations: Create, List, Load, Patch, Remove, Update.
@@ -314,7 +312,7 @@ API path: `/peoples`
 | --- | --- |
 | `id` |  |
 | `name` |  |
-| `stat` |  |
+| `stats` |  |
 | `type` |  |
 
 Operations: List.
@@ -347,13 +345,13 @@ Create an instance: `book = client.Book`
 | `author` | `String` |  |
 | `id` | `Integer` |  |
 | `isbn` | `String` |  |
-| `publication_year` | `Integer` |  |
+| `publicationYear` | `Integer` |  |
 | `title` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Book record (raises on error).
+# load returns the ENTITY — call data_get for the Book record (raises on error).
 book = client.Book.load({ "id" => 1 })
 ```
 
@@ -443,7 +441,7 @@ Create an instance: `pokemon = client.Pokemon`
 | --- | --- | --- |
 | `id` | `Integer` |  |
 | `name` | `String` |  |
-| `stat` | `Hash` |  |
+| `stats` | `Hash` |  |
 | `type` | `Array` |  |
 
 #### Example: List
@@ -530,11 +528,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-book = client.Book
-book.list()
+person = client.Person
+person.list()
 
-# book.data_get now returns the book data from the last list
-# book.match_get returns the last match criteria
+# person.data_get now returns the person data from the last list
+# person.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

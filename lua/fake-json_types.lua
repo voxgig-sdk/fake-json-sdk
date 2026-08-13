@@ -10,7 +10,7 @@
 ---@field author? string
 ---@field id? number
 ---@field isbn? string
----@field publication_year? number
+---@field publicationYear? number
 ---@field title? string
 
 ---@class BookLoadMatch
@@ -20,18 +20,22 @@
 ---@field author? string
 ---@field id? number
 ---@field isbn? string
----@field publication_year? number
+---@field publicationYear? number
 ---@field title? string
 
 ---@class BookCreateData
 ---@field author? string
 ---@field id? number
 ---@field isbn? string
----@field publication_year? number
+---@field publicationYear? number
 ---@field title? string
 
 ---@class BookUpdateData
 ---@field id number
+---@field author? string
+---@field isbn? string
+---@field publicationYear? number
+---@field title? string
 
 ---@class BookRemoveMatch
 ---@field id number
@@ -65,13 +69,13 @@
 ---@class Pokemon
 ---@field id? number
 ---@field name? string
----@field stat? table
+---@field stats? table
 ---@field type? table
 
 ---@class PokemonListMatch
 ---@field id? number
 ---@field name? string
----@field stat? table
+---@field stats? table
 ---@field type? table
 
 local M = {}

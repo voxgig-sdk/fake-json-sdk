@@ -37,7 +37,7 @@ class PokemonEntity extends FakeJsonEntityBase<Pokemon> {
 
 
 
-  async list(this: any, reqmatch?: PokemonListMatch, ctrl?: Control): Promise<Pokemon[]> {
+  async list(this: any, reqmatch?: PokemonListMatch, ctrl?: Control): Promise<PokemonEntity[]> {
 
     const utility = this._utility
 

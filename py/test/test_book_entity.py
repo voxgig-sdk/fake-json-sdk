@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from fakejson_sdk.utility.voxgig_struct import voxgig_struct as vs
 from fakejson_sdk import FakeJsonSDK
-from core import helpers
+from fakejson_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -42,7 +42,7 @@ class TestBookEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from config import make_config
+        from fakejson_sdk.config import make_config
         cfg = make_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = FakeJsonSDK.test(
@@ -70,7 +70,7 @@ class TestBookEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set FAKEJSON_TEST_BOOK_ENTID JSON to run live")
+                        "set FAKE_JSON_TEST_BOOK_ENTID JSON to run live")
         client = setup["client"]
 
         # CREATE
@@ -78,7 +78,7 @@ class TestBookEntity:
         book_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.book"), "book_ref01"))
 
-        book_ref01_data = helpers.to_map(book_ref01_ent.create(book_ref01_data, None))
+        book_ref01_data = helpers.to_map(runner.entity_data(book_ref01_ent.create(book_ref01_data, None)))
         assert book_ref01_data is not None
         assert book_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestBookEntity:
         book_ref01_markdef_up0_value = "Mark01-book_ref01_" + str(setup["now"])
         book_ref01_data_up0_up[book_ref01_markdef_up0_name] = book_ref01_markdef_up0_value
 
-        book_ref01_resdata_up0 = helpers.to_map(book_ref01_ent.update(book_ref01_data_up0_up, None))
+        book_ref01_resdata_up0 = helpers.to_map(runner.entity_data(book_ref01_ent.update(book_ref01_data_up0_up, None)))
         assert book_ref01_resdata_up0 is not None
         assert book_ref01_resdata_up0["id"] == book_ref01_data_up0_up["id"]
         assert book_ref01_resdata_up0[book_ref01_markdef_up0_name] == book_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestBookEntity:
             "id": book_ref01_data["id"],
         }
         book_ref01_data_dt0_loaded = book_ref01_ent.load(book_ref01_match_dt0, None)
-        book_ref01_data_dt0_load_result = helpers.to_map(book_ref01_data_dt0_loaded)
+        book_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(book_ref01_data_dt0_loaded))
         assert book_ref01_data_dt0_load_result is not None
         assert book_ref01_data_dt0_load_result["id"] == book_ref01_data["id"]
 
@@ -164,21 +164,21 @@ def _book_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "FAKEJSON_TEST_BOOK_ENTID")
+        "FAKE_JSON_TEST_BOOK_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "FAKEJSON_TEST_BOOK_ENTID": idmap,
-        "FAKEJSON_TEST_LIVE": "FALSE",
-        "FAKEJSON_TEST_EXPLAIN": "FALSE",
+        "FAKE_JSON_TEST_BOOK_ENTID": idmap,
+        "FAKE_JSON_TEST_LIVE": "FALSE",
+        "FAKE_JSON_TEST_EXPLAIN": "FALSE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("FAKEJSON_TEST_BOOK_ENTID"))
+        env.get("FAKE_JSON_TEST_BOOK_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("FAKEJSON_TEST_LIVE") == "TRUE":
+    if env.get("FAKE_JSON_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
             },
@@ -186,13 +186,13 @@ def _book_basic_setup(extra):
         ])
         client = FakeJsonSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("FAKEJSON_TEST_LIVE") == "TRUE"
+    _live = env.get("FAKE_JSON_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("FAKEJSON_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("FAKE_JSON_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

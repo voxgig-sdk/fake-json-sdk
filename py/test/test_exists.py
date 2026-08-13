@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# FakeJson SDK exists test
 
 import pytest
 from fakejson_sdk import FakeJsonSDK

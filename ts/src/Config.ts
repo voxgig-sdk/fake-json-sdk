@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'FakeJson',
   }
 
 
@@ -86,7 +86,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "publication_year",
+          "name": "publicationYear",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 3
@@ -108,6 +108,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/books",
               "parts": [
@@ -142,6 +143,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/books",
               "parts": [
@@ -181,6 +183,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/books/{id}",
               "parts": [
@@ -220,6 +223,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "PATCH",
               "orig": "/books/{id}",
               "parts": [
@@ -260,6 +264,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "DELETE",
               "orig": "/books/{id}",
               "parts": [
@@ -300,6 +305,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "PUT",
               "orig": "/books/{id}",
               "parts": [
@@ -376,6 +382,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/currencies",
               "parts": [
@@ -458,6 +465,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/peoples",
               "parts": [
@@ -500,7 +508,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "stat",
+          "name": "stats",
           "req": false,
           "type": "`$OBJECT`",
           "index$": 2
@@ -533,6 +541,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/pokemons",
               "parts": [

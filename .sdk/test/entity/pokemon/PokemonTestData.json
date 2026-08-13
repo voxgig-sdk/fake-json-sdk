@@ -4,19 +4,19 @@
       "POKEMON00": {
         "id": "POKEMON00",
         "name": "s29",
-        "stat": {},
+        "stats": {},
         "type": []
       },
       "POKEMON01": {
         "id": "POKEMON01",
         "name": "s51",
-        "stat": {},
+        "stats": {},
         "type": []
       },
       "POKEMON02": {
         "id": "POKEMON02",
         "name": "s79",
-        "stat": {},
+        "stats": {},
         "type": []
       }
     }
@@ -25,7 +25,7 @@
     "pokemon": {
       "pokemon_ref01": {
         "name": "sa1",
-        "stat": {},
+        "stats": {},
         "type": []
       }
     }

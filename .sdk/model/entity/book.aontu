@@ -21,7 +21,7 @@ main: kit: entity: book: {
       type: "`$STRING`"
     }
     {
-      name: "publication_year"
+      name: "publicationYear"
       req: false
       type: "`$INTEGER`"
     }

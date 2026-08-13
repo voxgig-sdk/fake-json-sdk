@@ -74,7 +74,7 @@ func main() {
     fmt.Println(created)
 
     // Update a book.
-    updated, err := client.Book(nil).Update(map[string]any{"id": 1}, nil)
+    updated, err := client.Book(nil).Update(map[string]any{"id": 1, "author": "example_author", "isbn": "example_isbn"}, nil)
     if err != nil {
         panic(err)
     }
@@ -96,12 +96,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-books, err := client.Book(nil).List(nil, nil)
+persons, err := client.Person(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = books
+_ = persons
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -165,13 +165,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-book, err := client.Book(nil).List(
+person, err := client.Person(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(book) // the returned mock data
+fmt.Println(person) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -299,7 +299,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"author"` |  |
 | `"id"` |  |
 | `"isbn"` |  |
-| `"publication_year"` |  |
+| `"publicationYear"` |  |
 | `"title"` |  |
 
 Operations: Create, List, Load, Patch, Remove, Update.
@@ -339,7 +339,7 @@ API path: `/peoples`
 | --- | --- |
 | `"id"` |  |
 | `"name"` |  |
-| `"stat"` |  |
+| `"stats"` |  |
 | `"type"` |  |
 
 Operations: List.
@@ -372,7 +372,7 @@ Create an instance: `book := client.Book(nil)`
 | `author` | `string` |  |
 | `id` | `int` |  |
 | `isbn` | `string` |  |
-| `publication_year` | `int` |  |
+| `publicationYear` | `int` |  |
 | `title` | `string` |  |
 
 #### Example: Load
@@ -484,7 +484,7 @@ Create an instance: `pokemon := client.Pokemon(nil)`
 | --- | --- | --- |
 | `id` | `int` |  |
 | `name` | `string` |  |
-| `stat` | `map[string]any` |  |
+| `stats` | `map[string]any` |  |
 | `type` | `[]any` |  |
 
 #### Example: List
@@ -571,11 +571,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-book := client.Book(nil)
-book.List(nil, nil)
+person := client.Person(nil)
+person.List(nil, nil)
 
-// book.Data() now returns the book data from the last list
-// book.Match() returns the last match criteria
+// person.Data() now returns the person data from the last list
+// person.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

@@ -155,7 +155,7 @@ const book = client.Book()
 | `author` | `string` | No |  |
 | `id` | `number` | No |  |
 | `isbn` | `string` | No |  |
-| `publication_year` | `number` | No |  |
+| `publicationYear` | `number` | No |  |
 | `title` | `string` | No |  |
 
 ### Operations
@@ -351,7 +351,7 @@ const pokemon = client.Pokemon()
 | --- | --- | --- | --- |
 | `id` | `number` | No |  |
 | `name` | `string` | No |  |
-| `stat` | `Record<string, any>` | No |  |
+| `stats` | `Record<string, any>` | No |  |
 | `type` | `any[]` | No |  |
 
 ### Operations

@@ -49,7 +49,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Book record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Book record (throws on error).
     $book = $client->Book()->load(["id" => 1]);
     print_r($book);
 } catch (\Throwable $err) {
@@ -60,14 +60,14 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Book record.
+// create() returns the ENTITY — call data_get() for the created Book record.
 $created = $client->Book()->create(["author" => "example_author", "isbn" => "example_isbn"]);
 
-// Update — index the bare record directly ($created["id"]).
-$client->Book()->update(["id" => $created["id"]]);
+// Update — index the record via data_get() ($created->data_get()["id"]).
+$client->Book()->update(["id" => $created->data_get()["id"], "author" => "example_author", "isbn" => "example_isbn"]);
 
 // Remove
-$client->Book()->remove(["id" => $created["id"]]);
+$client->Book()->remove(["id" => $created->data_get()["id"]]);
 ```
 
 
@@ -78,7 +78,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $books = $client->Book()->list();
+    $persons = $client->Person()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -145,17 +145,15 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = FakeJsonSDK::test([
-    "entity" => ["book" => ["test01" => ["id" => "test01"]]],
-]);
+$client = FakeJsonSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$book = $client->Book()->list();
-print_r($book);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$person = $client->Person()->list();
+print_r($person);
 ```
 
 ### Use a custom fetch function
@@ -259,7 +257,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -284,7 +282,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `author` |  |
 | `id` |  |
 | `isbn` |  |
-| `publication_year` |  |
+| `publicationYear` |  |
 | `title` |  |
 
 Operations: Create, List, Load, Patch, Remove, Update.
@@ -324,7 +322,7 @@ API path: `/peoples`
 | --- | --- |
 | `id` |  |
 | `name` |  |
-| `stat` |  |
+| `stats` |  |
 | `type` |  |
 
 Operations: List.
@@ -357,13 +355,13 @@ Create an instance: `$book = $client->Book();`
 | `author` | `string` |  |
 | `id` | `int` |  |
 | `isbn` | `string` |  |
-| `publication_year` | `int` |  |
+| `publicationYear` | `int` |  |
 | `title` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Book record (throws on error).
+// load() returns the ENTITY — call data_get() for the Book record (throws on error).
 $book = $client->Book()->load(["id" => 1]);
 ```
 
@@ -453,7 +451,7 @@ Create an instance: `$pokemon = $client->Pokemon();`
 | --- | --- | --- |
 | `id` | `int` |  |
 | `name` | `string` |  |
-| `stat` | `array` |  |
+| `stats` | `array` |  |
 | `type` | `array` |  |
 
 #### Example: List
@@ -540,11 +538,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$book = $client->Book();
-$book->list();
+$person = $client->Person();
+$person->list();
 
-// $book->data_get() now returns the book data from the last list
-// $book->match_get() returns the last match criteria
+// $person->data_get() now returns the person data from the last list
+// $person->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

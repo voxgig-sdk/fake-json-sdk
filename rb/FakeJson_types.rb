@@ -19,7 +19,7 @@
 # @!attribute [rw] isbn
 #   @return [String, nil]
 #
-# @!attribute [rw] publication_year
+# @!attribute [rw] publicationYear
 #   @return [Integer, nil]
 #
 # @!attribute [rw] title
@@ -28,7 +28,7 @@ Book = Struct.new(
   :author,
   :id,
   :isbn,
-  :publication_year,
+  :publicationYear,
   :title,
   keyword_init: true
 )
@@ -53,7 +53,7 @@ BookLoadMatch = Struct.new(
 # @!attribute [rw] isbn
 #   @return [String, nil]
 #
-# @!attribute [rw] publication_year
+# @!attribute [rw] publicationYear
 #   @return [Integer, nil]
 #
 # @!attribute [rw] title
@@ -62,7 +62,7 @@ BookListMatch = Struct.new(
   :author,
   :id,
   :isbn,
-  :publication_year,
+  :publicationYear,
   :title,
   keyword_init: true
 )
@@ -78,7 +78,7 @@ BookListMatch = Struct.new(
 # @!attribute [rw] isbn
 #   @return [String, nil]
 #
-# @!attribute [rw] publication_year
+# @!attribute [rw] publicationYear
 #   @return [Integer, nil]
 #
 # @!attribute [rw] title
@@ -87,7 +87,7 @@ BookCreateData = Struct.new(
   :author,
   :id,
   :isbn,
-  :publication_year,
+  :publicationYear,
   :title,
   keyword_init: true
 )
@@ -96,8 +96,24 @@ BookCreateData = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [Integer]
+#
+# @!attribute [rw] author
+#   @return [String, nil]
+#
+# @!attribute [rw] isbn
+#   @return [String, nil]
+#
+# @!attribute [rw] publicationYear
+#   @return [Integer, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
 BookUpdateData = Struct.new(
   :id,
+  :author,
+  :isbn,
+  :publicationYear,
+  :title,
   keyword_init: true
 )
 
@@ -210,7 +226,7 @@ PersonListMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] stat
+# @!attribute [rw] stats
 #   @return [Hash, nil]
 #
 # @!attribute [rw] type
@@ -218,7 +234,7 @@ PersonListMatch = Struct.new(
 Pokemon = Struct.new(
   :id,
   :name,
-  :stat,
+  :stats,
   :type,
   keyword_init: true
 )
@@ -231,7 +247,7 @@ Pokemon = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] stat
+# @!attribute [rw] stats
 #   @return [Hash, nil]
 #
 # @!attribute [rw] type
@@ -239,7 +255,7 @@ Pokemon = Struct.new(
 PokemonListMatch = Struct.new(
   :id,
   :name,
-  :stat,
+  :stats,
   :type,
   keyword_init: true
 )

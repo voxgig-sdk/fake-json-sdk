@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from fakejson_sdk.utility.voxgig_struct import voxgig_struct as vs
 from fakejson_sdk import FakeJsonSDK
-from core import helpers
+from fakejson_sdk.core import helpers
 from test import runner
 
 
@@ -102,11 +102,11 @@ def _book_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "FAKEJSON_TEST_BOOK_ENTID": {},
-        "FAKEJSON_TEST_LIVE": "FALSE",
+        "FAKE_JSON_TEST_BOOK_ENTID": {},
+        "FAKE_JSON_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("FAKEJSON_TEST_LIVE") == "TRUE"
+    live = env.get("FAKE_JSON_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

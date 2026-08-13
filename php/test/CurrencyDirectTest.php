@@ -66,11 +66,11 @@ function currency_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "FAKEJSON_TEST_CURRENCY_ENTID" => [],
-        "FAKEJSON_TEST_LIVE" => "FALSE",
+        "FAKE_JSON_TEST_CURRENCY_ENTID" => [],
+        "FAKE_JSON_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["FAKEJSON_TEST_LIVE"] === "TRUE";
+    $live = $env["FAKE_JSON_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

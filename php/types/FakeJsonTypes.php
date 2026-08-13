@@ -18,7 +18,7 @@ class Book
     public ?string $author = null;
     public ?int $id = null;
     public ?string $isbn = null;
-    public ?int $publication_year = null;
+    public ?int $publicationYear = null;
     public ?string $title = null;
 }
 
@@ -34,7 +34,7 @@ class BookListMatch
     public ?string $author = null;
     public ?int $id = null;
     public ?string $isbn = null;
-    public ?int $publication_year = null;
+    public ?int $publicationYear = null;
     public ?string $title = null;
 }
 
@@ -44,7 +44,7 @@ class BookCreateData
     public ?string $author = null;
     public ?int $id = null;
     public ?string $isbn = null;
-    public ?int $publication_year = null;
+    public ?int $publicationYear = null;
     public ?string $title = null;
 }
 
@@ -52,6 +52,10 @@ class BookCreateData
 class BookUpdateData
 {
     public int $id;
+    public ?string $author = null;
+    public ?string $isbn = null;
+    public ?int $publicationYear = null;
+    public ?string $title = null;
 }
 
 /** Request payload for Book#remove. */
@@ -103,7 +107,7 @@ class Pokemon
 {
     public ?int $id = null;
     public ?string $name = null;
-    public ?array $stat = null;
+    public ?array $stats = null;
     public ?array $type = null;
 }
 
@@ -112,7 +116,7 @@ class PokemonListMatch
 {
     public ?int $id = null;
     public ?string $name = null;
-    public ?array $stat = null;
+    public ?array $stats = null;
     public ?array $type = null;
 }
 

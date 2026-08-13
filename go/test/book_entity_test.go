@@ -93,7 +93,7 @@ func TestBookEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set FAKEJSON_TEST_BOOK_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set FAKE_JSON_TEST_BOOK_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -107,7 +107,7 @@ func TestBookEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		bookRef01Data = core.ToMapAny(bookRef01DataResult)
+		bookRef01Data = core.ToMapAny(entityData(bookRef01DataResult))
 		if bookRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -145,7 +145,7 @@ func TestBookEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		bookRef01ResdataUp0 := core.ToMapAny(bookRef01ResdataUp0Result)
+		bookRef01ResdataUp0 := core.ToMapAny(entityData(bookRef01ResdataUp0Result))
 		if bookRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -164,7 +164,7 @@ func TestBookEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		bookRef01DataDt0LoadResult := core.ToMapAny(bookRef01DataDt0Loaded)
+		bookRef01DataDt0LoadResult := core.ToMapAny(entityData(bookRef01DataDt0Loaded))
 		if bookRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
@@ -238,21 +238,21 @@ func bookBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("FAKEJSON_TEST_BOOK_ENTID")
+	entidEnvRaw := os.Getenv("FAKE_JSON_TEST_BOOK_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"FAKEJSON_TEST_BOOK_ENTID": idmap,
-		"FAKEJSON_TEST_LIVE":      "FALSE",
-		"FAKEJSON_TEST_EXPLAIN":   "FALSE",
+		"FAKE_JSON_TEST_BOOK_ENTID": idmap,
+		"FAKE_JSON_TEST_LIVE":      "FALSE",
+		"FAKE_JSON_TEST_EXPLAIN":   "FALSE",
 	})
 
-	idmapResolved := core.ToMapAny(env["FAKEJSON_TEST_BOOK_ENTID"])
+	idmapResolved := core.ToMapAny(env["FAKE_JSON_TEST_BOOK_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["FAKEJSON_TEST_LIVE"] == "TRUE" {
+	if env["FAKE_JSON_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
 			},
@@ -261,13 +261,13 @@ func bookBasicSetup(extra map[string]any) *entityTestSetup {
 		client = sdk.NewFakeJsonSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["FAKEJSON_TEST_LIVE"] == "TRUE"
+	live := env["FAKE_JSON_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["FAKEJSON_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["FAKE_JSON_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

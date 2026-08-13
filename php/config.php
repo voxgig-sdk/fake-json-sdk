@@ -56,7 +56,7 @@ class FakeJsonConfig
             ],
             [
               'active' => true,
-              'name' => 'publication_year',
+              'name' => 'publicationYear',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 3,
@@ -78,6 +78,7 @@ class FakeJsonConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/books',
                   'parts' => [
@@ -112,6 +113,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/books',
                   'parts' => [
@@ -151,6 +153,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/books/{id}',
                   'parts' => [
@@ -190,6 +193,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PATCH',
                   'orig' => '/books/{id}',
                   'parts' => [
@@ -230,6 +234,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/books/{id}',
                   'parts' => [
@@ -270,6 +275,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/books/{id}',
                   'parts' => [
@@ -346,6 +352,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/currencies',
                   'parts' => [
@@ -428,6 +435,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/peoples',
                   'parts' => [
@@ -470,7 +478,7 @@ class FakeJsonConfig
             ],
             [
               'active' => true,
-              'name' => 'stat',
+              'name' => 'stats',
               'req' => false,
               'type' => '`$OBJECT`',
               'index$' => 2,
@@ -503,6 +511,7 @@ class FakeJsonConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/pokemons',
                   'parts' => [

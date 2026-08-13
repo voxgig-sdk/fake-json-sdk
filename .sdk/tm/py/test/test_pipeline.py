@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import FakeJsonSDK
-from core.error import FakeJsonError
-from core.result import FakeJsonResult
-from core.response import FakeJsonResponse
-from core.spec import FakeJsonSpec
-from feature.base_feature import FakeJsonBaseFeature
+from projectname_sdk.core.error import FakeJsonError
+from projectname_sdk.core.result import FakeJsonResult
+from projectname_sdk.core.response import FakeJsonResponse
+from projectname_sdk.core.spec import FakeJsonSpec
+from projectname_sdk.feature.base_feature import FakeJsonBaseFeature
 
 
 def _client():

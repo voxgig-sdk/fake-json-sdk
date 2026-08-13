@@ -16,7 +16,7 @@ main: kit: entity: pokemon: {
       type: "`$STRING`"
     }
     {
-      name: "stat"
+      name: "stats"
       req: false
       type: "`$OBJECT`"
     }

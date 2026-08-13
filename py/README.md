@@ -52,7 +52,7 @@ except Exception as err:
 
 ### 3. Load a book
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -65,14 +65,14 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
+# Create — returns the ENTITY (call data_get() for the record)
 created = client.Book().create({"author": "example_author", "isbn": "example_isbn"})
 
 # Update — the created record's id is a plain dict key
-client.Book().update({"id": created["id"]})
+client.Book().update({"id": created.data_get()["id"], "author": "example_author", "isbn": "example_isbn"})
 
 # Remove
-client.Book().remove({"id": created["id"]})
+client.Book().remove({"id": created.data_get()["id"]})
 ```
 
 
@@ -82,8 +82,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    books = client.Book().list()
-    print(books)
+    persons = client.Person().list()
+    print(persons)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -149,9 +149,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FakeJsonSDK.test()
 
-# Entity ops return the bare record and raise on error.
-book = client.Book().list()
-# book contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+person = client.Person().list()
+# person contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -252,7 +253,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -277,7 +278,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | `author` |  |
 | `id` |  |
 | `isbn` |  |
-| `publication_year` |  |
+| `publicationYear` |  |
 | `title` |  |
 
 Operations: Create, List, Load, Patch, Remove, Update.
@@ -317,7 +318,7 @@ API path: `/peoples`
 | --- | --- |
 | `id` |  |
 | `name` |  |
-| `stat` |  |
+| `stats` |  |
 | `type` |  |
 
 Operations: List.
@@ -350,7 +351,7 @@ Create an instance: `book = client.Book()`
 | `author` | `str` |  |
 | `id` | `int` |  |
 | `isbn` | `str` |  |
-| `publication_year` | `int` |  |
+| `publicationYear` | `int` |  |
 | `title` | `str` |  |
 
 #### Example: Load
@@ -442,7 +443,7 @@ Create an instance: `pokemon = client.Pokemon()`
 | --- | --- | --- |
 | `id` | `int` |  |
 | `name` | `str` |  |
-| `stat` | `dict` |  |
+| `stats` | `dict` |  |
 | `type` | `list` |  |
 
 #### Example: List
@@ -527,11 +528,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-book = client.Book()
-book.list()
+person = client.Person()
+person.list()
 
-# book.data_get() now returns the book data from the last list
-# book.match_get() returns the last match criteria
+# person.data_get() now returns the person data from the last list
+# person.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
