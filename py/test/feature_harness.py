@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from fakejson_sdk.config import make_config
+from fakejson_sdk.config import shared_config
 from fakejson_sdk.features import _make_feature
 from fakejson_sdk.core.control import FakeJsonControl
 from fakejson_sdk.core.error import FakeJsonError
@@ -24,7 +24,7 @@ from fakejson_sdk.core.spec import FakeJsonSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

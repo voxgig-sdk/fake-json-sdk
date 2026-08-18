@@ -40,7 +40,7 @@ class FakeJsonSDK
         $utility = new FakeJsonUtility();
         $this->_utility = $utility;
 
-        $config = FakeJsonConfig::make_config();
+        $config = FakeJsonConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

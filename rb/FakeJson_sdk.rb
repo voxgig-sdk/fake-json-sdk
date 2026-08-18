@@ -28,7 +28,7 @@ class FakeJsonSDK
     utility = FakeJsonUtility.new
     @_utility = utility
 
-    config = FakeJsonConfig.make_config
+    config = FakeJsonConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

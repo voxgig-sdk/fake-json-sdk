@@ -15,7 +15,7 @@ require_relative "../FakeJson_sdk"
 module FakeJsonFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = FakeJsonConfig.make_config["feature"]
+    f = FakeJsonConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 
