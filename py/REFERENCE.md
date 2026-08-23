@@ -99,11 +99,11 @@ book = client.Book()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | `str` | No |  |
-| `id` | `int` | No |  |
-| `isbn` | `str` | No |  |
-| `publicationYear` | `int` | No |  |
-| `title` | `str` | No |  |
+| `author` | `str` | No | Author of the book |
+| `id` | `int` | No | Unique identifier for the book |
+| `isbn` | `str` | No | ISBN of the book |
+| `publicationYear` | `int` | No | Year of publication |
+| `title` | `str` | No | Title of the book |
 
 ### Operations
 
@@ -192,10 +192,10 @@ currency = client.Currency()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `str` | No |  |
-| `id` | `int` | No |  |
-| `name` | `str` | No |  |
-| `symbol` | `str` | No |  |
+| `code` | `str` | No | Currency code (ISO 4217) |
+| `id` | `int` | No | Unique identifier for the currency |
+| `name` | `str` | No | Currency name |
+| `symbol` | `str` | No | Currency symbol |
 
 ### Operations
 
@@ -248,11 +248,11 @@ person = client.Person()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `str` | No |  |
-| `age` | `int` | No |  |
-| `email` | `str` | No |  |
-| `id` | `int` | No |  |
-| `name` | `str` | No |  |
+| `address` | `str` | No | Address of the person |
+| `age` | `int` | No | Age of the person |
+| `email` | `str` | No | Email address |
+| `id` | `int` | No | Unique identifier for the person |
+| `name` | `str` | No | Full name of the person |
 
 ### Operations
 
@@ -305,10 +305,10 @@ pokemon = client.Pokemon()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `name` | `str` | No |  |
-| `stats` | `dict` | No |  |
-| `type` | `list` | No |  |
+| `id` | `int` | No | Unique identifier for the pokemon |
+| `name` | `str` | No | Name of the pokemon |
+| `stats` | `dict` | No | Stats of the pokemon |
+| `type` | `list` | No | Types of the pokemon |
 
 ### Operations
 

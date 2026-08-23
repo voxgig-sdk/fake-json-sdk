@@ -110,11 +110,11 @@ fmt.Println(book.GetName()) // "book"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | `string` | No |  |
-| `id` | `int` | No |  |
-| `isbn` | `string` | No |  |
-| `publicationYear` | `int` | No |  |
-| `title` | `string` | No |  |
+| `author` | `string` | No | Author of the book |
+| `id` | `int` | No | Unique identifier for the book |
+| `isbn` | `string` | No | ISBN of the book |
+| `publicationYear` | `int` | No | Year of publication |
+| `title` | `string` | No | Title of the book |
 
 ### Operations
 
@@ -217,10 +217,10 @@ fmt.Println(currency.GetName()) // "currency"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `string` | No |  |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
-| `symbol` | `string` | No |  |
+| `code` | `string` | No | Currency code (ISO 4217) |
+| `id` | `int` | No | Unique identifier for the currency |
+| `name` | `string` | No | Currency name |
+| `symbol` | `string` | No | Currency symbol |
 
 ### Operations
 
@@ -271,11 +271,11 @@ fmt.Println(person.GetName()) // "person"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `string` | No |  |
-| `age` | `int` | No |  |
-| `email` | `string` | No |  |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
+| `address` | `string` | No | Address of the person |
+| `age` | `int` | No | Age of the person |
+| `email` | `string` | No | Email address |
+| `id` | `int` | No | Unique identifier for the person |
+| `name` | `string` | No | Full name of the person |
 
 ### Operations
 
@@ -326,10 +326,10 @@ fmt.Println(pokemon.GetName()) // "pokemon"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
-| `stats` | `map[string]any` | No |  |
-| `type` | `[]any` | No |  |
+| `id` | `int` | No | Unique identifier for the pokemon |
+| `name` | `string` | No | Name of the pokemon |
+| `stats` | `map[string]any` | No | Stats of the pokemon |
+| `type` | `[]any` | No | Types of the pokemon |
 
 ### Operations
 

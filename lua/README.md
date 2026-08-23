@@ -261,11 +261,11 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `author` |  |
-| `id` |  |
-| `isbn` |  |
-| `publicationYear` |  |
-| `title` |  |
+| `author` | Author of the book |
+| `id` | Unique identifier for the book |
+| `isbn` | ISBN of the book |
+| `publicationYear` | Year of publication |
+| `title` | Title of the book |
 
 Operations: Create, List, Load, Patch, Remove, Update.
 
@@ -275,10 +275,10 @@ API path: `/books`
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
-| `id` |  |
-| `name` |  |
-| `symbol` |  |
+| `code` | Currency code (ISO 4217) |
+| `id` | Unique identifier for the currency |
+| `name` | Currency name |
+| `symbol` | Currency symbol |
 
 Operations: List.
 
@@ -288,11 +288,11 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
-| `age` |  |
-| `email` |  |
-| `id` |  |
-| `name` |  |
+| `address` | Address of the person |
+| `age` | Age of the person |
+| `email` | Email address |
+| `id` | Unique identifier for the person |
+| `name` | Full name of the person |
 
 Operations: List.
 
@@ -302,10 +302,10 @@ API path: `/peoples`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
-| `name` |  |
-| `stats` |  |
-| `type` |  |
+| `id` | Unique identifier for the pokemon |
+| `name` | Name of the pokemon |
+| `stats` | Stats of the pokemon |
+| `type` | Types of the pokemon |
 
 Operations: List.
 
@@ -334,11 +334,11 @@ Create an instance: `local book = client:Book(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `string` |  |
-| `id` | `number` |  |
-| `isbn` | `string` |  |
-| `publicationYear` | `number` |  |
-| `title` | `string` |  |
+| `author` | `string` | Author of the book |
+| `id` | `number` | Unique identifier for the book |
+| `isbn` | `string` | ISBN of the book |
+| `publicationYear` | `number` | Year of publication |
+| `title` | `string` | Title of the book |
 
 #### Example: Load
 
@@ -374,10 +374,10 @@ Create an instance: `local currency = client:Currency(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `string` |  |
-| `id` | `number` |  |
-| `name` | `string` |  |
-| `symbol` | `string` |  |
+| `code` | `string` | Currency code (ISO 4217) |
+| `id` | `number` | Unique identifier for the currency |
+| `name` | `string` | Currency name |
+| `symbol` | `string` | Currency symbol |
 
 #### Example: List
 
@@ -400,11 +400,11 @@ Create an instance: `local person = client:Person(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `string` |  |
-| `age` | `number` |  |
-| `email` | `string` |  |
-| `id` | `number` |  |
-| `name` | `string` |  |
+| `address` | `string` | Address of the person |
+| `age` | `number` | Age of the person |
+| `email` | `string` | Email address |
+| `id` | `number` | Unique identifier for the person |
+| `name` | `string` | Full name of the person |
 
 #### Example: List
 
@@ -427,10 +427,10 @@ Create an instance: `local pokemon = client:Pokemon(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `number` |  |
-| `name` | `string` |  |
-| `stats` | `table` |  |
-| `type` | `table` |  |
+| `id` | `number` | Unique identifier for the pokemon |
+| `name` | `string` | Name of the pokemon |
+| `stats` | `table` | Stats of the pokemon |
+| `type` | `table` | Types of the pokemon |
 
 #### Example: List
 

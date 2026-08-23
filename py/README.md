@@ -275,11 +275,11 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `author` |  |
-| `id` |  |
-| `isbn` |  |
-| `publicationYear` |  |
-| `title` |  |
+| `author` | Author of the book |
+| `id` | Unique identifier for the book |
+| `isbn` | ISBN of the book |
+| `publicationYear` | Year of publication |
+| `title` | Title of the book |
 
 Operations: Create, List, Load, Patch, Remove, Update.
 
@@ -289,10 +289,10 @@ API path: `/books`
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
-| `id` |  |
-| `name` |  |
-| `symbol` |  |
+| `code` | Currency code (ISO 4217) |
+| `id` | Unique identifier for the currency |
+| `name` | Currency name |
+| `symbol` | Currency symbol |
 
 Operations: List.
 
@@ -302,11 +302,11 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
-| `age` |  |
-| `email` |  |
-| `id` |  |
-| `name` |  |
+| `address` | Address of the person |
+| `age` | Age of the person |
+| `email` | Email address |
+| `id` | Unique identifier for the person |
+| `name` | Full name of the person |
 
 Operations: List.
 
@@ -316,10 +316,10 @@ API path: `/peoples`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
-| `name` |  |
-| `stats` |  |
-| `type` |  |
+| `id` | Unique identifier for the pokemon |
+| `name` | Name of the pokemon |
+| `stats` | Stats of the pokemon |
+| `type` | Types of the pokemon |
 
 Operations: List.
 
@@ -348,11 +348,11 @@ Create an instance: `book = client.Book()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `str` |  |
-| `id` | `int` |  |
-| `isbn` | `str` |  |
-| `publicationYear` | `int` |  |
-| `title` | `str` |  |
+| `author` | `str` | Author of the book |
+| `id` | `int` | Unique identifier for the book |
+| `isbn` | `str` | ISBN of the book |
+| `publicationYear` | `int` | Year of publication |
+| `title` | `str` | Title of the book |
 
 #### Example: Load
 
@@ -388,10 +388,10 @@ Create an instance: `currency = client.Currency()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `str` |  |
-| `id` | `int` |  |
-| `name` | `str` |  |
-| `symbol` | `str` |  |
+| `code` | `str` | Currency code (ISO 4217) |
+| `id` | `int` | Unique identifier for the currency |
+| `name` | `str` | Currency name |
+| `symbol` | `str` | Currency symbol |
 
 #### Example: List
 
@@ -414,11 +414,11 @@ Create an instance: `person = client.Person()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `str` |  |
-| `age` | `int` |  |
-| `email` | `str` |  |
-| `id` | `int` |  |
-| `name` | `str` |  |
+| `address` | `str` | Address of the person |
+| `age` | `int` | Age of the person |
+| `email` | `str` | Email address |
+| `id` | `int` | Unique identifier for the person |
+| `name` | `str` | Full name of the person |
 
 #### Example: List
 
@@ -441,10 +441,10 @@ Create an instance: `pokemon = client.Pokemon()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `int` |  |
-| `name` | `str` |  |
-| `stats` | `dict` |  |
-| `type` | `list` |  |
+| `id` | `int` | Unique identifier for the pokemon |
+| `name` | `str` | Name of the pokemon |
+| `stats` | `dict` | Stats of the pokemon |
+| `type` | `list` | Types of the pokemon |
 
 #### Example: List
 

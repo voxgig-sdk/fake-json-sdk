@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "FakeJson",
+      slug = "fake-json",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -32,22 +35,27 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "author",
+            ["short"] = "Author of the book",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the book",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "isbn",
+            ["short"] = "ISBN of the book",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "publicationYear",
+            ["short"] = "Year of publication",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "title",
+            ["short"] = "Title of the book",
             ["type"] = "`$STRING`",
           },
         },
@@ -260,18 +268,22 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "code",
+            ["short"] = "Currency code (ISO 4217)",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the currency",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "name",
+            ["short"] = "Currency name",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "symbol",
+            ["short"] = "Currency symbol",
             ["type"] = "`$STRING`",
           },
         },
@@ -319,22 +331,27 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "address",
+            ["short"] = "Address of the person",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "age",
+            ["short"] = "Age of the person",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "email",
+            ["short"] = "Email address",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the person",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "name",
+            ["short"] = "Full name of the person",
             ["type"] = "`$STRING`",
           },
         },
@@ -382,18 +399,22 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "id",
+            ["short"] = "Unique identifier for the pokemon",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "name",
+            ["short"] = "Name of the pokemon",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "stats",
+            ["short"] = "Stats of the pokemon",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "type",
+            ["short"] = "Types of the pokemon",
             ["type"] = "`$ARRAY`",
           },
         },

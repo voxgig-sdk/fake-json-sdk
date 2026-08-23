@@ -104,11 +104,11 @@ $book = $client->Book();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | `string` | No |  |
-| `id` | `int` | No |  |
-| `isbn` | `string` | No |  |
-| `publicationYear` | `int` | No |  |
-| `title` | `string` | No |  |
+| `author` | `string` | No | Author of the book |
+| `id` | `int` | No | Unique identifier for the book |
+| `isbn` | `string` | No | ISBN of the book |
+| `publicationYear` | `int` | No | Year of publication |
+| `title` | `string` | No | Title of the book |
 
 ### Operations
 
@@ -196,10 +196,10 @@ $currency = $client->Currency();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `string` | No |  |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
-| `symbol` | `string` | No |  |
+| `code` | `string` | No | Currency code (ISO 4217) |
+| `id` | `int` | No | Unique identifier for the currency |
+| `name` | `string` | No | Currency name |
+| `symbol` | `string` | No | Currency symbol |
 
 ### Operations
 
@@ -251,11 +251,11 @@ $person = $client->Person();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `string` | No |  |
-| `age` | `int` | No |  |
-| `email` | `string` | No |  |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
+| `address` | `string` | No | Address of the person |
+| `age` | `int` | No | Age of the person |
+| `email` | `string` | No | Email address |
+| `id` | `int` | No | Unique identifier for the person |
+| `name` | `string` | No | Full name of the person |
 
 ### Operations
 
@@ -307,10 +307,10 @@ $pokemon = $client->Pokemon();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
-| `stats` | `array` | No |  |
-| `type` | `array` | No |  |
+| `id` | `int` | No | Unique identifier for the pokemon |
+| `name` | `string` | No | Name of the pokemon |
+| `stats` | `array` | No | Stats of the pokemon |
+| `type` | `array` | No | Types of the pokemon |
 
 ### Operations
 

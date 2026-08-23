@@ -269,11 +269,11 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `author` |  |
-| `id` |  |
-| `isbn` |  |
-| `publicationYear` |  |
-| `title` |  |
+| `author` | Author of the book |
+| `id` | Unique identifier for the book |
+| `isbn` | ISBN of the book |
+| `publicationYear` | Year of publication |
+| `title` | Title of the book |
 
 Operations: Create, List, Load, Patch, Remove, Update.
 
@@ -283,10 +283,10 @@ API path: `/books`
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
-| `id` |  |
-| `name` |  |
-| `symbol` |  |
+| `code` | Currency code (ISO 4217) |
+| `id` | Unique identifier for the currency |
+| `name` | Currency name |
+| `symbol` | Currency symbol |
 
 Operations: List.
 
@@ -296,11 +296,11 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
-| `age` |  |
-| `email` |  |
-| `id` |  |
-| `name` |  |
+| `address` | Address of the person |
+| `age` | Age of the person |
+| `email` | Email address |
+| `id` | Unique identifier for the person |
+| `name` | Full name of the person |
 
 Operations: List.
 
@@ -310,10 +310,10 @@ API path: `/peoples`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
-| `name` |  |
-| `stats` |  |
-| `type` |  |
+| `id` | Unique identifier for the pokemon |
+| `name` | Name of the pokemon |
+| `stats` | Stats of the pokemon |
+| `type` | Types of the pokemon |
 
 Operations: List.
 
@@ -342,11 +342,11 @@ Create an instance: `book = client.Book`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `String` |  |
-| `id` | `Integer` |  |
-| `isbn` | `String` |  |
-| `publicationYear` | `Integer` |  |
-| `title` | `String` |  |
+| `author` | `String` | Author of the book |
+| `id` | `Integer` | Unique identifier for the book |
+| `isbn` | `String` | ISBN of the book |
+| `publicationYear` | `Integer` | Year of publication |
+| `title` | `String` | Title of the book |
 
 #### Example: Load
 
@@ -384,10 +384,10 @@ Create an instance: `currency = client.Currency`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `String` |  |
-| `id` | `Integer` |  |
-| `name` | `String` |  |
-| `symbol` | `String` |  |
+| `code` | `String` | Currency code (ISO 4217) |
+| `id` | `Integer` | Unique identifier for the currency |
+| `name` | `String` | Currency name |
+| `symbol` | `String` | Currency symbol |
 
 #### Example: List
 
@@ -411,11 +411,11 @@ Create an instance: `person = client.Person`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `String` |  |
-| `age` | `Integer` |  |
-| `email` | `String` |  |
-| `id` | `Integer` |  |
-| `name` | `String` |  |
+| `address` | `String` | Address of the person |
+| `age` | `Integer` | Age of the person |
+| `email` | `String` | Email address |
+| `id` | `Integer` | Unique identifier for the person |
+| `name` | `String` | Full name of the person |
 
 #### Example: List
 
@@ -439,10 +439,10 @@ Create an instance: `pokemon = client.Pokemon`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `Integer` |  |
-| `name` | `String` |  |
-| `stats` | `Hash` |  |
-| `type` | `Array` |  |
+| `id` | `Integer` | Unique identifier for the pokemon |
+| `name` | `String` | Name of the pokemon |
+| `stats` | `Hash` | Stats of the pokemon |
+| `type` | `Array` | Types of the pokemon |
 
 #### Example: List
 

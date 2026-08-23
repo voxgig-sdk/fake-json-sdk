@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "FakeJson",
+			"slug": "fake-json",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -36,22 +39,27 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "author",
+						"short": "Author of the book",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the book",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "isbn",
+						"short": "ISBN of the book",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "publicationYear",
+						"short": "Year of publication",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "title",
+						"short": "Title of the book",
 						"type": "`$STRING`",
 					},
 				},
@@ -264,18 +272,22 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "code",
+						"short": "Currency code (ISO 4217)",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the currency",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Currency name",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "symbol",
+						"short": "Currency symbol",
 						"type": "`$STRING`",
 					},
 				},
@@ -323,22 +335,27 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "address",
+						"short": "Address of the person",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "age",
+						"short": "Age of the person",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "email",
+						"short": "Email address",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the person",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Full name of the person",
 						"type": "`$STRING`",
 					},
 				},
@@ -386,18 +403,22 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the pokemon",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the pokemon",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "stats",
+						"short": "Stats of the pokemon",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "type",
+						"short": "Types of the pokemon",
 						"type": "`$ARRAY`",
 					},
 				},

@@ -102,11 +102,11 @@ local book = client:Book(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | `string` | No |  |
-| `id` | `number` | No |  |
-| `isbn` | `string` | No |  |
-| `publicationYear` | `number` | No |  |
-| `title` | `string` | No |  |
+| `author` | `string` | No | Author of the book |
+| `id` | `number` | No | Unique identifier for the book |
+| `isbn` | `string` | No | ISBN of the book |
+| `publicationYear` | `number` | No | Year of publication |
+| `title` | `string` | No | Title of the book |
 
 ### Operations
 
@@ -194,10 +194,10 @@ local currency = client:Currency(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `string` | No |  |
-| `id` | `number` | No |  |
-| `name` | `string` | No |  |
-| `symbol` | `string` | No |  |
+| `code` | `string` | No | Currency code (ISO 4217) |
+| `id` | `number` | No | Unique identifier for the currency |
+| `name` | `string` | No | Currency name |
+| `symbol` | `string` | No | Currency symbol |
 
 ### Operations
 
@@ -249,11 +249,11 @@ local person = client:Person(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `string` | No |  |
-| `age` | `number` | No |  |
-| `email` | `string` | No |  |
-| `id` | `number` | No |  |
-| `name` | `string` | No |  |
+| `address` | `string` | No | Address of the person |
+| `age` | `number` | No | Age of the person |
+| `email` | `string` | No | Email address |
+| `id` | `number` | No | Unique identifier for the person |
+| `name` | `string` | No | Full name of the person |
 
 ### Operations
 
@@ -305,10 +305,10 @@ local pokemon = client:Pokemon(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `number` | No |  |
-| `name` | `string` | No |  |
-| `stats` | `table` | No |  |
-| `type` | `table` | No |  |
+| `id` | `number` | No | Unique identifier for the pokemon |
+| `name` | `string` | No | Name of the pokemon |
+| `stats` | `table` | No | Stats of the pokemon |
+| `type` | `table` | No | Types of the pokemon |
 
 ### Operations
 

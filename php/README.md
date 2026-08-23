@@ -279,11 +279,11 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `author` |  |
-| `id` |  |
-| `isbn` |  |
-| `publicationYear` |  |
-| `title` |  |
+| `author` | Author of the book |
+| `id` | Unique identifier for the book |
+| `isbn` | ISBN of the book |
+| `publicationYear` | Year of publication |
+| `title` | Title of the book |
 
 Operations: Create, List, Load, Patch, Remove, Update.
 
@@ -293,10 +293,10 @@ API path: `/books`
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
-| `id` |  |
-| `name` |  |
-| `symbol` |  |
+| `code` | Currency code (ISO 4217) |
+| `id` | Unique identifier for the currency |
+| `name` | Currency name |
+| `symbol` | Currency symbol |
 
 Operations: List.
 
@@ -306,11 +306,11 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
-| `age` |  |
-| `email` |  |
-| `id` |  |
-| `name` |  |
+| `address` | Address of the person |
+| `age` | Age of the person |
+| `email` | Email address |
+| `id` | Unique identifier for the person |
+| `name` | Full name of the person |
 
 Operations: List.
 
@@ -320,10 +320,10 @@ API path: `/peoples`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
-| `name` |  |
-| `stats` |  |
-| `type` |  |
+| `id` | Unique identifier for the pokemon |
+| `name` | Name of the pokemon |
+| `stats` | Stats of the pokemon |
+| `type` | Types of the pokemon |
 
 Operations: List.
 
@@ -352,11 +352,11 @@ Create an instance: `$book = $client->Book();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `string` |  |
-| `id` | `int` |  |
-| `isbn` | `string` |  |
-| `publicationYear` | `int` |  |
-| `title` | `string` |  |
+| `author` | `string` | Author of the book |
+| `id` | `int` | Unique identifier for the book |
+| `isbn` | `string` | ISBN of the book |
+| `publicationYear` | `int` | Year of publication |
+| `title` | `string` | Title of the book |
 
 #### Example: Load
 
@@ -394,10 +394,10 @@ Create an instance: `$currency = $client->Currency();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `string` |  |
-| `id` | `int` |  |
-| `name` | `string` |  |
-| `symbol` | `string` |  |
+| `code` | `string` | Currency code (ISO 4217) |
+| `id` | `int` | Unique identifier for the currency |
+| `name` | `string` | Currency name |
+| `symbol` | `string` | Currency symbol |
 
 #### Example: List
 
@@ -421,11 +421,11 @@ Create an instance: `$person = $client->Person();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `string` |  |
-| `age` | `int` |  |
-| `email` | `string` |  |
-| `id` | `int` |  |
-| `name` | `string` |  |
+| `address` | `string` | Address of the person |
+| `age` | `int` | Age of the person |
+| `email` | `string` | Email address |
+| `id` | `int` | Unique identifier for the person |
+| `name` | `string` | Full name of the person |
 
 #### Example: List
 
@@ -449,10 +449,10 @@ Create an instance: `$pokemon = $client->Pokemon();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `int` |  |
-| `name` | `string` |  |
-| `stats` | `array` |  |
-| `type` | `array` |  |
+| `id` | `int` | Unique identifier for the pokemon |
+| `name` | `string` | Name of the pokemon |
+| `stats` | `array` | Stats of the pokemon |
+| `type` | `array` | Types of the pokemon |
 
 #### Example: List
 

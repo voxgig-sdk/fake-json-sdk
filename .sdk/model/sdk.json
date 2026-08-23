@@ -36,30 +36,35 @@
               "active": true,
               "name": "author",
               "req": false,
+              "short": "Author of the book",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the book",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "isbn",
               "req": false,
+              "short": "ISBN of the book",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "publicationYear",
               "req": false,
+              "short": "Year of publication",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "title",
               "req": false,
+              "short": "Title of the book",
               "type": "`$STRING`"
             }
           ],
@@ -294,24 +299,28 @@
               "active": true,
               "name": "code",
               "req": false,
+              "short": "Currency code (ISO 4217)",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the currency",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Currency name",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "symbol",
               "req": false,
+              "short": "Currency symbol",
               "type": "`$STRING`"
             }
           ],
@@ -372,30 +381,35 @@
               "active": true,
               "name": "address",
               "req": false,
+              "short": "Address of the person",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "age",
               "req": false,
+              "short": "Age of the person",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "email",
               "req": false,
+              "short": "Email address",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the person",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Full name of the person",
               "type": "`$STRING`"
             }
           ],
@@ -456,24 +470,28 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the pokemon",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the pokemon",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "stats",
               "req": false,
+              "short": "Stats of the pokemon",
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "type",
               "req": false,
+              "short": "Types of the pokemon",
               "type": "`$ARRAY`"
             }
           ],

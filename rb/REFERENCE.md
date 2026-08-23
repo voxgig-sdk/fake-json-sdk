@@ -105,11 +105,11 @@ book = client.Book
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `isbn` | `String` | No |  |
-| `publicationYear` | `Integer` | No |  |
-| `title` | `String` | No |  |
+| `author` | `String` | No | Author of the book |
+| `id` | `Integer` | No | Unique identifier for the book |
+| `isbn` | `String` | No | ISBN of the book |
+| `publicationYear` | `Integer` | No | Year of publication |
+| `title` | `String` | No | Title of the book |
 
 ### Operations
 
@@ -197,10 +197,10 @@ currency = client.Currency
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `name` | `String` | No |  |
-| `symbol` | `String` | No |  |
+| `code` | `String` | No | Currency code (ISO 4217) |
+| `id` | `Integer` | No | Unique identifier for the currency |
+| `name` | `String` | No | Currency name |
+| `symbol` | `String` | No | Currency symbol |
 
 ### Operations
 
@@ -252,11 +252,11 @@ person = client.Person
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `String` | No |  |
-| `age` | `Integer` | No |  |
-| `email` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `name` | `String` | No |  |
+| `address` | `String` | No | Address of the person |
+| `age` | `Integer` | No | Age of the person |
+| `email` | `String` | No | Email address |
+| `id` | `Integer` | No | Unique identifier for the person |
+| `name` | `String` | No | Full name of the person |
 
 ### Operations
 
@@ -308,10 +308,10 @@ pokemon = client.Pokemon
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `Integer` | No |  |
-| `name` | `String` | No |  |
-| `stats` | `Hash` | No |  |
-| `type` | `Array` | No |  |
+| `id` | `Integer` | No | Unique identifier for the pokemon |
+| `name` | `String` | No | Name of the pokemon |
+| `stats` | `Hash` | No | Stats of the pokemon |
+| `type` | `Array` | No | Types of the pokemon |
 
 ### Operations
 
