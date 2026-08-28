@@ -44,26 +44,10 @@ BookLoadMatch = Struct.new(
 
 # Request payload for Book#list.
 #
-# @!attribute [rw] author
-#   @return [String, nil]
-#
-# @!attribute [rw] id
+# @!attribute [rw] limit
 #   @return [Integer, nil]
-#
-# @!attribute [rw] isbn
-#   @return [String, nil]
-#
-# @!attribute [rw] publicationYear
-#   @return [Integer, nil]
-#
-# @!attribute [rw] title
-#   @return [String, nil]
 BookListMatch = Struct.new(
-  :author,
-  :id,
-  :isbn,
-  :publicationYear,
-  :title,
+  :limit,
   keyword_init: true
 )
 
@@ -149,22 +133,10 @@ Currency = Struct.new(
 
 # Request payload for Currency#list.
 #
-# @!attribute [rw] code
-#   @return [String, nil]
-#
-# @!attribute [rw] id
+# @!attribute [rw] limit
 #   @return [Integer, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] symbol
-#   @return [String, nil]
 CurrencyListMatch = Struct.new(
-  :code,
-  :id,
-  :name,
-  :symbol,
+  :limit,
   keyword_init: true
 )
 
@@ -195,26 +167,10 @@ Person = Struct.new(
 
 # Request payload for Person#list.
 #
-# @!attribute [rw] address
-#   @return [String, nil]
-#
-# @!attribute [rw] age
+# @!attribute [rw] limit
 #   @return [Integer, nil]
-#
-# @!attribute [rw] email
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
 PersonListMatch = Struct.new(
-  :address,
-  :age,
-  :email,
-  :id,
-  :name,
+  :limit,
   keyword_init: true
 )
 
@@ -241,22 +197,10 @@ Pokemon = Struct.new(
 
 # Request payload for Pokemon#list.
 #
-# @!attribute [rw] id
+# @!attribute [rw] limit
 #   @return [Integer, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] stats
-#   @return [Hash, nil]
-#
-# @!attribute [rw] type
-#   @return [Array, nil]
 PokemonListMatch = Struct.new(
-  :id,
-  :name,
-  :stats,
-  :type,
+  :limit,
   keyword_init: true
 )
 

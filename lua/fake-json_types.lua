@@ -17,11 +17,7 @@
 ---@field id number
 
 ---@class BookListMatch
----@field author? string
----@field id? number
----@field isbn? string
----@field publicationYear? number
----@field title? string
+---@field limit? number
 
 ---@class BookCreateData
 ---@field author? string
@@ -47,10 +43,7 @@
 ---@field symbol? string
 
 ---@class CurrencyListMatch
----@field code? string
----@field id? number
----@field name? string
----@field symbol? string
+---@field limit? number
 
 ---@class Person
 ---@field address? string
@@ -60,11 +53,7 @@
 ---@field name? string
 
 ---@class PersonListMatch
----@field address? string
----@field age? number
----@field email? string
----@field id? number
----@field name? string
+---@field limit? number
 
 ---@class Pokemon
 ---@field id? number
@@ -73,10 +62,7 @@
 ---@field type? table
 
 ---@class PokemonListMatch
----@field id? number
----@field name? string
----@field stats? table
----@field type? table
+---@field limit? number
 
 local M = {}
 

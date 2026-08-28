@@ -29,11 +29,7 @@ class BookLoadMatch(TypedDict):
 
 
 class BookListMatch(TypedDict, total=False):
-    author: str
-    id: int
-    isbn: str
-    publicationYear: int
-    title: str
+    limit: int
 
 
 class BookCreateData(TypedDict, total=False):
@@ -67,10 +63,7 @@ class Currency(TypedDict, total=False):
 
 
 class CurrencyListMatch(TypedDict, total=False):
-    code: str
-    id: int
-    name: str
-    symbol: str
+    limit: int
 
 
 class Person(TypedDict, total=False):
@@ -82,11 +75,7 @@ class Person(TypedDict, total=False):
 
 
 class PersonListMatch(TypedDict, total=False):
-    address: str
-    age: int
-    email: str
-    id: int
-    name: str
+    limit: int
 
 
 class Pokemon(TypedDict, total=False):
@@ -97,7 +86,4 @@ class Pokemon(TypedDict, total=False):
 
 
 class PokemonListMatch(TypedDict, total=False):
-    id: int
-    name: str
-    stats: dict
-    type: list
+    limit: int

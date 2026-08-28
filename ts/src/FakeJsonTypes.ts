@@ -18,11 +18,7 @@ export interface BookLoadMatch {
 }
 
 export interface BookListMatch {
-  author?: string
-  id?: number
-  isbn?: string
-  publicationYear?: number
-  title?: string
+  limit?: number
 }
 
 export interface BookCreateData {
@@ -53,10 +49,7 @@ export interface Currency {
 }
 
 export interface CurrencyListMatch {
-  code?: string
-  id?: number
-  name?: string
-  symbol?: string
+  limit?: number
 }
 
 export interface Person {
@@ -68,11 +61,7 @@ export interface Person {
 }
 
 export interface PersonListMatch {
-  address?: string
-  age?: number
-  email?: string
-  id?: number
-  name?: string
+  limit?: number
 }
 
 export interface Pokemon {
@@ -83,9 +72,6 @@ export interface Pokemon {
 }
 
 export interface PokemonListMatch {
-  id?: number
-  name?: string
-  stats?: Record<string, any>
-  type?: any[]
+  limit?: number
 }
 

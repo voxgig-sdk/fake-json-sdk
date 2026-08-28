@@ -28,11 +28,7 @@ type BookLoadMatch struct {
 
 // BookListMatch is the typed request payload for Book.ListTyped.
 type BookListMatch struct {
-	Author *string `json:"author,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Isbn *string `json:"isbn,omitempty"`
-	PublicationYear *int `json:"publicationYear,omitempty"`
-	Title *string `json:"title,omitempty"`
+	Limit *int `json:"limit,omitempty"`
 }
 
 // BookCreateData is the typed request payload for Book.CreateTyped.
@@ -68,10 +64,7 @@ type Currency struct {
 
 // CurrencyListMatch is the typed request payload for Currency.ListTyped.
 type CurrencyListMatch struct {
-	Code *string `json:"code,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Symbol *string `json:"symbol,omitempty"`
+	Limit *int `json:"limit,omitempty"`
 }
 
 // Person is the typed data model for the person entity.
@@ -85,11 +78,7 @@ type Person struct {
 
 // PersonListMatch is the typed request payload for Person.ListTyped.
 type PersonListMatch struct {
-	Address *string `json:"address,omitempty"`
-	Age *int `json:"age,omitempty"`
-	Email *string `json:"email,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
+	Limit *int `json:"limit,omitempty"`
 }
 
 // Pokemon is the typed data model for the pokemon entity.
@@ -102,10 +91,7 @@ type Pokemon struct {
 
 // PokemonListMatch is the typed request payload for Pokemon.ListTyped.
 type PokemonListMatch struct {
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Stats *map[string]any `json:"stats,omitempty"`
-	Type *[]any `json:"type,omitempty"`
+	Limit *int `json:"limit,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

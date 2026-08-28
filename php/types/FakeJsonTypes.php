@@ -31,11 +31,7 @@ class BookLoadMatch
 /** Request payload for Book#list. */
 class BookListMatch
 {
-    public ?string $author = null;
-    public ?int $id = null;
-    public ?string $isbn = null;
-    public ?int $publicationYear = null;
-    public ?string $title = null;
+    public ?int $limit = null;
 }
 
 /** Request payload for Book#create. */
@@ -76,10 +72,7 @@ class Currency
 /** Request payload for Currency#list. */
 class CurrencyListMatch
 {
-    public ?string $code = null;
-    public ?int $id = null;
-    public ?string $name = null;
-    public ?string $symbol = null;
+    public ?int $limit = null;
 }
 
 /** Person entity data model. */
@@ -95,11 +88,7 @@ class Person
 /** Request payload for Person#list. */
 class PersonListMatch
 {
-    public ?string $address = null;
-    public ?int $age = null;
-    public ?string $email = null;
-    public ?int $id = null;
-    public ?string $name = null;
+    public ?int $limit = null;
 }
 
 /** Pokemon entity data model. */
@@ -114,9 +103,6 @@ class Pokemon
 /** Request payload for Pokemon#list. */
 class PokemonListMatch
 {
-    public ?int $id = null;
-    public ?string $name = null;
-    public ?array $stats = null;
-    public ?array $type = null;
+    public ?int $limit = null;
 }
 
