@@ -1,6 +1,14 @@
 # FakeJson SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -81,6 +89,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "book",
         "op": {
           "create": {
@@ -92,14 +104,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/books",
-                "parts": [
-                  "books",
+                "segments": [
+                  {
+                    "lit": "books",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "books",
+                ],
               },
             ],
           },
@@ -122,8 +139,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/books",
-                "parts": [
-                  "books",
+                "segments": [
+                  {
+                    "lit": "books",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -134,6 +153,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "books",
+                ],
               },
             ],
           },
@@ -157,9 +179,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/books/{id}",
-                "parts": [
-                  "books",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "books",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -170,6 +196,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "books",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -193,9 +223,13 @@ def make_config():
                 "kind": "http",
                 "method": "PATCH",
                 "orig": "/books/{id}",
-                "parts": [
-                  "books",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "books",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -206,6 +240,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "books",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -229,9 +267,13 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/books/{id}",
-                "parts": [
-                  "books",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "books",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -242,6 +284,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "books",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -265,9 +311,13 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/books/{id}",
-                "parts": [
-                  "books",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "books",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -278,6 +328,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "books",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -309,6 +363,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "currency",
         "op": {
           "list": {
@@ -329,8 +387,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/currencies",
-                "parts": [
-                  "currencies",
+                "segments": [
+                  {
+                    "lit": "currencies",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -341,6 +401,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "currencies",
+                ],
               },
             ],
           },
@@ -362,6 +425,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "email",
             "name": "email",
             "short": "Email address",
             "type": "`$STRING`",
@@ -377,6 +441,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "person",
         "op": {
           "list": {
@@ -397,8 +465,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/peoples",
-                "parts": [
-                  "peoples",
+                "segments": [
+                  {
+                    "lit": "peoples",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -409,6 +479,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "peoples",
+                ],
               },
             ],
           },
@@ -440,6 +513,10 @@ def make_config():
             "type": "`$ARRAY`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "pokemon",
         "op": {
           "list": {
@@ -460,8 +537,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/pokemons",
-                "parts": [
-                  "pokemons",
+                "segments": [
+                  {
+                    "lit": "pokemons",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -472,6 +551,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "pokemons",
+                ],
               },
             ],
           },

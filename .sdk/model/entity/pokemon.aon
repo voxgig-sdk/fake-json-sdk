@@ -55,8 +55,10 @@ main: kit: entity: pokemon: {
           }
           method: "GET"
           orig: "/pokemons"
-          parts: [
-            "pokemons"
+          segments: [
+            {
+              lit: "pokemons"
+            }
           ]
           select: {
             exist: [

@@ -60,6 +60,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "book",
         ["op"] = {
           ["create"] = {
@@ -71,13 +75,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/books",
-                ["parts"] = {
-                  "books",
+                ["segments"] = {
+                  {
+                    ["lit"] = "books",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "books",
                 },
               },
             },
@@ -101,8 +110,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/books",
-                ["parts"] = {
-                  "books",
+                ["segments"] = {
+                  {
+                    ["lit"] = "books",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -112,6 +123,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "books",
                 },
               },
             },
@@ -136,9 +150,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/books/{id}",
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "books",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -148,6 +166,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
               },
             },
@@ -172,9 +194,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/books/{id}",
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "books",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -184,6 +210,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
               },
             },
@@ -208,9 +238,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/books/{id}",
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "books",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -220,6 +254,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
               },
             },
@@ -244,9 +282,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/books/{id}",
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "books",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -256,6 +298,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
               },
             },
@@ -288,6 +334,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "currency",
         ["op"] = {
           ["list"] = {
@@ -308,8 +358,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/currencies",
-                ["parts"] = {
-                  "currencies",
+                ["segments"] = {
+                  {
+                    ["lit"] = "currencies",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -319,6 +371,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "currencies",
                 },
               },
             },
@@ -341,6 +396,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "email",
             ["name"] = "email",
             ["short"] = "Email address",
             ["type"] = "`$STRING`",
@@ -355,6 +411,10 @@ local function make_config()
             ["short"] = "Full name of the person",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "person",
         ["op"] = {
@@ -376,8 +436,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/peoples",
-                ["parts"] = {
-                  "peoples",
+                ["segments"] = {
+                  {
+                    ["lit"] = "peoples",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -387,6 +449,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "peoples",
                 },
               },
             },
@@ -419,6 +484,10 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "pokemon",
         ["op"] = {
           ["list"] = {
@@ -439,8 +508,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/pokemons",
-                ["parts"] = {
-                  "pokemons",
+                ["segments"] = {
+                  {
+                    ["lit"] = "pokemons",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -450,6 +521,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "pokemons",
                 },
               },
             },

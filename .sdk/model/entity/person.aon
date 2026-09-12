@@ -18,6 +18,7 @@ main: kit: entity: person: {
       type: "`$INTEGER`"
     }
     {
+      format: "email"
       name: "email"
       req: false
       short: "Email address"
@@ -61,8 +62,10 @@ main: kit: entity: person: {
           }
           method: "GET"
           orig: "/peoples"
-          parts: [
-            "peoples"
+          segments: [
+            {
+              lit: "peoples"
+            }
           ]
           select: {
             exist: [

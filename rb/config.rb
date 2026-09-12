@@ -72,6 +72,10 @@ module FakeJsonConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "book",
           "op" => {
             "create" => {
@@ -83,14 +87,19 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/books",
-                  "parts" => [
-                    "books",
+                  "segments" => [
+                    {
+                      "lit" => "books",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "books",
+                  ],
                 },
               ],
             },
@@ -113,8 +122,10 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/books",
-                  "parts" => [
-                    "books",
+                  "segments" => [
+                    {
+                      "lit" => "books",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -125,6 +136,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "books",
+                  ],
                 },
               ],
             },
@@ -148,9 +162,13 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/books/{id}",
-                  "parts" => [
-                    "books",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "books",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -161,6 +179,10 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "books",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -184,9 +206,13 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "PATCH",
                   "orig" => "/books/{id}",
-                  "parts" => [
-                    "books",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "books",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -197,6 +223,10 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "books",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -220,9 +250,13 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/books/{id}",
-                  "parts" => [
-                    "books",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "books",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -233,6 +267,10 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "books",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -256,9 +294,13 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/books/{id}",
-                  "parts" => [
-                    "books",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "books",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -269,6 +311,10 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "books",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -300,6 +346,10 @@ module FakeJsonConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "currency",
           "op" => {
             "list" => {
@@ -320,8 +370,10 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/currencies",
-                  "parts" => [
-                    "currencies",
+                  "segments" => [
+                    {
+                      "lit" => "currencies",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -332,6 +384,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "currencies",
+                  ],
                 },
               ],
             },
@@ -353,6 +408,7 @@ module FakeJsonConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "email",
               "name" => "email",
               "short" => "Email address",
               "type" => "`$STRING`",
@@ -368,6 +424,10 @@ module FakeJsonConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "person",
           "op" => {
             "list" => {
@@ -388,8 +448,10 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/peoples",
-                  "parts" => [
-                    "peoples",
+                  "segments" => [
+                    {
+                      "lit" => "peoples",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -400,6 +462,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "peoples",
+                  ],
                 },
               ],
             },
@@ -431,6 +496,10 @@ module FakeJsonConfig
               "type" => "`$ARRAY`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "pokemon",
           "op" => {
             "list" => {
@@ -451,8 +520,10 @@ module FakeJsonConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/pokemons",
-                  "parts" => [
-                    "pokemons",
+                  "segments" => [
+                    {
+                      "lit" => "pokemons",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -463,6 +534,9 @@ module FakeJsonConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "pokemons",
+                  ],
                 },
               ],
             },
