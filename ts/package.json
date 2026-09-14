@@ -1,5 +1,5 @@
 {
-  "name": "@voxgig-sdk/fake-json",
+  "name": "@voxgig-sdk/fake-json-sdk",
   "version": "0.0.1",
   "description": "Unofficial generated TypeScript SDK for the Fake JSON public API. Not affiliated with or endorsed by the upstream API provider.",
   "keywords": [

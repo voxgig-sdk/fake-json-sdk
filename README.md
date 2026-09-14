@@ -105,7 +105,7 @@ local results, err = client:Person():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
+| TypeScript | `@voxgig-sdk/fake-json-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
 | Python | `voxgig-sdk-fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
 | PHP | `voxgig-sdk/fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/fake-json-sdk/go` | `go get github.com/voxgig-sdk/fake-json-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Person():list()
 ### TypeScript
 
 ```ts
-import { FakeJsonSDK } from '@voxgig-sdk/fake-json'
+import { FakeJsonSDK } from '@voxgig-sdk/fake-json-sdk'
 
 const client = new FakeJsonSDK()
 
