@@ -53,6 +53,12 @@ main: kit: entity: currency: {
               }
             ]
           }
+          contract: {
+            id: "GET /currencies"
+            json: "{\"operationId\":\"getCurrencies\",\"parameters\":[{\"description\":\"Maximum number of currencies to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"code\":{\"description\":\"Currency code (ISO 4217)\",\"example\":\"USD\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the currency\",\"example\":1,\"type\":\"integer\"},\"name\":{\"description\":\"Currency name\",\"example\":\"United States Dollar\",\"type\":\"string\"},\"symbol\":{\"description\":\"Currency symbol\",\"example\":\"$\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/currencies"
           segments: [

@@ -3,21 +3,21 @@
     "person": {
       "PERSON00": {
         "address": "s32",
-        "age": "s33",
+        "age": 51,
         "email": "s34",
         "id": "PERSON00",
         "name": "s36"
       },
       "PERSON01": {
         "address": "s64",
-        "age": "s65",
+        "age": 101,
         "email": "s66",
         "id": "PERSON01",
         "name": "s68"
       },
       "PERSON02": {
         "address": "s96",
-        "age": "s97",
+        "age": 151,
         "email": "s98",
         "id": "PERSON02",
         "name": "s9a"
@@ -28,9 +28,73 @@
     "person": {
       "person_ref01": {
         "address": "sc8",
-        "age": "sc9",
+        "age": 201,
         "email": "sca",
         "name": "scc"
+      }
+    }
+  },
+  "requests": {
+    "GET /peoples": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getPeoples",
+        "parameters": [
+          {
+            "description": "Maximum number of peoples to return",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "address": {
+                        "description": "Address of the person",
+                        "example": "123 Main St, Anytown, USA",
+                        "type": "string"
+                      },
+                      "age": {
+                        "description": "Age of the person",
+                        "example": 30,
+                        "type": "integer"
+                      },
+                      "email": {
+                        "description": "Email address",
+                        "example": "john.doe@example.com",
+                        "format": "email",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the person",
+                        "example": 1,
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "Full name of the person",
+                        "example": "John Doe",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

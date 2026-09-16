@@ -5,21 +5,21 @@
         "author": "s32",
         "id": "BOOK00",
         "isbn": "s34",
-        "publicationYear": "s35",
+        "publicationYear": 53,
         "title": "s36"
       },
       "BOOK01": {
         "author": "s64",
         "id": "BOOK01",
         "isbn": "s66",
-        "publicationYear": "s67",
+        "publicationYear": 103,
         "title": "s68"
       },
       "BOOK02": {
         "author": "s96",
         "id": "BOOK02",
         "isbn": "s98",
-        "publicationYear": "s99",
+        "publicationYear": 153,
         "title": "s9a"
       }
     }
@@ -29,8 +29,430 @@
       "book_ref01": {
         "author": "sc8",
         "isbn": "sca",
-        "publicationYear": "scb",
+        "publicationYear": 203,
         "title": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /books": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createBook",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "author": {
+                    "description": "Author of the book",
+                    "example": "F. Scott Fitzgerald",
+                    "type": "string"
+                  },
+                  "isbn": {
+                    "description": "ISBN of the book",
+                    "example": "978-0-7432-7356-5",
+                    "type": "string"
+                  },
+                  "publicationYear": {
+                    "description": "Year of publication",
+                    "example": 1925,
+                    "type": "integer"
+                  },
+                  "title": {
+                    "description": "Title of the book",
+                    "example": "The Great Gatsby",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "author": {
+                      "description": "Author of the book",
+                      "example": "F. Scott Fitzgerald",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the book",
+                      "example": 1,
+                      "type": "integer"
+                    },
+                    "isbn": {
+                      "description": "ISBN of the book",
+                      "example": "978-0-7432-7356-5",
+                      "type": "string"
+                    },
+                    "publicationYear": {
+                      "description": "Year of publication",
+                      "example": 1925,
+                      "type": "integer"
+                    },
+                    "title": {
+                      "description": "Title of the book",
+                      "example": "The Great Gatsby",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Book created successfully"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /books": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getBooks",
+        "parameters": [
+          {
+            "description": "Maximum number of books to return",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "example": 20,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "author": {
+                        "description": "Author of the book",
+                        "example": "F. Scott Fitzgerald",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "Unique identifier for the book",
+                        "example": 1,
+                        "type": "integer"
+                      },
+                      "isbn": {
+                        "description": "ISBN of the book",
+                        "example": "978-0-7432-7356-5",
+                        "type": "string"
+                      },
+                      "publicationYear": {
+                        "description": "Year of publication",
+                        "example": 1925,
+                        "type": "integer"
+                      },
+                      "title": {
+                        "description": "Title of the book",
+                        "example": "The Great Gatsby",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /books/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getBookById",
+        "parameters": [
+          {
+            "description": "ID of the book to retrieve",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 23,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "author": {
+                      "description": "Author of the book",
+                      "example": "F. Scott Fitzgerald",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the book",
+                      "example": 1,
+                      "type": "integer"
+                    },
+                    "isbn": {
+                      "description": "ISBN of the book",
+                      "example": "978-0-7432-7356-5",
+                      "type": "string"
+                    },
+                    "publicationYear": {
+                      "description": "Year of publication",
+                      "example": 1925,
+                      "type": "integer"
+                    },
+                    "title": {
+                      "description": "Title of the book",
+                      "example": "The Great Gatsby",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "PATCH /books/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "patchBook",
+        "parameters": [
+          {
+            "description": "ID of the book to update",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 23,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "author": {
+                    "description": "Author of the book",
+                    "example": "F. Scott Fitzgerald",
+                    "type": "string"
+                  },
+                  "isbn": {
+                    "description": "ISBN of the book",
+                    "example": "978-0-7432-7356-5",
+                    "type": "string"
+                  },
+                  "publicationYear": {
+                    "description": "Year of publication",
+                    "example": 1925,
+                    "type": "integer"
+                  },
+                  "title": {
+                    "description": "Title of the book",
+                    "example": "The Great Gatsby",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "author": {
+                      "description": "Author of the book",
+                      "example": "F. Scott Fitzgerald",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the book",
+                      "example": 1,
+                      "type": "integer"
+                    },
+                    "isbn": {
+                      "description": "ISBN of the book",
+                      "example": "978-0-7432-7356-5",
+                      "type": "string"
+                    },
+                    "publicationYear": {
+                      "description": "Year of publication",
+                      "example": 1925,
+                      "type": "integer"
+                    },
+                    "title": {
+                      "description": "Title of the book",
+                      "example": "The Great Gatsby",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Book updated successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "DELETE /books/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteBook",
+        "parameters": [
+          {
+            "description": "ID of the book to delete",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 23,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "PUT /books/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateBook",
+        "parameters": [
+          {
+            "description": "ID of the book to update",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 23,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "author": {
+                    "description": "Author of the book",
+                    "example": "F. Scott Fitzgerald",
+                    "type": "string"
+                  },
+                  "isbn": {
+                    "description": "ISBN of the book",
+                    "example": "978-0-7432-7356-5",
+                    "type": "string"
+                  },
+                  "publicationYear": {
+                    "description": "Year of publication",
+                    "example": 1925,
+                    "type": "integer"
+                  },
+                  "title": {
+                    "description": "Title of the book",
+                    "example": "The Great Gatsby",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "author": {
+                      "description": "Author of the book",
+                      "example": "F. Scott Fitzgerald",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier for the book",
+                      "example": 1,
+                      "type": "integer"
+                    },
+                    "isbn": {
+                      "description": "ISBN of the book",
+                      "example": "978-0-7432-7356-5",
+                      "type": "string"
+                    },
+                    "publicationYear": {
+                      "description": "Year of publication",
+                      "example": 1925,
+                      "type": "integer"
+                    },
+                    "title": {
+                      "description": "Title of the book",
+                      "example": "The Great Gatsby",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Book updated successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

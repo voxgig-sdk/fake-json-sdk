@@ -4,7 +4,10 @@ declare(strict_types=1);
 // FakeJson SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class FakeJsonFeatures
@@ -14,8 +17,14 @@ class FakeJsonFeatures
         switch ($name) {
             case "base":
                 return new FakeJsonBaseFeature();
+            case "ratelimit":
+                return new FakeJsonRatelimitFeature();
+            case "retry":
+                return new FakeJsonRetryFeature();
             case "test":
                 return new FakeJsonTestFeature();
+            case "timeout":
+                return new FakeJsonTimeoutFeature();
             default:
                 return new FakeJsonBaseFeature();
         }
@@ -31,7 +40,10 @@ class FakeJsonFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

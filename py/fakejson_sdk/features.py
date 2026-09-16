@@ -1,12 +1,18 @@
 # FakeJson SDK feature factory
 
 from fakejson_sdk.feature.base_feature import FakeJsonBaseFeature
+from fakejson_sdk.feature.ratelimit_feature import FakeJsonRatelimitFeature
+from fakejson_sdk.feature.retry_feature import FakeJsonRetryFeature
 from fakejson_sdk.feature.test_feature import FakeJsonTestFeature
+from fakejson_sdk.feature.timeout_feature import FakeJsonTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: FakeJsonBaseFeature(),
+    "ratelimit": lambda: FakeJsonRatelimitFeature(),
+    "retry": lambda: FakeJsonRetryFeature(),
     "test": lambda: FakeJsonTestFeature(),
+    "timeout": lambda: FakeJsonTimeoutFeature(),
 }
 
 

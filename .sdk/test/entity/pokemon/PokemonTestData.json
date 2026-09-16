@@ -29,5 +29,82 @@
         "type": []
       }
     }
+  },
+  "requests": {
+    "GET /pokemons": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getPokemons",
+        "parameters": [
+          {
+            "description": "Maximum number of pokemons to return",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "description": "Unique identifier for the pokemon",
+                        "example": 1,
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "Name of the pokemon",
+                        "example": "Bulbasaur",
+                        "type": "string"
+                      },
+                      "stats": {
+                        "description": "Stats of the pokemon",
+                        "properties": {
+                          "attack": {
+                            "example": 49,
+                            "type": "integer"
+                          },
+                          "defense": {
+                            "example": 49,
+                            "type": "integer"
+                          },
+                          "hp": {
+                            "example": 45,
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "description": "Types of the pokemon",
+                        "example": [
+                          "Grass",
+                          "Poison"
+                        ],
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

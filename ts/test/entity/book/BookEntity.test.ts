@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { FakeJsonSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('BookEntity', async () => {
 
     const live = 'TRUE' === process.env.FAKE_JSON_TEST_LIVE
     for (const op of ['create', 'list', 'update', 'load', 'remove']) {
-      if (maybeSkipControl(t, 'entityOp', 'book.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'book.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set FAKE_JSON_TEST_BOOK_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"author","req":false,"short":"Author of the book","type":"`$STRING`","index$":0},{"active":true,"name":"id","req":false,"short":"Unique identifier for the book","type":"`$INTEGER`","index$":1},{"active":true,"name":"isbn","req":false,"short":"ISBN of the book","type":"`$STRING`","index$":2},{"active":true,"name":"publicationYear","req":false,"short":"Year of publication","type":"`$INTEGER`","index$":3},{"active":true,"name":"title","req":false,"short":"Title of the book","type":"`$STRING`","index$":4}],"id":{"field":"id","name":"id"},"name":"book","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{},"contract":{"id":"POST /books","json":"{\"operationId\":\"createBook\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Book created successfully\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/books","segments":[{"lit":"books"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"example":20,"kind":"query","name":"limit","orig":"limit","reqd":false,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"GET /books","json":"{\"operationId\":\"getBooks\",\"parameters\":[{\"description\":\"Maximum number of books to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"example\":20,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/books","segments":[{"lit":"books"}],"select":{"exist":["limit"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"example":23,"kind":"param","name":"id","orig":"id","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"GET /books/{id}","json":"{\"operationId\":\"getBookById\",\"parameters\":[{\"description\":\"ID of the book to retrieve\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/books/{id}","segments":[{"lit":"books"},{"var":"id"}],"select":{"exist":["id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"},"patch":{"input":"data","name":"patch","points":[{"active":true,"args":{"params":[{"active":true,"example":23,"kind":"param","name":"id","orig":"id","reqd":true,"type":"`$INTEGER`"}]},"contract":{"id":"PATCH /books/{id}","json":"{\"operationId\":\"patchBook\",\"parameters\":[{\"description\":\"ID of the book to update\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Book updated successfully\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"PATCH","orig":"/books/{id}","segments":[{"lit":"books"},{"var":"id"}],"select":{"exist":["id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"patch"},"remove":{"input":"data","name":"remove","points":[{"active":true,"args":{"params":[{"active":true,"example":23,"kind":"param","name":"id","orig":"id","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"DELETE /books/{id}","json":"{\"operationId\":\"deleteBook\",\"parameters\":[{\"description\":\"ID of the book to delete\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"description\":\"Book deleted successfully\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"DELETE","orig":"/books/{id}","segments":[{"lit":"books"},{"var":"id"}],"select":{"exist":["id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"remove"},"update":{"input":"data","name":"update","points":[{"active":true,"args":{"params":[{"active":true,"example":23,"kind":"param","name":"id","orig":"id","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"PUT /books/{id}","json":"{\"operationId\":\"updateBook\",\"parameters\":[{\"description\":\"ID of the book to update\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Book updated successfully\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"PUT","orig":"/books/{id}","segments":[{"lit":"books"},{"var":"id"}],"select":{"exist":["id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"update"}},"relations":{"ancestors":[]},"key$":"book","name__orig":"book","Name":"Book","name_":"book","name-":"book","NAME":"BOOK","index$":0}, {"active":true,"entity":"book","key$":"BasicBookFlow","kind":"basic","name":"BasicBookFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"book_ref01"},"match":{},"op":"create","spec":[],"valid":[],"index$":0},{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"book_ref01"}}],"index$":1},{"active":true,"data":{},"input":{"ref":"book_ref01","srcdatavar":"book_ref01_data","suffix":"_up0","textfield":"author"},"match":{},"op":"update","spec":[{"apply":"TextFieldMark","def":{"mark":"Mark01-book_ref01"}}],"valid":[],"index$":2},{"active":true,"data":{},"input":{"ref":"book_ref01","srcdatavar":"book_ref01_data","suffix":"_dt0"},"match":{"id":"book01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-book_ref01"}}],"index$":3},{"active":true,"data":{},"input":{"ref":"book_ref01","suffix":"_rm0"},"match":{"id":"book01"},"op":"remove","spec":[],"valid":[],"index$":4},{"active":true,"data":{},"input":{"suffix":"_rt0"},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemNotExists","def":{"ref":"book_ref01"}}],"index$":5}]}, 'Book')
     }
     const client = setup.client
     const struct = setup.struct
@@ -150,13 +149,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['FAKE_JSON_TEST_BOOK_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'FAKE_JSON_TEST_BOOK_ENTID': idmap,
     'FAKE_JSON_TEST_LIVE': 'FALSE',
@@ -167,7 +159,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.FAKE_JSON_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['FAKE_JSON_TEST_BOOK_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new FakeJsonSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -179,7 +177,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -192,7 +191,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.FAKE_JSON_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

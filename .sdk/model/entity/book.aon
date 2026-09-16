@@ -48,6 +48,12 @@ main: kit: entity: book: {
       name: "create"
       points: [
         {
+          contract: {
+            id: "POST /books"
+            json: "{\"operationId\":\"createBook\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Book created successfully\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "POST"
           orig: "/books"
           segments: [
@@ -77,6 +83,12 @@ main: kit: entity: book: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /books"
+            json: "{\"operationId\":\"getBooks\",\"parameters\":[{\"description\":\"Maximum number of books to return\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"example\":20,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/books"
@@ -112,6 +124,12 @@ main: kit: entity: book: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /books/{id}"
+            json: "{\"operationId\":\"getBookById\",\"parameters\":[{\"description\":\"ID of the book to retrieve\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/books/{id}"
@@ -151,6 +169,12 @@ main: kit: entity: book: {
               }
             ]
           }
+          contract: {
+            id: "PATCH /books/{id}"
+            json: "{\"operationId\":\"patchBook\",\"parameters\":[{\"description\":\"ID of the book to update\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Book updated successfully\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "PATCH"
           orig: "/books/{id}"
           segments: [
@@ -189,6 +213,12 @@ main: kit: entity: book: {
               }
             ]
           }
+          contract: {
+            id: "DELETE /books/{id}"
+            json: "{\"operationId\":\"deleteBook\",\"parameters\":[{\"description\":\"ID of the book to delete\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"description\":\"Book deleted successfully\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "DELETE"
           orig: "/books/{id}"
           segments: [
@@ -226,6 +256,12 @@ main: kit: entity: book: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "PUT /books/{id}"
+            json: "{\"operationId\":\"updateBook\",\"parameters\":[{\"description\":\"ID of the book to update\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"example\":23,\"type\":\"integer\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"author\":{\"description\":\"Author of the book\",\"example\":\"F. Scott Fitzgerald\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the book\",\"example\":1,\"type\":\"integer\"},\"isbn\":{\"description\":\"ISBN of the book\",\"example\":\"978-0-7432-7356-5\",\"type\":\"string\"},\"publicationYear\":{\"description\":\"Year of publication\",\"example\":1925,\"type\":\"integer\"},\"title\":{\"description\":\"Title of the book\",\"example\":\"The Great Gatsby\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Book updated successfully\"},\"404\":{\"description\":\"Book not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "PUT"
           orig: "/books/{id}"
