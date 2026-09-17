@@ -105,12 +105,12 @@ local results, err = client:Person():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/fake-json-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
-| Python | `voxgig-sdk-fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
-| PHP | `voxgig-sdk/fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
+| TypeScript | `@voxgig-sdk/fake-json-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/tags) |
+| Python | `voxgig-sdk-fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/tags) |
+| PHP | `voxgig-sdk/fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/fake-json-sdk/go` | `go get github.com/voxgig-sdk/fake-json-sdk/go@latest` |
-| Ruby | `voxgig-sdk-fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
-| Lua | `voxgig-sdk-fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/releases) |
+| Ruby | `voxgig-sdk-fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/tags) |
+| Lua | `voxgig-sdk-fake-json` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fake-json-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/fake-json-sdk/go-cli` | `go install github.com/voxgig-sdk/fake-json-sdk/go-cli/cmd/fake-json@latest` |
 | Go MCP server | `github.com/voxgig-sdk/fake-json-sdk/go-mcp` | `go get github.com/voxgig-sdk/fake-json-sdk/go-mcp@latest` |
 

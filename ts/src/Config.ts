@@ -127,18 +127,18 @@ class Config {
 
     entity: {
       
-      book: {
-      },
-
-      currency: {
-      },
-
-      person: {
-      },
-
-      pokemon: {
-      },
-
+        book: {
+        },
+  
+        currency: {
+        },
+  
+        person: {
+        },
+  
+        pokemon: {
+        },
+  
     }
   }
 
