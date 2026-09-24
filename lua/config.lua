@@ -90,28 +90,33 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "author",
-            ["short"] = "Author of the book",
+            ["title"] = "Author",
             ["type"] = "`$STRING`",
+            ["short"] = "Author of the book",
           },
           {
             ["name"] = "id",
-            ["short"] = "Unique identifier for the book",
+            ["title"] = "Id",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Unique identifier for the book",
           },
           {
             ["name"] = "isbn",
-            ["short"] = "ISBN of the book",
+            ["title"] = "Isbn",
             ["type"] = "`$STRING`",
+            ["short"] = "ISBN of the book",
           },
           {
             ["name"] = "publicationYear",
-            ["short"] = "Year of publication",
+            ["title"] = "Publication Year",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Year of publication",
           },
           {
             ["name"] = "title",
-            ["short"] = "Title of the book",
+            ["title"] = "Title",
             ["type"] = "`$STRING`",
+            ["short"] = "Title of the book",
           },
         },
         ["id"] = {
@@ -125,7 +130,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/books",
@@ -134,14 +138,16 @@ local function make_config()
                     ["lit"] = "books",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "books",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "books",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -150,17 +156,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["example"] = 20,
-                      ["kind"] = "query",
-                      ["name"] = "limit",
-                      ["orig"] = "limit",
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/books",
@@ -169,17 +164,29 @@ local function make_config()
                     ["lit"] = "books",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "limit",
-                  },
+                ["parts"] = {
+                  "books",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "books",
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "limit",
+                      ["orig"] = "limit",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 20,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "limit",
+                  },
                 },
               },
             },
@@ -189,18 +196,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = 23,
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/books/{id}",
@@ -212,18 +207,31 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                  },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "id",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = 23,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -233,18 +241,6 @@ local function make_config()
             ["name"] = "patch",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = 23,
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "PATCH",
                 ["orig"] = "/books/{id}",
@@ -256,18 +252,31 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                  },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "id",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = 23,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -277,18 +286,6 @@ local function make_config()
             ["name"] = "remove",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = 23,
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/books/{id}",
@@ -300,18 +297,31 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                  },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "id",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = 23,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -321,18 +331,6 @@ local function make_config()
             ["name"] = "update",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = 23,
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/books/{id}",
@@ -344,18 +342,31 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                  },
+                ["parts"] = {
+                  "books",
+                  "{id}",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "books",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "id",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = 23,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -369,23 +380,27 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "code",
-            ["short"] = "Currency code (ISO 4217)",
+            ["title"] = "Code",
             ["type"] = "`$STRING`",
+            ["short"] = "Currency code (ISO 4217)",
           },
           {
             ["name"] = "id",
-            ["short"] = "Unique identifier for the currency",
+            ["title"] = "Id",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Unique identifier for the currency",
           },
           {
             ["name"] = "name",
-            ["short"] = "Currency name",
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["short"] = "Currency name",
           },
           {
             ["name"] = "symbol",
-            ["short"] = "Currency symbol",
+            ["title"] = "Symbol",
             ["type"] = "`$STRING`",
+            ["short"] = "Currency symbol",
           },
         },
         ["id"] = {
@@ -399,16 +414,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "limit",
-                      ["orig"] = "limit",
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/currencies",
@@ -417,17 +422,28 @@ local function make_config()
                     ["lit"] = "currencies",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "limit",
-                  },
+                ["parts"] = {
+                  "currencies",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "currencies",
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "limit",
+                      ["orig"] = "limit",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "limit",
+                  },
                 },
               },
             },
@@ -441,29 +457,34 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "address",
-            ["short"] = "Address of the person",
+            ["title"] = "Address",
             ["type"] = "`$STRING`",
+            ["short"] = "Address of the person",
           },
           {
             ["name"] = "age",
-            ["short"] = "Age of the person",
+            ["title"] = "Age",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Age of the person",
           },
           {
-            ["format"] = "email",
             ["name"] = "email",
-            ["short"] = "Email address",
+            ["title"] = "Email",
             ["type"] = "`$STRING`",
+            ["short"] = "Email address",
+            ["format"] = "email",
           },
           {
             ["name"] = "id",
-            ["short"] = "Unique identifier for the person",
+            ["title"] = "Id",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Unique identifier for the person",
           },
           {
             ["name"] = "name",
-            ["short"] = "Full name of the person",
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["short"] = "Full name of the person",
           },
         },
         ["id"] = {
@@ -477,16 +498,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "limit",
-                      ["orig"] = "limit",
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/peoples",
@@ -495,17 +506,28 @@ local function make_config()
                     ["lit"] = "peoples",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "limit",
-                  },
+                ["parts"] = {
+                  "peoples",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "peoples",
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "limit",
+                      ["orig"] = "limit",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "limit",
+                  },
                 },
               },
             },
@@ -519,23 +541,27 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "id",
-            ["short"] = "Unique identifier for the pokemon",
+            ["title"] = "Id",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Unique identifier for the pokemon",
           },
           {
             ["name"] = "name",
-            ["short"] = "Name of the pokemon",
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["short"] = "Name of the pokemon",
           },
           {
             ["name"] = "stats",
-            ["short"] = "Stats of the pokemon",
+            ["title"] = "Stats",
             ["type"] = "`$OBJECT`",
+            ["short"] = "Stats of the pokemon",
           },
           {
             ["name"] = "type",
-            ["short"] = "Types of the pokemon",
+            ["title"] = "Type",
             ["type"] = "`$ARRAY`",
+            ["short"] = "Types of the pokemon",
           },
         },
         ["id"] = {
@@ -549,16 +575,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "limit",
-                      ["orig"] = "limit",
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/pokemons",
@@ -567,17 +583,28 @@ local function make_config()
                     ["lit"] = "pokemons",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "limit",
-                  },
+                ["parts"] = {
+                  "pokemons",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "pokemons",
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "limit",
+                      ["orig"] = "limit",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "limit",
+                  },
                 },
               },
             },

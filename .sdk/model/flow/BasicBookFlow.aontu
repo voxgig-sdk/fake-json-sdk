@@ -1,0 +1,100 @@
+# BasicBookFlow
+
+main: kit: flow: BasicBookFlow:
+{
+  entity: "book",
+  kind: "basic",
+  name: "BasicBookFlow",
+  step: [
+    {
+      i: {
+        ref: "book_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "book_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "book_ref01",
+        srcdatavar: "book_ref01_data",
+        suffix: "_up0",
+        textfield: "author"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-book_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "book_ref01",
+        srcdatavar: "book_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "book01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-book_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "book_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "book01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "book_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicBookFlow"
+}

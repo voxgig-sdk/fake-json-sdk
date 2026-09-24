@@ -19,7 +19,6 @@ import type {
   PersonListMatch,
 } from '../FakeJsonTypes'
 
-// TODO: needs Entity superclass
 class PersonEntity extends FakeJsonEntityBase<Person> {
 
   constructor(client: FakeJsonSDK, entopts: any) {

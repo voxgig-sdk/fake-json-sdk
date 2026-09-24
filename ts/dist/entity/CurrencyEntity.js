@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CurrencyEntity = void 0;
 const FakeJsonEntityBase_1 = require("../FakeJsonEntityBase");
-// TODO: needs Entity superclass
 class CurrencyEntity extends FakeJsonEntityBase_1.FakeJsonEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

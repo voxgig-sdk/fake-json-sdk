@@ -19,7 +19,6 @@ import type {
   PokemonListMatch,
 } from '../FakeJsonTypes'
 
-// TODO: needs Entity superclass
 class PokemonEntity extends FakeJsonEntityBase<Pokemon> {
 
   constructor(client: FakeJsonSDK, entopts: any) {

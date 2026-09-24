@@ -43,7 +43,7 @@ local books, err = client:Book():list()
 if err then error(err) end
 
 for _, item in ipairs(books) do
-  print(item["id"], item["author"])
+  print(item["id"])
 end
 ```
 

@@ -1,7 +1,7 @@
 // Typed models for the FakeJson SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,11 +14,6 @@ import (
 
 // Book is the typed data model for the book entity.
 type Book struct {
-	Author *string `json:"author,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Isbn *string `json:"isbn,omitempty"`
-	PublicationYear *int `json:"publicationYear,omitempty"`
-	Title *string `json:"title,omitempty"`
 }
 
 // BookLoadMatch is the typed request payload for Book.LoadTyped.
@@ -56,10 +51,6 @@ type BookRemoveMatch struct {
 
 // Currency is the typed data model for the currency entity.
 type Currency struct {
-	Code *string `json:"code,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Symbol *string `json:"symbol,omitempty"`
 }
 
 // CurrencyListMatch is the typed request payload for Currency.ListTyped.
@@ -69,11 +60,6 @@ type CurrencyListMatch struct {
 
 // Person is the typed data model for the person entity.
 type Person struct {
-	Address *string `json:"address,omitempty"`
-	Age *int `json:"age,omitempty"`
-	Email *string `json:"email,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
 }
 
 // PersonListMatch is the typed request payload for Person.ListTyped.
@@ -83,10 +69,6 @@ type PersonListMatch struct {
 
 // Pokemon is the typed data model for the pokemon entity.
 type Pokemon struct {
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Stats *map[string]any `json:"stats,omitempty"`
-	Type *[]any `json:"type,omitempty"`
 }
 
 // PokemonListMatch is the typed request payload for Pokemon.ListTyped.

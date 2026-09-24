@@ -19,7 +19,6 @@ import type {
   CurrencyListMatch,
 } from '../FakeJsonTypes'
 
-// TODO: needs Entity superclass
 class CurrencyEntity extends FakeJsonEntityBase<Currency> {
 
   constructor(client: FakeJsonSDK, entopts: any) {

@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -148,28 +141,33 @@ class Config {
       "fields": [
         {
           "name": "author",
-          "short": "Author of the book",
-          "type": "`$STRING`"
+          "title": "Author",
+          "type": "`$STRING`",
+          "short": "Author of the book"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the book",
-          "type": "`$INTEGER`"
+          "title": "Id",
+          "type": "`$INTEGER`",
+          "short": "Unique identifier for the book"
         },
         {
           "name": "isbn",
-          "short": "ISBN of the book",
-          "type": "`$STRING`"
+          "title": "Isbn",
+          "type": "`$STRING`",
+          "short": "ISBN of the book"
         },
         {
           "name": "publicationYear",
-          "short": "Year of publication",
-          "type": "`$INTEGER`"
+          "title": "Publication Year",
+          "type": "`$INTEGER`",
+          "short": "Year of publication"
         },
         {
           "name": "title",
-          "short": "Title of the book",
-          "type": "`$STRING`"
+          "title": "Title",
+          "type": "`$STRING`",
+          "short": "Title of the book"
         }
       ],
       "id": {
@@ -183,7 +181,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/books",
@@ -192,14 +189,16 @@ class Config {
                   "lit": "books"
                 }
               ],
-              "select": {},
+              "parts": [
+                "books"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "books"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -208,17 +207,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "example": 20,
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/books",
@@ -227,18 +215,30 @@ class Config {
                   "lit": "books"
                 }
               ],
-              "select": {
-                "exist": [
-                  "limit"
-                ]
-              },
+              "parts": [
+                "books"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "books"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 20
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "limit"
+                ]
+              }
             }
           ]
         },
@@ -247,18 +247,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": 23,
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "id",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/books/{id}",
@@ -270,19 +258,32 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
+              "parts": [
+                "books",
+                "{id}"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "books",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "id",
+                    "type": "`$INTEGER`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": 23
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         },
@@ -291,18 +292,6 @@ class Config {
           "name": "patch",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": 23,
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "id",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "PATCH",
               "orig": "/books/{id}",
@@ -314,19 +303,32 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
+              "parts": [
+                "books",
+                "{id}"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "books",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "id",
+                    "type": "`$INTEGER`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": 23
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         },
@@ -335,18 +337,6 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": 23,
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "id",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "DELETE",
               "orig": "/books/{id}",
@@ -358,19 +348,32 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
+              "parts": [
+                "books",
+                "{id}"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "books",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "id",
+                    "type": "`$INTEGER`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": 23
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         },
@@ -379,18 +382,6 @@ class Config {
           "name": "update",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": 23,
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "id",
-                    "reqd": true,
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "PUT",
               "orig": "/books/{id}",
@@ -402,19 +393,32 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
+              "parts": [
+                "books",
+                "{id}"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "books",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "id",
+                    "type": "`$INTEGER`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": 23
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }
@@ -427,23 +431,27 @@ class Config {
       "fields": [
         {
           "name": "code",
-          "short": "Currency code (ISO 4217)",
-          "type": "`$STRING`"
+          "title": "Code",
+          "type": "`$STRING`",
+          "short": "Currency code (ISO 4217)"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the currency",
-          "type": "`$INTEGER`"
+          "title": "Id",
+          "type": "`$INTEGER`",
+          "short": "Unique identifier for the currency"
         },
         {
           "name": "name",
-          "short": "Currency name",
-          "type": "`$STRING`"
+          "title": "Name",
+          "type": "`$STRING`",
+          "short": "Currency name"
         },
         {
           "name": "symbol",
-          "short": "Currency symbol",
-          "type": "`$STRING`"
+          "title": "Symbol",
+          "type": "`$STRING`",
+          "short": "Currency symbol"
         }
       ],
       "id": {
@@ -457,16 +465,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/currencies",
@@ -475,18 +473,29 @@ class Config {
                   "lit": "currencies"
                 }
               ],
-              "select": {
-                "exist": [
-                  "limit"
-                ]
-              },
+              "parts": [
+                "currencies"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "currencies"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "limit"
+                ]
+              }
             }
           ]
         }
@@ -499,29 +508,34 @@ class Config {
       "fields": [
         {
           "name": "address",
-          "short": "Address of the person",
-          "type": "`$STRING`"
+          "title": "Address",
+          "type": "`$STRING`",
+          "short": "Address of the person"
         },
         {
           "name": "age",
-          "short": "Age of the person",
-          "type": "`$INTEGER`"
+          "title": "Age",
+          "type": "`$INTEGER`",
+          "short": "Age of the person"
         },
         {
-          "format": "email",
           "name": "email",
+          "title": "Email",
+          "type": "`$STRING`",
           "short": "Email address",
-          "type": "`$STRING`"
+          "format": "email"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the person",
-          "type": "`$INTEGER`"
+          "title": "Id",
+          "type": "`$INTEGER`",
+          "short": "Unique identifier for the person"
         },
         {
           "name": "name",
-          "short": "Full name of the person",
-          "type": "`$STRING`"
+          "title": "Name",
+          "type": "`$STRING`",
+          "short": "Full name of the person"
         }
       ],
       "id": {
@@ -535,16 +549,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/peoples",
@@ -553,18 +557,29 @@ class Config {
                   "lit": "peoples"
                 }
               ],
-              "select": {
-                "exist": [
-                  "limit"
-                ]
-              },
+              "parts": [
+                "peoples"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "peoples"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "limit"
+                ]
+              }
             }
           ]
         }
@@ -577,23 +592,27 @@ class Config {
       "fields": [
         {
           "name": "id",
-          "short": "Unique identifier for the pokemon",
-          "type": "`$INTEGER`"
+          "title": "Id",
+          "type": "`$INTEGER`",
+          "short": "Unique identifier for the pokemon"
         },
         {
           "name": "name",
-          "short": "Name of the pokemon",
-          "type": "`$STRING`"
+          "title": "Name",
+          "type": "`$STRING`",
+          "short": "Name of the pokemon"
         },
         {
           "name": "stats",
-          "short": "Stats of the pokemon",
-          "type": "`$OBJECT`"
+          "title": "Stats",
+          "type": "`$OBJECT`",
+          "short": "Stats of the pokemon"
         },
         {
           "name": "type",
-          "short": "Types of the pokemon",
-          "type": "`$ARRAY`"
+          "title": "Type",
+          "type": "`$ARRAY`",
+          "short": "Types of the pokemon"
         }
       ],
       "id": {
@@ -607,16 +626,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/pokemons",
@@ -625,18 +634,29 @@ class Config {
                   "lit": "pokemons"
                 }
               ],
-              "select": {
-                "exist": [
-                  "limit"
-                ]
-              },
+              "parts": [
+                "pokemons"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "pokemons"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "limit"
+                ]
+              }
             }
           ]
         }
