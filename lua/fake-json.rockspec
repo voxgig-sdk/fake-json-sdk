@@ -1,4 +1,4 @@
-package = "voxgig-sdk-fake-json"
+package = "voxgig-sdk-fake-json-sdk"
 version = "0.0.1-1"
 source = {
   -- git+https (GitHub dropped git:// in 2022); pin the install to the release
