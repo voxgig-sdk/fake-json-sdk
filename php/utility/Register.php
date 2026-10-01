@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 FakeJsonUtility::setRegistrar(function (FakeJsonUtility $u): void {
     $u->clean = [FakeJsonClean::class, 'call'];
+    $u->clean_add = [FakeJsonClean::class, 'add'];
+    $u->clean_explain = [FakeJsonDone::class, 'clean_explain'];
     $u->done = [FakeJsonDone::class, 'call'];
     $u->make_error = [FakeJsonMakeError::class, 'call'];
     $u->feature_add = [FakeJsonFeatureAdd::class, 'call'];

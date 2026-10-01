@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 FakeJsonUtility.registrar = ->(u) {
   u.clean = FakeJsonUtilities::Clean
+  u.clean_add = FakeJsonUtilities::CleanAdd
+  u.clean_explain = FakeJsonUtilities::CleanExplain
   u.done = FakeJsonUtilities::Done
   u.make_error = FakeJsonUtilities::MakeError
   u.feature_add = FakeJsonUtilities::FeatureAdd
