@@ -56,9 +56,6 @@ BookListMatch = Struct.new(
 # @!attribute [rw] author
 #   @return [String, nil]
 #
-# @!attribute [rw] id
-#   @return [Integer, nil]
-#
 # @!attribute [rw] isbn
 #   @return [String, nil]
 #
@@ -69,7 +66,6 @@ BookListMatch = Struct.new(
 #   @return [String, nil]
 BookCreateData = Struct.new(
   :author,
-  :id,
   :isbn,
   :publicationYear,
   :title,
@@ -93,6 +89,31 @@ BookCreateData = Struct.new(
 # @!attribute [rw] title
 #   @return [String, nil]
 BookUpdateData = Struct.new(
+  :id,
+  :author,
+  :isbn,
+  :publicationYear,
+  :title,
+  keyword_init: true
+)
+
+# Request payload for Book#patch.
+#
+# @!attribute [rw] id
+#   @return [Integer]
+#
+# @!attribute [rw] author
+#   @return [String, nil]
+#
+# @!attribute [rw] isbn
+#   @return [String, nil]
+#
+# @!attribute [rw] publicationYear
+#   @return [Integer, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+BookPatchData = Struct.new(
   :id,
   :author,
   :isbn,

@@ -150,6 +150,12 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "author",
+                    "isbn",
+                    "publicationYear",
+                    "title"
+                  ],
                   "co": {
                     "id": "POST /books",
                     "source": "openapi3",
@@ -161,6 +167,10 @@
                   "o": "/books",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "books"
@@ -200,12 +210,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/books",
-                  "q": {
-                    "exist": [
-                      "limit"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "books"
@@ -251,6 +261,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "books"
@@ -272,6 +286,12 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "author",
+                    "isbn",
+                    "publicationYear",
+                    "title"
+                  ],
                   "co": {
                     "id": "PATCH /books/{id}",
                     "source": "openapi3",
@@ -299,6 +319,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "books"
@@ -368,6 +392,12 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "author",
+                    "isbn",
+                    "publicationYear",
+                    "title"
+                  ],
                   "co": {
                     "id": "PUT /books/{id}",
                     "source": "openapi3",
@@ -395,6 +425,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "books"
@@ -486,12 +520,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/currencies",
-                  "q": {
-                    "exist": [
-                      "limit"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "currencies"
@@ -589,12 +623,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/peoples",
-                  "q": {
-                    "exist": [
-                      "limit"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "peoples"
@@ -683,12 +717,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/pokemons",
-                  "q": {
-                    "exist": [
-                      "limit"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "pokemons"
@@ -1029,6 +1063,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -1331,7 +1366,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -1384,6 +1419,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -1614,7 +1654,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -1991,6 +2034,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

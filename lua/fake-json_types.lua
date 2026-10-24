@@ -21,12 +21,18 @@
 
 ---@class BookCreateData
 ---@field author? string
----@field id? number
 ---@field isbn? string
 ---@field publicationYear? number
 ---@field title? string
 
 ---@class BookUpdateData
+---@field id number
+---@field author? string
+---@field isbn? string
+---@field publicationYear? number
+---@field title? string
+
+---@class BookPatchData
 ---@field id number
 ---@field author? string
 ---@field isbn? string

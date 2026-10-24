@@ -34,7 +34,6 @@ class BookListMatch(TypedDict, total=False):
 
 class BookCreateData(TypedDict, total=False):
     author: str
-    id: int
     isbn: str
     publicationYear: int
     title: str
@@ -45,6 +44,17 @@ class BookUpdateDataRequired(TypedDict):
 
 
 class BookUpdateData(BookUpdateDataRequired, total=False):
+    author: str
+    isbn: str
+    publicationYear: int
+    title: str
+
+
+class BookPatchDataRequired(TypedDict):
+    id: int
+
+
+class BookPatchData(BookPatchDataRequired, total=False):
     author: str
     isbn: str
     publicationYear: int

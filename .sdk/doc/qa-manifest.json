@@ -3,5 +3,33 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Address of the person",
+      "Age of the person",
+      "Author of the book",
+      "Book created successfully",
+      "Book deleted successfully",
+      "Book updated successfully",
+      "Currency code (ISO 4217)",
+      "Currency name",
+      "Currency symbol",
+      "Email address",
+      "Full name of the person",
+      "ISBN of the book",
+      "Name of the pokemon",
+      "Production server",
+      "Stats of the pokemon",
+      "Successful response",
+      "This free public API allows developers to easily obtain fake JSON data for testing and development. There is no need for registration, tokens, or authentication, simplifying the process of retrieving dummy data quickly.",
+      "Title of the book",
+      "Types of the pokemon",
+      "Unique identifier for the book",
+      "Unique identifier for the currency",
+      "Unique identifier for the person",
+      "Unique identifier for the pokemon",
+      "Year of publication"
+    ]
+  }
 }

@@ -72,10 +72,9 @@ main: kit: entity: person: {
           }
           m: "GET"
           o: "/peoples"
-          q: {
-            exist: [
-              "limit"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

@@ -4,7 +4,7 @@
 
 The Ruby SDK for the FakeJson API — an entity-oriented client using idiomatic Ruby conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Book` — with named operations (`list`/`load`/`create`/`update`/`remove`/`patch`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Book` — with named operations (`list`/`load`/`create`/`update`/`patch`/`remove`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fake-json-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/fake-json-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -43,10 +43,11 @@ client = FakeJsonSDK.new
 
 ```ruby
 begin
-  # list returns an Array of Book records — iterate directly.
+  # list returns an Array of Book entities, one per record; data_get reads the record.
   books = client.Book.list
   books.each do |item|
-    puts "#{item["id"]} #{item["author"]}"
+    record = item.data_get
+    puts "#{record["id"]} #{record["author"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -59,7 +60,7 @@ end
 begin
   # load returns the ENTITY — call data_get for the Book record (raises on error).
   book = client.Book.load({ "id" => 1 })
-  puts book
+  puts book.data_get
 rescue => err
   warn "load failed: #{err}"
 end
@@ -73,6 +74,9 @@ created = client.Book.create({ "author" => "example_author", "isbn" => "example_
 
 # Update — index the record via data_get (created.data_get["id"]).
 client.Book.update({ "id" => created.data_get["id"], "author" => "example_author", "isbn" => "example_isbn" })
+
+# Patch — sends only the fields given
+client.Book.patch({ "id" => created.data_get["id"], "author" => "example_author", "isbn" => "example_isbn" })
 
 # Remove
 client.Book.remove({ "id" => created.data_get["id"] })
@@ -153,10 +157,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = FakeJsonSDK.test
 
-# Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-person = client.Person.list()
-puts person
+# list returns an Array of Person entities, one per mock record (raises on
+# error); data_get reads each record.
+persons = client.Person.list()
+persons.each { |item| puts item.data_get }
 ```
 
 ### Use a custom fetch function
@@ -243,11 +247,12 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity, and return it. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity, and return it. Raises on error. |
+| `patch` | `(reqdata, ctrl) -> any` | Change part of an existing entity, and return it. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity, and return it marked as deleted. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -257,9 +262,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `FakeJsonError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`FakeJsonError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -344,6 +350,7 @@ Create an instance: `book = client.Book`
 | `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
+| `patch(data)` | Change part of an existing entity. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
 
@@ -367,8 +374,9 @@ book = client.Book.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Book records (raises on error).
+# list returns an Array of Book entities, one per record (raises on error).
 books = client.Book.list
+books.each { |item| puts item.data_get }
 ```
 
 #### Example: Create
@@ -401,8 +409,9 @@ Create an instance: `currency = client.Currency`
 #### Example: List
 
 ```ruby
-# list returns an Array of Currency records (raises on error).
+# list returns an Array of Currency entities, one per record (raises on error).
 currencys = client.Currency.list
+currencys.each { |item| puts item.data_get }
 ```
 
 
@@ -429,8 +438,9 @@ Create an instance: `person = client.Person`
 #### Example: List
 
 ```ruby
-# list returns an Array of Person records (raises on error).
+# list returns an Array of Person entities, one per record (raises on error).
 persons = client.Person.list
+persons.each { |item| puts item.data_get }
 ```
 
 
@@ -456,8 +466,9 @@ Create an instance: `pokemon = client.Pokemon`
 #### Example: List
 
 ```ruby
-# list returns an Array of Pokemon records (raises on error).
+# list returns an Array of Pokemon entities, one per record (raises on error).
 pokemons = client.Pokemon.list
+pokemons.each { |item| puts item.data_get }
 ```
 
 ## Features

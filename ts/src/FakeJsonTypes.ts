@@ -23,13 +23,20 @@ export interface BookListMatch {
 
 export interface BookCreateData {
   author?: string
-  id?: number
   isbn?: string
   publicationYear?: number
   title?: string
 }
 
 export interface BookUpdateData {
+  id: number
+  author?: string
+  isbn?: string
+  publicationYear?: number
+  title?: string
+}
+
+export interface BookPatchData {
   id: number
   author?: string
   isbn?: string

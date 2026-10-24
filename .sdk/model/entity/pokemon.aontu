@@ -64,10 +64,9 @@ main: kit: entity: pokemon: {
           }
           m: "GET"
           o: "/pokemons"
-          q: {
-            exist: [
-              "limit"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

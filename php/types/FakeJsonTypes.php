@@ -38,7 +38,6 @@ class BookListMatch
 class BookCreateData
 {
     public ?string $author = null;
-    public ?int $id = null;
     public ?string $isbn = null;
     public ?int $publicationYear = null;
     public ?string $title = null;
@@ -46,6 +45,16 @@ class BookCreateData
 
 /** Request payload for Book#update. */
 class BookUpdateData
+{
+    public int $id;
+    public ?string $author = null;
+    public ?string $isbn = null;
+    public ?int $publicationYear = null;
+    public ?string $title = null;
+}
+
+/** Request payload for Book#patch. */
+class BookPatchData
 {
     public int $id;
     public ?string $author = null;

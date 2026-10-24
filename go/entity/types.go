@@ -29,7 +29,6 @@ type BookListMatch struct {
 // BookCreateData is the typed request payload for Book.CreateTyped.
 type BookCreateData struct {
 	Author *string `json:"author,omitempty"`
-	Id *int `json:"id,omitempty"`
 	Isbn *string `json:"isbn,omitempty"`
 	PublicationYear *int `json:"publicationYear,omitempty"`
 	Title *string `json:"title,omitempty"`
@@ -37,6 +36,15 @@ type BookCreateData struct {
 
 // BookUpdateData is the typed request payload for Book.UpdateTyped.
 type BookUpdateData struct {
+	Id int `json:"id"`
+	Author *string `json:"author,omitempty"`
+	Isbn *string `json:"isbn,omitempty"`
+	PublicationYear *int `json:"publicationYear,omitempty"`
+	Title *string `json:"title,omitempty"`
+}
+
+// BookPatchData is the typed request payload for Book.PatchTyped.
+type BookPatchData struct {
 	Id int `json:"id"`
 	Author *string `json:"author,omitempty"`
 	Isbn *string `json:"isbn,omitempty"`

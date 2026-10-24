@@ -53,6 +53,12 @@ main: kit: entity: book: {
       name: "create"
       points: [
         {
+          bf: [
+            "author"
+            "isbn"
+            "publicationYear"
+            "title"
+          ]
           co: {
             id: "POST /books"
             source: "openapi3"
@@ -60,6 +66,10 @@ main: kit: entity: book: {
           }
           m: "POST"
           o: "/books"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "books"
@@ -95,10 +105,9 @@ main: kit: entity: book: {
           }
           m: "GET"
           o: "/books"
-          q: {
-            exist: [
-              "limit"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -140,6 +149,10 @@ main: kit: entity: book: {
               "id"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "books"
@@ -159,6 +172,12 @@ main: kit: entity: book: {
       name: "patch"
       points: [
         {
+          bf: [
+            "author"
+            "isbn"
+            "publicationYear"
+            "title"
+          ]
           co: {
             id: "PATCH /books/{id}"
             source: "openapi3"
@@ -182,6 +201,10 @@ main: kit: entity: book: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -245,6 +268,12 @@ main: kit: entity: book: {
       name: "update"
       points: [
         {
+          bf: [
+            "author"
+            "isbn"
+            "publicationYear"
+            "title"
+          ]
           co: {
             id: "PUT /books/{id}"
             source: "openapi3"
@@ -268,6 +297,10 @@ main: kit: entity: book: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

@@ -64,10 +64,9 @@ main: kit: entity: currency: {
           }
           m: "GET"
           o: "/currencies"
-          q: {
-            exist: [
-              "limit"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

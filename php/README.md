@@ -4,7 +4,7 @@
 
 The PHP SDK for the FakeJson API — an entity-oriented client using PHP conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Book()` — with named operations (`list`/`load`/`create`/`update`/`remove`/`patch`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Book()` — with named operations (`list`/`load`/`create`/`update`/`patch`/`remove`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fake-json-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/fake-json-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -71,6 +71,9 @@ $created = $client->Book()->create(["author" => "example_author", "isbn" => "exa
 
 // Update — index the record via data_get() ($created->data_get()["id"]).
 $client->Book()->update(["id" => $created->data_get()["id"], "author" => "example_author", "isbn" => "example_isbn"]);
+
+// Patch — sends only the fields given
+$client->Book()->patch(["id" => $created->data_get()["id"], "author" => "example_author", "isbn" => "example_isbn"]);
 
 // Remove
 $client->Book()->remove(["id" => $created->data_get()["id"]]);
@@ -252,11 +255,12 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `list` | `(?array $reqmatch = null, $ctrl): mixed` | List entities matching the criteria (call with no argument to list all), one per record. |
+| `create` | `($reqdata, $ctrl): mixed` | Create a new entity, and return it. |
+| `update` | `($reqdata, $ctrl): mixed` | Update an existing entity, and return it. |
+| `patch` | `($reqdata, $ctrl): mixed` | Change part of an existing entity, and return it. |
+| `remove` | `($reqmatch, $ctrl): mixed` | Remove an entity, and return it marked as deleted. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -266,9 +270,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -354,6 +358,7 @@ Create an instance: `$book = $client->Book();`
 | `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
+| `patch(data)` | Change part of an existing entity. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
 
@@ -377,7 +382,7 @@ $book = $client->Book()->load(["id" => 1]);
 #### Example: List
 
 ```php
-// list() returns an array of Book records (throws on error).
+// list() returns an array of Book entities, one per record (throws on error).
 $books = $client->Book()->list();
 ```
 
@@ -411,7 +416,7 @@ Create an instance: `$currency = $client->Currency();`
 #### Example: List
 
 ```php
-// list() returns an array of Currency records (throws on error).
+// list() returns an array of Currency entities, one per record (throws on error).
 $currencys = $client->Currency()->list();
 ```
 
@@ -439,7 +444,7 @@ Create an instance: `$person = $client->Person();`
 #### Example: List
 
 ```php
-// list() returns an array of Person records (throws on error).
+// list() returns an array of Person entities, one per record (throws on error).
 $persons = $client->Person()->list();
 ```
 
@@ -466,7 +471,7 @@ Create an instance: `$pokemon = $client->Pokemon();`
 #### Example: List
 
 ```php
-// list() returns an array of Pokemon records (throws on error).
+// list() returns an array of Pokemon entities, one per record (throws on error).
 $pokemons = $client->Pokemon()->list();
 ```
 
